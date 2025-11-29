@@ -1,0 +1,54 @@
+{
+  "id": "revolutionary-starter",
+  "title": "Foundry VTT Module Starter",
+  "description": "",
+  "version": "#{VERSION}#",
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "authors": [
+    {
+      "name": "Jason Godesky",
+      "email": "jason@revolutionarygames.co",
+      "github": "revolutionarygamesco"
+    }
+  ],
+  "esmodules": [
+    "scripts/module.js"
+  ],
+  "styles": [
+    "styles/module.css"
+  ],
+  "packs": [],
+  "packFolders": [
+    {
+      "name": "Foundry VTT Module Starter",
+      "sorting": "a",
+      "packs": []
+    }
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "relationships": {},
+  "includes": [],
+  "socket": false,
+  "url": "#{URL}#",
+  "manifest": "#{MANIFEST}#",
+  "download": "#{DOWNLOAD}#",
+  "bugs": "#{BUGS}#",
+  "changelog": "#{CHANGELOG}#",
+  "license": "#{LICENSE}#",
+  "readme": "#{README}#",
+  "funding": [
+    {
+      "type": "patreon",
+      "url": "https://patreon.com/revolutionarygamesco"
+    }
+  ]
+}
