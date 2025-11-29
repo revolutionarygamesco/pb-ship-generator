@@ -26,6 +26,43 @@ interface Collection<K, V> extends Map<K, V> {
   contents: V[]
 }
 
+interface Document {
+  id: string
+  name: string
+  img: string
+  type: string
+  system?: Record<string, any>
+  parent?: Document
+  parentCollection?: string
+  toObject(source?: boolean): any
+  getFlag<T>(scope: string, key: string): T
+  setFlag<T>(scope: string, key: string, value: T): void
+  update(data?: any, operation?: any): Promise<Document | undefined>
+  createEmbeddedDocuments(type: string, data?: any, operation?: any): Promise<Document>
+  deleteEmbeddedDocuments(type: string, ids: string[], operation?: any): Promise<Document>
+}
+
+interface Actor extends Document {
+  collections: {
+    items: Collection<string, Document>
+  },
+  system?: {
+    attributes: {
+      speed?: {
+        value: number
+      }
+      crew?: {
+        min: number
+        max: number
+        value: number
+      }
+      featureType?: string
+    },
+    captain?: string,
+    crews?: string[]
+  }
+}
+
 interface User {
   id: string
 }
@@ -47,4 +84,10 @@ declare const game: {
   },
   modules: Collection<string, Module>,
   user: User
+}
+
+declare const foundry: {
+  documents: {
+    Actor: Actor
+  }
 }
