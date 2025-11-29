@@ -1,7 +1,7 @@
 {
-  "id": "revolutionary-starter",
-  "title": "Foundry VTT Module Starter",
-  "description": "",
+  "id": "revolutionary-pbshipgen",
+  "title": "Pirate Borg Ship Generator",
+  "description": "A module for Foundry VTT and Pirate Borg for generating random ships and their captains.",
   "version": "#{VERSION}#",
   "compatibility": {
     "minimum": "13",
@@ -17,15 +17,54 @@
   "esmodules": [
     "scripts/module.js"
   ],
-  "styles": [
-    "styles/module.css"
+  "packs": [
+    {
+      "name": "macros",
+      "label": "Pirate Borg Ship Generator Macros",
+      "path": "packs/macros",
+      "type": "Macro",
+      "ownership": {
+        "GAMEMASTER": "OWNER"
+      }
+    },
+    {
+      "name": "tables",
+      "label": "Pirate Borg Ship Generator Roll Tables",
+      "path": "packs/tables",
+      "type": "RollTable",
+      "ownership": {
+        "GAMEMASTER": "OWNER"
+      }
+    },
+    {
+      "name": "actors",
+      "label": "Pirate Borg Ship Generator Actors",
+      "path": "packs/actors",
+      "type": "Actor",
+      "ownership": {
+        "GAMEMASTER": "OWNER"
+      }
+    },
+    {
+      "name": "items",
+      "label": "Pirate Borg Ship Generator Features",
+      "path": "packs/features",
+      "type": "Item",
+      "ownership": {
+        "GAMEMASTER": "OWNER"
+      }
+    }
   ],
-  "packs": [],
   "packFolders": [
     {
-      "name": "Foundry VTT Module Starter",
+      "name": "Pirate Borg Ship Generator",
       "sorting": "a",
-      "packs": []
+      "packs": [
+        "tables",
+        "macros",
+        "items",
+        "actors"
+      ]
     }
   ],
   "languages": [
@@ -35,8 +74,22 @@
       "path": "lang/en.json"
     }
   ],
-  "relationships": {},
-  "includes": [],
+  "relationships": {
+    "systems": [
+      {
+        "id": "pirateborg",
+        "type": "system",
+        "compatibility": {}
+      }
+    ],
+    "requires": [
+      {
+        "id": "revolutionary-piratenames",
+        "type": "module",
+        "compatibility": {}
+      }
+    ]
+  },
   "socket": false,
   "url": "#{URL}#",
   "manifest": "#{MANIFEST}#",
@@ -44,11 +97,5 @@
   "bugs": "#{BUGS}#",
   "changelog": "#{CHANGELOG}#",
   "license": "#{LICENSE}#",
-  "readme": "#{README}#",
-  "funding": [
-    {
-      "type": "patreon",
-      "url": "https://patreon.com/revolutionarygamesco"
-    }
-  ]
+  "readme": "#{README}#"
 }

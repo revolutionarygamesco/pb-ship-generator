@@ -1,15 +1,16 @@
-# Foundry VTT Module Starter
+# Pirate Borg Ship Generator
 
-![Latest Release](https://img.shields.io/github/v/release/revolutionarygamesco/fvttmod-starter?label=Latest+release&style=for-the-badge)
+![Latest Release](https://img.shields.io/github/v/release/revolutionarygamesco/pb-ship-generator?label=Latest+release&style=for-the-badge)
 ![Foundry Version](https://img.shields.io/badge/Foundry-v13-informational?label=Foundry+version&style=for-the-badge)
-![Test Status](https://img.shields.io/github/actions/workflow/status/revolutionarygamesco/fvttmod-starter/test.yml?label=Test+status&style=for-the-badge)
-![License](https://img.shields.io/github/license/revolutionarygamesco/fvttmod-starter?style=for-the-badge)
+![Test Status](https://img.shields.io/github/actions/workflow/status/revolutionarygamesco/pb-ship-generator/test.yml?label=Test+status&style=for-the-badge)
+![License](https://img.shields.io/github/license/revolutionarygamesco/pb-ship-generator?style=for-the-badge)
 
-This repository is a starting point for
-making new Foundry VTT modules according
-to our preferences:
+A module for [Foundry VTT](https://foundryvtt.com/) and
+_[Pirate Borg](https://www.limithron.com/pirateborg)_ for generating random
+ships and their captains.
 
-* Jest ready to go for test-driven development (TDD)
-* Typescript
-* Sass
-* GitHub Actions workflows for packaging releases and running tests on each push
+### Requirements
+
+* [Foundry VTT v13](https://foundryvtt.com/)
+* [Pirate Borg system](https://foundryvtt.com/packages/pirateborg)
+* [Pirate Name Generator](https://foundryvtt.com/packages/revolutionary-piratenames)
