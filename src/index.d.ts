@@ -91,3 +91,18 @@ declare const foundry: {
     Actor: Actor
   }
 }
+
+interface RollTableResult {
+  type?: string
+  img?: string
+  name?: string
+  description?: string
+}
+
+interface RollTableOptions {
+  displayChat?: boolean
+  recursive?: boolean
+  results?: any
+  roll?: any
+  rollMode?: string
+}
