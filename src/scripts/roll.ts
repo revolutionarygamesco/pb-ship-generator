@@ -3,6 +3,7 @@ import createShipDetails from './details.ts'
 import rollTable from './roll-table.ts'
 import shuffleArray from './randomizers/shuffle.ts'
 import generateCaptain from './captain.ts'
+import describeCaptain from './describe.ts'
 
 const parseNumberUpgrades = (str: string | undefined): number => {
   const sub = str ? str.substring(0, 1) : '0'
@@ -79,6 +80,7 @@ const rollShip = async (
   }
 
   const captain = await generateCaptain(d.nationality, xp, d.specialty.includes(specialty.captain))
+  await describeCaptain(captain, d, xp)
   return { details: d, captain }
 }
 
