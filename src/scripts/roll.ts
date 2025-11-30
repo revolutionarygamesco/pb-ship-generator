@@ -1,7 +1,8 @@
-import { tables } from './ids.ts'
+import {specialty, tables} from './ids.ts'
 import createShipDetails from './details.ts'
 import rollTable from './roll-table.ts'
 import shuffleArray from './randomizers/shuffle.ts'
+import generateCaptain from './captain.ts'
 
 const parseNumberUpgrades = (str: string | undefined): number => {
   const sub = str ? str.substring(0, 1) : '0'
@@ -11,9 +12,9 @@ const parseNumberUpgrades = (str: string | undefined): number => {
 
 const rollShip = async (
   details?: Partial<ShipDetails>
-): Promise<{details: ShipDetails, captain: string }> => {
+): Promise<{details: ShipDetails, captain: Actor }> => {
   const d = createShipDetails(details)
-  let captain = 'Medium'
+  let xp = 'Medium'
 
   // Name the ship
   const namer = game.modules.get('revolutionary-piratenames')
@@ -37,7 +38,7 @@ const rollShip = async (
   if (d.naval || d.pirate) {
     const level = await rollTable(tables.upgrades.naval, { displayChat: false })
     const n = level ? parseNumberUpgrades(level[0].name) : 0
-    if (level && level.length > 1 && level[1].name) captain = level[1].name
+    if (level && level.length > 1 && level[1].name) xp = level[1].name
     if (level && level.length > 2 && level[2].document) d.specialty.push(level[2].document)
 
     const upgrades = shuffleArray(['upgrade-swivels', 'extra-swivels', 'upgrade-cannons', 'extra-cannons', 'armored', 'ram', 'sails'])
@@ -46,9 +47,9 @@ const rollShip = async (
     const upgraded = await rollTable(tables.upgrades.merchant, { displayChat: false })
     if (upgraded && upgraded[0].name === 'Improved sails') d.upgrades.push('sails')
 
-    const xp = await rollTable(tables.captain, { displayChat: false })
-    if (xp && xp[0].name) captain = xp[0].name
-    if (xp && xp.length > 1 && xp[1].document) d.specialty.push(xp[1].document)
+    const drawn = await rollTable(tables.captain, { displayChat: false })
+    if (drawn && drawn[0].name) xp = drawn[0].name
+    if (drawn && drawn.length > 1 && drawn[1].document) d.specialty.push(drawn[1].document)
   }
 
   // Check for crew size
@@ -77,6 +78,7 @@ const rollShip = async (
     if (check && check[0].document) d.specialty.push(check[0].document)
   }
 
+  const captain = await generateCaptain(d.nationality, xp, d.specialty.includes(specialty.captain))
   return { details: d, captain }
 }
 

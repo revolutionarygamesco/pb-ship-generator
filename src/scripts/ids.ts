@@ -28,3 +28,15 @@ export const tables = {
     }
   }
 }
+
+export const specialty = {
+  captain: 'Compendium.revolutionary-pbshipgen.items.Item.dmlGTnZhfEgWUYDm',
+  quartermaster: 'Compendium.revolutionary-pbshipgen.items.Item.Z3pAMBnBvSWRxFUm',
+  bosun: 'Compendium.revolutionary-pbshipgen.items.Item.67OUgeWGhrTp629d',
+  gunner: 'Compendium.revolutionary-pbshipgen.items.Item.rRwYfX3SR1rBh4jO',
+  master: 'Compendium.revolutionary-pbshipgen.items.Item.LKAXQBEp2CEgXEcH',
+  priest: 'Compendium.revolutionary-pbshipgen.items.Item.LKAXQBEp2CEgXEcH',
+  sorcerer: 'Compendium.revolutionary-pbshipgen.items.Item.0KDL3PjlyVOFQUxG',
+  carpenter: 'Compendium.revolutionary-pbshipgen.items.Item.usyDHqr0Lg4jXWtN',
+  drunk: 'Compendium.revolutionary-pbshipgen.items.Item.P89ELFOoYxzjuQSh'
+}

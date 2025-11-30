@@ -48,7 +48,23 @@ interface Actor extends Document {
   },
   system?: {
     attributes: {
+      armor?: {
+        formula: string
+        description: string
+      }
+      attack?: {
+        formula: string
+        description: string
+      }
+      hp?: {
+        max: number
+        value: number
+      }
+      morale?: number
+      special?: string
       speed?: {
+        max: number
+        min: number
         value: number
       }
       crew?: {
@@ -58,9 +74,11 @@ interface Actor extends Document {
       }
       featureType?: string
     },
+    description?: string,
     captain?: string,
     crews?: string[]
   }
+  create(data?: any, operation?: any): Promise<Actor>
 }
 
 interface User {
