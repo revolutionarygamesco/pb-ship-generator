@@ -99,6 +99,7 @@ interface RollTableResult {
   img?: string
   name?: string
   description?: string
+  document?: string
 }
 
 interface RollTableOptions {
