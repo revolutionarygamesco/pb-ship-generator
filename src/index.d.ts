@@ -92,6 +92,8 @@ declare const foundry: {
   }
 }
 
+type Nationality = 'Spanish' | 'British' | 'French' | 'Dutch'
+
 interface RollTableResult {
   type?: string
   img?: string
@@ -105,4 +107,15 @@ interface RollTableOptions {
   results?: any
   roll?: any
   rollMode?: string
+}
+
+interface ShipDetails {
+  nationality: Nationality
+  naval: boolean
+  pirate: boolean
+  upgrades: []
+  specialty: []
+  name: string
+  type: string
+  crewSize: string
 }
