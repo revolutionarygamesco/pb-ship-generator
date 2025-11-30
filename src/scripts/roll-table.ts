@@ -15,12 +15,12 @@ const reduceRollTableDraw = (orig: any): RollTableResult => {
 const rollTable = async (
   id: string,
   options?: RollTableOptions
-): Promise<RollTableResult | null> => {
+): Promise<RollTableResult[] | null> => {
   const table = await fromUuid(id)
   if (!table || typeof table.draw !== 'function') return null
   const { results } = await table.draw(options)
   return results.length > 0
-    ? reduceRollTableDraw(results[0])
+    ? results.map((result: any) => reduceRollTableDraw(result))
     : null
 }
 

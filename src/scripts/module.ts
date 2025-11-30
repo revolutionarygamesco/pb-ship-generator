@@ -1,9 +1,14 @@
-const moduleName = 'Module'
+import { MODULE_ID } from './settings'
 
-Hooks.on('init', () => {
-  console.log(`Initializing ${moduleName}...`)
-})
+import rollTable from './roll-table.ts'
+import rollShip from './roll.ts'
 
-Hooks.on('ready', () => {
-  console.log(`${moduleName} is ready`)
+Hooks.once('init', async () => {
+  const generator = game.modules.get(MODULE_ID)
+  if (!generator) return
+
+  generator.api = {
+    rollTable,
+    rollShip
+  }
 })

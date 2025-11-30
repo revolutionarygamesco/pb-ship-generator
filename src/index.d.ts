@@ -114,8 +114,8 @@ interface ShipDetails {
   nationality: Nationality
   naval: boolean
   pirate: boolean
-  upgrades: []
-  specialty: []
+  upgrades: string[]
+  specialty: string[]
   name: string
   type: string
   crewSize: string
