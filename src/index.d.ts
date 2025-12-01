@@ -31,6 +31,7 @@ interface Document {
   name: string
   img: string
   type: string
+  folder?: Folder
   system?: Record<string, any>
   parent?: Document
   parentCollection?: string
@@ -82,7 +83,6 @@ interface Actor extends Document {
 }
 
 interface Folder extends Document {
-  folder?: Folder
   create(data?: any, operation?: any): Promise<Folder>
 }
 

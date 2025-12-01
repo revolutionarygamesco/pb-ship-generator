@@ -38,7 +38,7 @@ const getMerchantFlavor = (
   if (isLegendary(details)) return `${captain.name} is a legend among ${details.nationality} traders and merchants for his ability to outrun pirates and bring his cargo to port.`
   switch (xp) {
     case 'High': return `${captain.name} is a respected ${details.nationality} captain.`
-    case 'Low': return `${captain.name} has earned enough confidence from ${details.nationality} investors to earn a captaincy, but has yet to earn the confidence of his crew.`
+    case 'Low': return `${captain.name} has earned enough confidence from ${details.nationality} investors to secure a captaincy, but not yet the confidence of his crew.`
     default: return `${captain.name} is a ${details.nationality} captain.`
   }
 }
