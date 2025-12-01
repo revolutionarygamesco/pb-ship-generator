@@ -82,6 +82,7 @@ interface Actor extends Document {
 }
 
 interface Folder extends Document {
+  folder?: Folder
   create(data?: any, operation?: any): Promise<Folder>
 }
 
