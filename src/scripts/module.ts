@@ -4,7 +4,7 @@ import { localize } from './wrapper.ts'
 
 import rollTable from './roll-table.ts'
 import rollShip from './roll.ts'
-import generateCaptain from './captain.ts'
+import generateShip from './ship.ts'
 
 Hooks.once('init', async () => {
   const generator = game.modules.get(MODULE_ID)
@@ -13,7 +13,7 @@ Hooks.once('init', async () => {
   generator.api = {
     rollTable,
     rollShip,
-    generateCaptain
+    generateShip
   }
 })
 

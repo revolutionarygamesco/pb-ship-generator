@@ -48,10 +48,23 @@ interface Actor extends Document {
     items: Collection<string, Document>
   },
   system?: {
+    abilities?: {
+      agility?: {
+        value: number
+      }
+      skill?: {
+        value: number
+      }
+    }
     attributes: {
       armor?: {
         formula: string
         description: string
+      }
+      hull?: {
+        min: number,
+        max: number,
+        value: number
       }
       attack?: {
         formula: string
@@ -73,11 +86,30 @@ interface Actor extends Document {
         max: number
         value: number
       }
+      cargo?: {
+        max: number
+        value: number
+      }
       featureType?: string
     },
-    description?: string,
-    captain?: string,
+    description?: string
+    captain?: string
     crews?: string[]
+    weapons?: {
+      broadsides?: {
+        die: string
+        quantity: number
+        warning: string
+      }
+      smallArms?: {
+        die: string
+        quantity: number
+        warning: string
+      }
+      ram?: {
+        die: string
+      }
+    }
   }
   create(data?: any, operation?: any): Promise<Actor>
 }

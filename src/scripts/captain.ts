@@ -59,7 +59,7 @@ const generateCaptain = async (
     ? `Captain ${await namer.api.generateName(nation, 'Masculine')}`
     : 'Captain'
 
-  const capt = await foundry.documents.Actor.create({ name, type: 'creature' })
+  const capt = await foundry.documents.Actor.create({ name, type: 'creature', img: 'systems/pirateborg/icons/misc/monster.png' })
   const hp = generateCaptainHP(xp, legendary)
   const morale = generateCaptainMorale(xp, legendary)
   const weapon = getWeapon(xp)
