@@ -3,3 +3,9 @@ export async function fromUuid (uuid: string): Promise<any> {
   if (typeof global.fromUuid === 'function') return await global.fromUuid(uuid)
   throw new Error('fromUuid is not defined in this context.')
 }
+
+export const localize = (
+  key: string,
+  options?: Record<string, any>
+) => game?.i18n?.format?.(key, options) ?? key
+

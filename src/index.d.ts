@@ -81,6 +81,10 @@ interface Actor extends Document {
   create(data?: any, operation?: any): Promise<Actor>
 }
 
+interface Folder extends Document {
+  create(data?: any, operation?: any): Promise<Folder>
+}
+
 interface User {
   id: string
 }
@@ -100,6 +104,7 @@ declare const game: {
     format: (key: string, data?: Record<string, any>) => string
     localize: (key: string) => string
   },
+  folders: Collection<string, Folder>,
   modules: Collection<string, Module>,
   user: User
 }
@@ -107,6 +112,7 @@ declare const game: {
 declare const foundry: {
   documents: {
     Actor: Actor
+    Folder: Folder
   }
 }
 

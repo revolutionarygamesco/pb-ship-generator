@@ -1,0 +1,51 @@
+{
+  "revolutionary-pbshipgen": {
+    "folders": {
+      "root": "Generated Ships",
+      "captains": {
+        "root": "Captains",
+        "nation": {
+          "pirates": "Pirate Captains",
+          "spanish": {
+            "root": "Spanish Captains",
+            "merchant": "Spanish Merchant Captains",
+            "naval": "Spanish Royal Armada Captains"
+          },
+          "british": {
+            "root": "British Captains",
+            "merchant": "British Merchant Captains",
+            "naval": "British Royal Navy Captains"
+          },
+          "french": {
+            "root": "French Captains",
+            "merchant": "French Merchant Captains",
+            "naval": "French Royal Navy Captains"
+          },
+          "dutch": "Dutch West India Company"
+        }
+      },
+      "ships": {
+        "root": "Ships",
+        "nation": {
+          "pirates": "Pirate Ships",
+          "spanish": {
+            "root": "Spanish Ships",
+            "merchant": "Spanish Merchantmen",
+            "naval": "Spanish Royal Armada"
+          },
+          "british": {
+            "root": "British Ships",
+            "merchant": "British Merchantmen",
+            "naval": "British Royal Navy"
+          },
+          "french": {
+            "root": "French Ships",
+            "merchant": "French Merchantmen",
+            "naval": "French Royal Navy"
+          },
+          "dutch": "Dutch West India Company"
+        }
+      }
+    }
+  }
+}
