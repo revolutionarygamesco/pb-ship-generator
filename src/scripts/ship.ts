@@ -1,8 +1,10 @@
 import randomizeBetween from './randomizers/between.ts'
 import upgradeDie from './upgrade.ts'
 import fileActor from './file.ts'
+import { isPremium, icons, tokens } from './premium.ts'
 
 const baseShip = { type: 'vehicle', img: 'systems/pirateborg/icons/misc/ship.png' }
+const premiumRoot = 'modules/pirate-borg-premium/'
 
 const calculateCrewSize = (range: [number, number], min: number, max: number): number => {
   const window = max - min
@@ -23,7 +25,7 @@ const getCrewSize = (desc: string, min: number, max: number): number => {
 
 const generateSloop = async (details: ShipDetails): Promise<Actor> => {
   const ship = await foundry.documents.Actor.create({ name: details.name, ...baseShip })
-  await ship.update({
+  const update: Record<string, any> = {
     'system.attributes.hp.max': 30,
     'system.attributes.hp.value': 30,
     'system.attributes.hull.min': 0,
@@ -44,13 +46,20 @@ const generateSloop = async (details: ShipDetails): Promise<Actor> => {
     'system.attributes.crew.value': getCrewSize(details.crewSize, 3, 10),
     'system.attributes.cargo.max': 2,
     'system.attributes.cargo.value': 0
-  })
+  }
+
+  if (isPremium()) {
+    update['img'] = premiumRoot + icons.sloop
+    update['prototypeToken.texture.source'] = premiumRoot + tokens.sloop
+  }
+
+  await ship.update(update)
   return ship
 }
 
 const generateBrigntine = async (details: ShipDetails): Promise<Actor> => {
   const ship = await foundry.documents.Actor.create({ name: details.name, ...baseShip })
-  await ship.update({
+  const update: Record<string, any> = {
     'system.attributes.hp.max': 40,
     'system.attributes.hp.value': 40,
     'system.attributes.hull.min': 0,
@@ -71,13 +80,20 @@ const generateBrigntine = async (details: ShipDetails): Promise<Actor> => {
     'system.attributes.crew.value': getCrewSize(details.crewSize, 15, 30),
     'system.attributes.cargo.max': 3,
     'system.attributes.cargo.value': 0
-  })
+  }
+
+  if (isPremium()) {
+    update['img'] = premiumRoot + icons.brigantine
+    update['prototypeToken.texture.src'] = premiumRoot + tokens.brigantine
+  }
+
+  await ship.update(update)
   return ship
 }
 
 const generateFluyt = async (details: ShipDetails): Promise<Actor> => {
   const ship = await foundry.documents.Actor.create({ name: details.name, ...baseShip })
-  await ship.update({
+  const update: Record<string, any> = {
     'system.attributes.hp.max': 50,
     'system.attributes.hp.value': 50,
     'system.attributes.hull.min': 0,
@@ -98,13 +114,20 @@ const generateFluyt = async (details: ShipDetails): Promise<Actor> => {
     'system.attributes.crew.value': getCrewSize(details.crewSize, 10, 40),
     'system.attributes.cargo.max': 5,
     'system.attributes.cargo.value': 0
-  })
+  }
+
+  if (isPremium()) {
+    update['img'] = premiumRoot + icons.fluyt
+    update['prototypeToken.texture.src'] = premiumRoot + tokens.frigate
+  }
+
+  await ship.update(update)
   return ship
 }
 
 const generateFrigate = async (details: ShipDetails): Promise<Actor> => {
   const ship = await foundry.documents.Actor.create({ name: details.name, ...baseShip })
-  await ship.update({
+  const update: Record<string, any> = {
     'system.attributes.hp.max': 60,
     'system.attributes.hp.value': 60,
     'system.attributes.hull.min': 0,
@@ -125,13 +148,20 @@ const generateFrigate = async (details: ShipDetails): Promise<Actor> => {
     'system.attributes.crew.value': getCrewSize(details.crewSize, 24, 48),
     'system.attributes.cargo.max': 4,
     'system.attributes.cargo.value': 0
-  })
+  }
+
+  if (isPremium()) {
+    update['img'] = premiumRoot + icons.frigate
+    update['prototypeToken.texture.src'] = premiumRoot + tokens.frigate
+  }
+
+  await ship.update(update)
   return ship
 }
 
 const generateManOWar = async (details: ShipDetails): Promise<Actor> => {
   const ship = await foundry.documents.Actor.create({ name: details.name, ...baseShip })
-  await ship.update({
+  const update: Record<string, any> = {
     'system.attributes.hp.max': 75,
     'system.attributes.hp.value': 75,
     'system.attributes.hull.min': 0,
@@ -152,7 +182,14 @@ const generateManOWar = async (details: ShipDetails): Promise<Actor> => {
     'system.attributes.crew.value': getCrewSize(details.crewSize, 50, 150),
     'system.attributes.cargo.max': 4,
     'system.attributes.cargo.value': 0
-  })
+  }
+
+  if (isPremium()) {
+    update['img'] = premiumRoot + icons.manowar
+    update['prototypeToken.texture.src'] = premiumRoot + tokens.manowar
+  }
+
+  await ship.update(update)
   return ship
 }
 
