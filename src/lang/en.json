@@ -1,5 +1,64 @@
 {
   "revolutionary-pbshipgen": {
+    "dialog": {
+      "title": "Generate Ship",
+      "nationalities": {
+        "label": "Colors",
+        "options": {
+          "Spanish": "The Spanish Empire",
+          "British": "The British Empire",
+          "French": "The Kingdom of France",
+          "Dutch": "The Dutch West India Company",
+          "Pirate": "Pirates",
+          "Random": "Random"
+        }
+      },
+      "purpose": {
+        "label": "Purpose",
+        "hint": "Is this a naval ship or a civilian merchant ship?",
+        "options": {
+          "merchant": "Merchant Ship",
+          "naval": "Naval Ship",
+          "random": "Random"
+        }
+      },
+      "type": {
+        "label": "Type",
+        "hint": "What type of ship is it?",
+        "options": {
+          "brigantine": "Brigantine",
+          "fluyt": "Fluyt",
+          "frigate": "Frigate",
+          "manowar": "Man-of-War",
+          "sloop": "Sloop",
+          "random": "Random"
+        }
+      },
+      "actions": {
+        "generate": "Generate Ship",
+        "cancel": "Cancel"
+      }
+    },
+    "message": {
+      "speaker": "Pirate Borg Ship Generator",
+      "flavor": "Draws a ship.",
+      "content": {
+        "pirate": "{ship}, a pirate {type} commanded by {captain}",
+        "dutch": "{ship}, a {type} of the Dutch West India Company commanded by {captain}",
+        "spanish": {
+          "naval": "{ship}, a {type} of the Spanish Royal Armada commanded by {captain}",
+          "merchant": "{ship}, a Spanish merchant {type} commanded by {captain}"
+        },
+        "british": {
+          "naval": "{ship}, a {type} of the British Royal Navy commanded by {captain}",
+          "merchant": "{ship}, a British merchant {type} commanded by {captain}"
+        },
+        "french": {
+          "naval": "{ship}, a {type} of the French Royal Navy commanded by {captain}",
+          "merchant": "{ship}, a French merchant {type} commanded by {captain}"
+        }
+      }
+    },
     "folders": {
       "root": "Generated Ships",
       "captains": {

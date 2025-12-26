@@ -143,8 +143,14 @@ declare const game: {
 }
 
 declare const foundry: {
+  applications: {
+    api: {
+      DialogV2: typeof DialogV2
+    }
+  }
   documents: {
     Actor: Actor
+    ChatMessage: ChatMessage
     Folder: Folder
   }
 }
