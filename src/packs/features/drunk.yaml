@@ -1,0 +1,9 @@
+_id: P89ELFOoYxzjuQSh
+_key: "!items!P89ELFOoYxzjuQSh"
+name: Drunk Crew
+type: feature
+img: systems/pirateborg/icons/misc/class-feature.png
+system:
+  description: |
+    <p>Take an extra crew action each round, even if it has already been taken.</p>
+  featureType: Specialty Crew

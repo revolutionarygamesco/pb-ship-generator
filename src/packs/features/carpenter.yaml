@@ -1,0 +1,9 @@
+_id: usyDHqr0Lg4jXWtN
+_key: "!items!usyDHqr0Lg4jXWtN"
+name: Master Carpenter
+type: feature
+img: systems/pirateborg/icons/misc/class-feature.png
+system:
+  description: |
+    <p>Repair actions are -5 DR.</p>
+  featureType: Specialty Crew

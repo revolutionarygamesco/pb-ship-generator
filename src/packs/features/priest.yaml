@@ -1,0 +1,9 @@
+_id: oh2VItoo8q4i49GX
+_key: "!items!oh2VItoo8q4i49GX"
+name: Deck Priest
+type: feature
+img: systems/pirateborg/icons/misc/class-feature.png
+system:
+  description: |
+    <p>Once per combat, change the speed and direction of the wind.</p>
+  featureType: Specialty Crew

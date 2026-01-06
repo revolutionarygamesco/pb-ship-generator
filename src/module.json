@@ -31,9 +31,9 @@
       }
     },
     {
-      "name": "tables",
+      "name": "rolltables",
       "label": "Pirate Borg Ship Generator Roll Tables",
-      "path": "packs/tables",
+      "path": "packs/rolltables",
       "type": "RollTable",
       "ownership": {
         "GAMEMASTER": "OWNER"
@@ -49,8 +49,8 @@
       }
     },
     {
-      "name": "items",
-      "label": "Pirate Borg Ship Generator Features",
+      "name": "features",
+      "label": "Pirate Borg Ship Generator Specialty Crew Features",
       "path": "packs/features",
       "type": "Item",
       "ownership": {
@@ -63,9 +63,9 @@
       "name": "Pirate Borg Ship Generator",
       "sorting": "a",
       "packs": [
-        "tables",
+        "rolltables",
         "macros",
-        "items",
+        "features",
         "actors"
       ]
     }

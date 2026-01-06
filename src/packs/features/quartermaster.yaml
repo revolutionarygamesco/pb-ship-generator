@@ -1,0 +1,9 @@
+_id: Z3pAMBnBvSWRxFUm
+_key: "!items!Z3pAMBnBvSWRxFUm"
+name: Veteran Quartermaster
+type: feature
+img: systems/pirateborg/icons/misc/class-feature.png
+system:
+  description: |
+    <p>Crew morale tests are +3. Cargo sells for 50% more in port.</p>
+  featureType: Specialty Crew

@@ -1,0 +1,9 @@
+_id: rRwYfX3SR1rBh4jO
+_key: "!items!rRwYfX3SR1rBh4jO"
+name: Master Gunner
+type: feature
+img: systems/pirateborg/icons/misc/class-feature.png
+system:
+  description: |
+    <p>Ship attacks are -2 DR.</p>
+  featureType: Specialty Crew

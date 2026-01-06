@@ -1,0 +1,9 @@
+_id: LKAXQBEp2CEgXEcH
+_key: "!items!LKAXQBEp2CEgXEcH"
+name: Master of Sails
+type: feature
+img: systems/pirateborg/icons/misc/class-feature.png
+system:
+  description: |
+    <p>Ship Agility tests are -2 DR.</p>
+  featureType: Specialty Crew
