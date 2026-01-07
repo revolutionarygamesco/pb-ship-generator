@@ -1,0 +1,27 @@
+_id: Y6xBTHXJwmdD0c8G
+_key: "!actors!Y6xBTHXJwmdD0c8G"
+name: Sailor
+type: creature
+img: systems/pirateborg/icons/misc/monster.png
+system:
+  description: |
+    <p><em>A typical sailor.</em></p>
+    <p><strong>HP</strong> 8</p>
+    <p><strong>Morale</strong> 7</p>
+    <p><strong>No Armor</strong></p>
+    <p><strong>Belaying pin</strong> d4</p>
+  attributes:
+    hp:
+      max: 8
+      value: 8
+    speed:
+      min: 0
+      max: 6
+      value: 6
+    armor:
+      formula: "0"
+      description:
+    attack:
+      formula: d4
+      description: Belaying pin
+    morale: 7
