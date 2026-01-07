@@ -1,0 +1,41 @@
+_id: CVMx8AU4argJvxt9
+_key: "!tables!CVMx8AU4argJvxt9"
+name: Captain Experience
+description: How experienced is this captain?
+img: icons/svg/d20-grey.svg
+formula: 1d10
+folder: mmY3v7ua3w3CEQPE
+results:
+  - _id: VFKFZdMO3LiUSQ8Y
+    _key: "!tables.results!CVMx8AU4argJvxt9.VFKFZdMO3LiUSQ8Y"
+    range:
+      - 1
+      - 5
+    weight: 5
+    type: text
+    name: Low
+  - _id: DUoozHL8mhxlOHm3
+    _key: "!tables.results!CVMx8AU4argJvxt9.DUoozHL8mhxlOHm3"
+    range:
+      - 6
+      - 9
+    weight: 4
+    type: text
+    name: Medium
+  - _id: kf37EOfGLthrGO8q
+    _key: "!tables.results!CVMx8AU4argJvxt9.kf37EOfGLthrGO8q"
+    range:
+      - 10
+      - 10
+    weight: 1
+    type: text
+    name: High
+  - _id: pKztd1oLOJmfYSsL
+    _key: "!tables.results!CVMx8AU4argJvxt9.pKztd1oLOJmfYSsL"
+    range:
+      - 10
+      - 10
+    weight: 1
+    type: document
+    documentUuid: Compendium.revolutionary-pbshipgen.rolltables.RollTable.sNYjeMwT1AfnLaoQ
+    name: Legendary Captain

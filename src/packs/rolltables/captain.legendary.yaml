@@ -1,0 +1,25 @@
+_id: sNYjeMwT1AfnLaoQ
+_key: "!tables!sNYjeMwT1AfnLaoQ"
+name: Legendary Captain
+description: We already know that this captain is highly experienced, but is he legendary?
+img: icons/svg/d20-grey.svg
+formula: 1d10
+folder: mmY3v7ua3w3CEQPE
+results:
+  - _id: waho3cRjVeaUU8L9
+    _key: "!tables.results!sNYjeMwT1AfnLaoQ.waho3cRjVeaUU8L9"
+    range:
+      - 1
+      - 9
+    weight: 9
+    type: text
+    name: Experienced Captain
+  - _id: rV0w8OSaB9KQJgE2
+    _key: "!tables.results!sNYjeMwT1AfnLaoQ.rV0w8OSaB9KQJgE2"
+    range:
+      - 10
+      - 10
+    weight: 1
+    type: document
+    documentUuid: Compendium.revolutionary-pbshipgen.features.Item.dmlGTnZhfEgWUYDm
+    name: Legendary Captain

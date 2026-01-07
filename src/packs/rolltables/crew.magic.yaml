@@ -1,0 +1,34 @@
+_id: gqZlY1m95IzB0XXN
+_key: "!tables!gqZlY1m95IzB0XXN"
+name: Deck Magician
+description: Does the ship have a deck priest or deck sorcerer?
+img: icons/svg/d20-grey.svg
+formula: 1d20
+folder: mmY3v7ua3w3CEQPE
+results:
+  - _id: OWlSoBiWvQ7zEvm5
+    _key: "!tables.results!gqZlY1m95IzB0XXN.OWlSoBiWvQ7zEvm5"
+    range:
+      - 1
+      - 1
+    weight: 1
+    type: document
+    documentUuid: Compendium.revolutionary-pbshipgen.features.Item.0KDL3PjlyVOFQUxG
+    name: Deck Sorcerer
+  - _id: eJ7o145GQwJ5mUoJ
+    _key: "!tables.results!gqZlY1m95IzB0XXN.eJ7o145GQwJ5mUoJ"
+    range:
+      - 2
+      - 19
+    weight: 18
+    type: text
+    name: No Deck Magician
+  - _id: A2GTaPDzwXRb3hg0
+    _key: "!tables.results!gqZlY1m95IzB0XXN.A2GTaPDzwXRb3hg0"
+    range:
+      - 20
+      - 20
+    weight: 1
+    type: document
+    documentUuid: Compendium.revolutionary-pbshipgen.features.Item.oh2VItoo8q4i49GX
+    name: Deck Priest

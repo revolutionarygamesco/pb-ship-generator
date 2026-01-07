@@ -1,0 +1,25 @@
+_id: 52kXirfJrABVh9Qa
+_key: "!tables!52kXirfJrABVh9Qa"
+name: Master of Sails
+description: Does the ship have a sailing master?
+img: icons/svg/d20-grey.svg
+formula: 1d6
+folder: mmY3v7ua3w3CEQPE
+results:
+  - _id: UpmOnFzcfCqpIzoQ
+    _key: "!tables.results!52kXirfJrABVh9Qa.UpmOnFzcfCqpIzoQ"
+    range:
+      - 1
+      - 4
+    weight: 4
+    type: text
+    name: No Sailing Master
+  - _id: mO7HJ1q39IOB2MAZ
+    _key: "!tables.results!52kXirfJrABVh9Qa.mO7HJ1q39IOB2MAZ"
+    range:
+      - 5
+      - 6
+    weight: 2
+    type: document
+    documentUuid: Compendium.revolutionary-pbshipgen.features.Item.LKAXQBEp2CEgXEcH
+    name: Sailing Master

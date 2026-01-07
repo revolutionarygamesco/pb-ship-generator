@@ -1,0 +1,32 @@
+_id: l5ETTdXVDY41fmYp
+_key: "!tables!l5ETTdXVDY41fmYp"
+name: Common Ship Types
+description: Types of ships (sloops, brigantines, frigrates) common to all fleets.
+img: icons/svg/d20-grey.svg
+formula: 1d20
+folder: WMPgfSSX2OEovhhn
+results:
+  - _id: 4Wk0baLatbOocL7D
+    _key: "!tables.results!l5ETTdXVDY41fmYp.4Wk0baLatbOocL7D"
+    range:
+      - 1
+      - 8
+    weight: 8
+    type: text
+    name: Sloop
+  - _id: 2DwimjAcY8Uha8Jl
+    _key: "!tables.results!l5ETTdXVDY41fmYp.2DwimjAcY8Uha8Jl"
+    range:
+      - 9
+      - 15
+    weight: 7
+    type: text
+    name: Brigantine
+  - _id: kIdX3gqRUmoXgNpK
+    _key: "!tables.results!l5ETTdXVDY41fmYp.kIdX3gqRUmoXgNpK"
+    range:
+      - 16
+      - 20
+    weight: 5
+    type: text
+    name: Frigate

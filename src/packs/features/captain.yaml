@@ -5,5 +5,5 @@ type: feature
 img: systems/pirateborg/icons/misc/class-feature.png
 system:
   description: |
-    <p>+2 DR for all the ships rolls.</p>
+    <p>Take an extra crew action each round, even if it has already been taken.</p>
   featureType: Specialty Crew

@@ -1,0 +1,48 @@
+_id: 6bVsKF0H16v6EUKx
+_key: "!tables!6bVsKF0H16v6EUKx"
+name: Crew Size
+description: How big is the crew relative to the ship?
+img: icons/svg/d20-grey.svg
+formula: 2d6
+folder: mmY3v7ua3w3CEQPE
+results:
+  - _id: xYSD7guJEDoF9xc5
+    _key: "!tables.results!6bVsKF0H16v6EUKx.xYSD7guJEDoF9xc5"
+    range:
+      - 2
+      - 3
+    weight: 2
+    type: text
+    name: Skeleton
+  - _id: FUMw7vqrbEV5qg6x
+    _key: "!tables.results!6bVsKF0H16v6EUKx.FUMw7vqrbEV5qg6x"
+    range:
+      - 4
+      - 5
+    weight: 2
+    type: text
+    name: Small
+  - _id: Ttjalpis8V9oH9xC
+    _key: "!tables.results!6bVsKF0H16v6EUKx.Ttjalpis8V9oH9xC"
+    range:
+      - 6
+      - 8
+    weight: 3
+    type: text
+    name: Medium
+  - _id: ERvA4A5YLDTEG6T6
+    _key: "!tables.results!6bVsKF0H16v6EUKx.ERvA4A5YLDTEG6T6"
+    range:
+      - 9
+      - 10
+    weight: 2
+    type: text
+    name: Large
+  - _id: cktxmvbLiZYq7ySV
+    _key: "!tables.results!6bVsKF0H16v6EUKx.cktxmvbLiZYq7ySV"
+    range:
+      - 11
+      - 12
+    weight: 2
+    type: text
+    name: Overloaded

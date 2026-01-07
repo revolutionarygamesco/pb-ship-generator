@@ -1,0 +1,24 @@
+_id: QfQEHZpRe2eHxeG3
+_key: "!tables!QfQEHZpRe2eHxeG3"
+name: Merchantman Upgrades
+description: Does a merchant vessel have improved sails?
+img: icons/svg/d20-grey.svg
+formula: 1d6
+folder: PALeCN8fMrudKzDv
+results:
+  - _id: w7EwUqxNVwOq9TJ6
+    _key: "!tables.results!QfQEHZpRe2eHxeG3.w7EwUqxNVwOq9TJ6"
+    range:
+      - 1
+      - 5
+    weight: 5
+    type: text
+    name: No Upgrades
+  - _id: T3080FjbMFt0htP0
+    _key: "!tables.results!QfQEHZpRe2eHxeG3.T3080FjbMFt0htP0"
+    range:
+      - 6
+      - 6
+    weight: 1
+    type: text
+    name: Improved Sails

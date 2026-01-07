@@ -1,0 +1,25 @@
+_id: N4St5jvbmOZY1bgl
+_key: "!tables!N4St5jvbmOZY1bgl"
+name: Master Gunner (Martial)
+description: Does this man-of-war have a master gunner?
+img: icons/svg/d20-grey.svg
+formula: 1d6
+folder: mmY3v7ua3w3CEQPE
+results:
+  - _id: qsOzGFOehvTS1x7K
+    _key: "!tables.results!N4St5jvbmOZY1bgl.qsOzGFOehvTS1x7K"
+    range:
+      - 1
+      - 4
+    weight: 4
+    type: text
+    name: No Master Gunner
+  - _id: e3CurEwsrMIcSeJU
+    _key: "!tables.results!N4St5jvbmOZY1bgl.e3CurEwsrMIcSeJU"
+    range:
+      - 5
+      - 6
+    weight: 1
+    type: document
+    documentUuid: Compendium.revolutionary-pbshipgen.features.Item.rRwYfX3SR1rBh4jO
+    name: Master Gunner

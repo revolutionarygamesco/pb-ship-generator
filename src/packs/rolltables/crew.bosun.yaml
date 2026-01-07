@@ -1,0 +1,25 @@
+_id: 2NccJx0hJ4gDyk28
+_key: "!tables!2NccJx0hJ4gDyk28"
+name: Strict Bosun
+description: Does the ship have a strict bosun?
+img: icons/svg/d20-grey.svg
+formula: 1d6
+folder: mmY3v7ua3w3CEQPE
+results:
+  - _id: 1VGFQuVH6RF4f2bB
+    _key: "!tables.results!2NccJx0hJ4gDyk28.1VGFQuVH6RF4f2bB"
+    range:
+      - 1
+      - 4
+    weight: 4
+    type: text
+    name: No Strict Bosun
+  - _id: 0Honr60YdyPRPnHY
+    _key: "!tables.results!2NccJx0hJ4gDyk28.0Honr60YdyPRPnHY"
+    range:
+      - 5
+      - 6
+    weight: 2
+    type: document
+    documentUuid: Compendium.revolutionary-pbshipgen.features.Item.67OUgeWGhrTp629d
+    name: Strict Bosun

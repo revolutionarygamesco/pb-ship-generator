@@ -1,0 +1,25 @@
+_id: 1uqKawwe6iemyGy3
+_key: "!tables!1uqKawwe6iemyGy3"
+name: Dutch Ship Types
+description: Types of ships used by the Dutch West India Company.
+img: icons/svg/d20-grey.svg
+formula: 1d6
+folder: WMPgfSSX2OEovhhn
+results:
+  - _id: CBLaANgZW5rf8WSF
+    _key: "!tables.results!1uqKawwe6iemyGy3.CBLaANgZW5rf8WSF"
+    range:
+      - 1
+      - 5
+    weight: 5
+    type: document
+    documentUuid: Compendium.revolutionary-pbshipgen.rolltables.RollTable.l5ETTdXVDY41fmYp
+    name: Common Ship Types
+  - _id: nEHaTpqYoPUM6NwY
+    _key: "!tables.results!1uqKawwe6iemyGy3.nEHaTpqYoPUM6NwY"
+    range:
+      - 6
+      - 6
+    weight: .nan
+    type: text
+    name: Fluyt

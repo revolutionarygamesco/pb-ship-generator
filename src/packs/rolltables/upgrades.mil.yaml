@@ -1,0 +1,40 @@
+_id: gBflC3QT9aDiD60p
+_key: "!tables!gBflC3QT9aDiD60p"
+name: Man-of-War Upgrades
+description: The number of upgrades that a naval or privateer vessel should have.
+img: icons/svg/d20-grey.svg
+formula: 1d20
+folder: PALeCN8fMrudKzDv
+results:
+  - _id: NYYlPwK7sDvbALlJ
+    _key: "!tables.results!gBflC3QT9aDiD60p.NYYlPwK7sDvbALlJ"
+    range:
+      - 1
+      - 13
+    weight: 13
+    type: text
+    name: 0
+  - _id: aAKx8b1dl09U6i33
+    _key: "!tables.results!gBflC3QT9aDiD60p.aAKx8b1dl09U6i33"
+    range:
+      - 14
+      - 17
+    weight: 4
+    type: text
+    name: 1
+  - _id: hrbgWdki9WEglVVf
+    _key: "!tables.results!gBflC3QT9aDiD60p.hrbgWdki9WEglVVf"
+    range:
+      - 18
+      - 19
+    weight: 2
+    type: text
+    name: 2
+  - _id: BwnUtGQDWVLBwQXu
+    _key: "!tables.results!gBflC3QT9aDiD60p.BwnUtGQDWVLBwQXu"
+    range:
+      - 20
+      - 20
+    weight: 1
+    type: text
+    name: 3

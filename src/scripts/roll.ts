@@ -1,4 +1,4 @@
-import {specialty, tables} from './ids.ts'
+import { specialty, tables } from './ids.ts'
 import createShipDetails from './details.ts'
 import rollTable from './roll-table.ts'
 import shuffleArray from './randomizers/shuffle.ts'
@@ -38,7 +38,7 @@ const rollShip = async (
 
   // Check for upgrades & captain experience
   if (d.naval || d.pirate) {
-    const level = await rollTable(tables.upgrades.naval, { displayChat: false })
+    const level = await rollTable(tables.upgrades.martial, { displayChat: false })
     const n = level ? parseNumberUpgrades(level[0].name) : 0
     if (level && level.length > 1 && level[1].name) xp = level[1].name
     if (level && level.length > 2 && level[2].document) d.specialty.push(level[2].document)
@@ -46,7 +46,7 @@ const rollShip = async (
     const upgrades = shuffleArray(['upgrade-swivels', 'extra-swivels', 'upgrade-cannons', 'extra-cannons', 'armored', 'ram', 'sails'])
     d.upgrades = [...d.upgrades, ...upgrades.slice(0, n - d.upgrades.length)]
   } else {
-    const upgraded = await rollTable(tables.upgrades.merchant, { displayChat: false })
+    const upgraded = await rollTable(tables.upgrades.commercial, { displayChat: false })
     if (upgraded && upgraded[0].name === 'Improved sails') d.upgrades.push('sails')
 
     const drawn = await rollTable(tables.captain, { displayChat: false })
@@ -59,9 +59,9 @@ const rollShip = async (
   d.crewSize = crewSize && crewSize[0].name ? crewSize[0].name : 'Medium'
 
   // Check for specialty crew
-  const gunner = d.naval || d.pirate
-    ? tables.crew.special.gunner.naval
-    : tables.crew.special.gunner.merchant
+  const gunner = d.naval || d.pirate || d.nationality === 'Dutch'
+    ? tables.crew.special.gunner.martial
+    : tables.crew.special.gunner.commercial
   const drunk = d.pirate
     ? tables.crew.drunk.pirate
     : tables.crew.drunk.legit

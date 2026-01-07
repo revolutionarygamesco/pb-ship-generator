@@ -1,0 +1,25 @@
+_id: Ma0YEv1KxfstZMmw
+_key: "!tables!Ma0YEv1KxfstZMmw"
+name: Drunk Crew
+description: Is the crew drunk?
+img: icons/svg/d20-grey.svg
+formula: 1d10
+folder: mmY3v7ua3w3CEQPE
+results:
+  - _id: zAsv43p88WNLdclP
+    _key: "!tables.results!Ma0YEv1KxfstZMmw.zAsv43p88WNLdclP"
+    range:
+      - 1
+      - 1
+    weight: 1
+    type: document
+    documentUuid: Compendium.revolutionary-pbshipgen.features.Item.P89ELFOoYxzjuQSh
+    name: Drunk Crew
+  - _id: HEpVJIgvR3XQSklG
+    _key: "!tables.results!Ma0YEv1KxfstZMmw.HEpVJIgvR3XQSklG"
+    range:
+      - 2
+      - 10
+    weight: 9
+    type: text
+    name: Sober

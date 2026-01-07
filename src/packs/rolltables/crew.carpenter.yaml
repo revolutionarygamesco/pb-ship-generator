@@ -1,0 +1,25 @@
+_id: phJInv1Iy6nCRZdI
+_key: "!tables!phJInv1Iy6nCRZdI"
+name: Master Carpenter
+description: Does the ship have a master carpenter?
+img: icons/svg/d20-grey.svg
+formula: 1d10
+folder: mmY3v7ua3w3CEQPE
+results:
+  - _id: xkWEkjiLa1xKzeLX
+    _key: "!tables.results!phJInv1Iy6nCRZdI.xkWEkjiLa1xKzeLX"
+    range:
+      - 1
+      - 9
+    weight: 9
+    type: text
+    name: No Master Carpenter
+  - _id: cBGhc2LYHCzqZ7nx
+    _key: "!tables.results!phJInv1Iy6nCRZdI.cBGhc2LYHCzqZ7nx"
+    range:
+      - 10
+      - 10
+    weight: 1
+    type: document
+    documentUuid: Compendium.revolutionary-pbshipgen.features.Item.usyDHqr0Lg4jXWtN
+    name: Master Carpenter

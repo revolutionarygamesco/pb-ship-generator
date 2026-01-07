@@ -1,0 +1,25 @@
+_id: ewPtPqWpahcj078J
+_key: "!tables!ewPtPqWpahcj078J"
+name: Veteran Quartermaster
+description: Does the ship have a veteran quartermaster?
+img: icons/svg/d20-grey.svg
+formula: 1d20
+folder: mmY3v7ua3w3CEQPE
+results:
+  - _id: VSxbBy3VG9NUes1k
+    _key: "!tables.results!ewPtPqWpahcj078J.VSxbBy3VG9NUes1k"
+    range:
+      - 1
+      - 19
+    weight: 19
+    type: text
+    name: No Veteran Quartermaster
+  - _id: gPPsDTGIX4ygUUme
+    _key: "!tables.results!ewPtPqWpahcj078J.gPPsDTGIX4ygUUme"
+    range:
+      - 20
+      - 20
+    weight: 1
+    type: document
+    documentUuid: Compendium.revolutionary-pbshipgen.features.Item.Z3pAMBnBvSWRxFUm
+    name: Veteran Quartermaster

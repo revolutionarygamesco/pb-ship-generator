@@ -1,0 +1,25 @@
+_id: 7CEm9hB6JH0t9uiJ
+_key: "!tables!7CEm9hB6JH0t9uiJ"
+name: Drunk Pirate Crew
+description: Is the crew drunk?
+img: icons/svg/d20-grey.svg
+formula: 1d6
+folder: mmY3v7ua3w3CEQPE
+results:
+  - _id: uXWvQx6sUVWoTfld
+    _key: "!tables.results!7CEm9hB6JH0t9uiJ.uXWvQx6sUVWoTfld"
+    range:
+      - 1
+      - 2
+    weight: 2
+    type: document
+    documentUuid: Compendium.revolutionary-pbshipgen.features.Item.P89ELFOoYxzjuQSh
+    name: Drunk Crew
+  - _id: pBjC7299mqn4oyR8
+    _key: "!tables.results!7CEm9hB6JH0t9uiJ.pBjC7299mqn4oyR8"
+    range:
+      - 3
+      - 6
+    weight: 4
+    type: text
+    name: Sober

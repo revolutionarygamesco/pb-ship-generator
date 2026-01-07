@@ -1,0 +1,25 @@
+_id: 7dr4d7PEXDdL1RKT
+_key: "!tables!7dr4d7PEXDdL1RKT"
+name: Master Gunner (Commercial)
+description: Does this merchantman have a master gunner?
+img: icons/svg/d20-grey.svg
+formula: 1d20
+folder: mmY3v7ua3w3CEQPE
+results:
+  - _id: CVSS7NYn46ymcqAe
+    _key: "!tables.results!7dr4d7PEXDdL1RKT.CVSS7NYn46ymcqAe"
+    range:
+      - 1
+      - 19
+    weight: 19
+    type: text
+    name: No Master Gunner
+  - _id: 26ZSkqyYeCACVjGX
+    _key: "!tables.results!7dr4d7PEXDdL1RKT.26ZSkqyYeCACVjGX"
+    range:
+      - 20
+      - 20
+    weight: 1
+    type: document
+    documentUuid: Compendium.revolutionary-pbshipgen.features.Item.rRwYfX3SR1rBh4jO
+    name: Master Gunner
