@@ -18,6 +18,7 @@ const describeCaptain = async (
     type: details.type.toLowerCase(),
     ship: linkActor(ship),
     nation: details.captain.culture,
+    navy: localize(`${MODULE_ID}.navies.${details.nationality}`),
     sovereign
   }
 

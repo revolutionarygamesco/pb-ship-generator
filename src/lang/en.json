@@ -118,10 +118,10 @@
     },
     "captains": {
       "naval": {
-        "legendary": "{name} is a legendary captain of the {navy} {type}, the {ship}.",
-        "high": "{name} is a decorated and respected captain of the {navy} {type}, the {ship}.",
-        "medium": "{name} is a captain in the {navy} {type}, the {ship}.",
-        "low": "{name} is an inexperienced captain in the {navy} {type}, the {ship}."
+        "legendary": "{name} is a legendary captain of the {navy}, currently assigned to the {ship}.",
+        "high": "{name} is a decorated and respected captain of the {navy}, currently assigned to the {ship}.",
+        "medium": "{name} is a captain of the {navy}, currently assigned to the {ship}.",
+        "low": "{name} is an inexperienced captain of the {navy}, currently serving aboard his first command, the {ship}."
       },
       "privateer": {
         "legendary": "{name} is the legendary {nation} captain of the {ship}. He bears a letter of marque signed by the {sovereign}.",
@@ -146,6 +146,11 @@
       "Spanish": "King of Spain",
       "British": "King of England",
       "French": "King of France"
+    },
+    "navies": {
+      "Spanish": "Spanish Royal Armada",
+      "British": "British Royal Navy",
+      "French": "French Royal Navy"
     }
   }
 }
