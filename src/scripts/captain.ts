@@ -61,7 +61,7 @@ const getWeapon = (xp: string): {
 
 const chooseCulture = async (details: ShipDetails): Promise<Culture> => {
   if (details.use === 'Naval') return details.captain.culture
-  const reroll = details.pirate || chance(1, 10)
+  const reroll = details.pirate || chance(1, 100)
   const englishToCeltic = details.nationality === 'British' && chance(1, 3)
   if (!reroll && !englishToCeltic) return details.captain.culture
 
