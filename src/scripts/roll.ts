@@ -19,7 +19,9 @@ const rollShip = async (
 
   // Name the ship
   const namer = game.modules.get('revolutionary-piratenames')
-  if (namer) {
+  if (namer && d.pirate) {
+    d.name = await namer.api.generatePirateShipName()
+  } else if (namer) {
     const result = await namer.api.generateShipName({ colors: d.nationality, martial })
     d.name = typeof result === 'string'
       ? result

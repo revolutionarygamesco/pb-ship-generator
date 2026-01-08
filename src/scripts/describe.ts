@@ -22,9 +22,9 @@ const describeCaptain = async (
     sovereign
   }
 
-  const flavor = isLegendary(details)
-    ? localize(`${MODULE_ID}.captains.${details.use.toLowerCase()}.legendary`, data)
-    : localize(`${MODULE_ID}.captains.${details.use.toLowerCase()}.${details.captain.xp.toLowerCase()}`, data)
+  const level = isLegendary(details) ? 'legendary' : details.captain.xp.toLowerCase()
+  const kind = details.pirate ? 'pirate' : details.use.toLowerCase()
+  const flavor = localize(`${MODULE_ID}.captains.${kind}.${level}`, data)
 
   const desc = `<p><em>${flavor}</em></p>${captain.system?.description}`
   await captain.update({ 'system.description': desc })
