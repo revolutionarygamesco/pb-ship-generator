@@ -1,9 +1,8 @@
-import { specialty, tables } from './ids.ts'
+import { tables } from './ids.ts'
 import createShipDetails from './details.ts'
 import rollTable from './roll-table.ts'
 import shuffleArray from './randomizers/shuffle.ts'
 import generateCaptain from './captain.ts'
-import describeCaptain from './describe.ts'
 import fileActor from './file.ts'
 
 const parseNumberUpgrades = (str: string | undefined): number => {
@@ -16,19 +15,19 @@ const rollShip = async (
   details?: Partial<ShipDetails>
 ): Promise<{details: ShipDetails, captain: Actor }> => {
   const d = createShipDetails(details)
-  let xp = 'Medium'
+  const martial = d.type === 'Naval' || d.type === 'Privateer' || d.pirate
 
   // Name the ship
   const namer = game.modules.get('revolutionary-piratenames')
   if (namer) {
-    const result = await namer.api.generateShipName({ nation: d.nationality, naval: d.naval })
+    const result = await namer.api.generateShipName({ colors: d.nationality, martial })
     d.name = typeof result === 'string'
       ? result
       : `${result.religious} (${result.secular})`
   }
 
   // Check for ship type
-  const typeTable = d.naval
+  const typeTable = d.type === 'Naval'
     ? tables.types.naval
     : d.nationality === 'Dutch'
       ? tables.types.dutch
@@ -37,10 +36,10 @@ const rollShip = async (
   d.type = type && type[0].name ? type[0].name : 'Sloop'
 
   // Check for upgrades & captain experience
-  if (d.naval || d.pirate) {
+  if (martial) {
     const level = await rollTable(tables.upgrades.martial, { displayChat: false })
     const n = level ? parseNumberUpgrades(level[0].name) : 0
-    if (level && level.length > 1 && level[1].name) xp = level[1].name
+    if (level && level.length > 1 && level[1].name) d.captain.xp = level[1].name
     if (level && level.length > 2 && level[2].document) d.specialty.push(level[2].document)
 
     const upgrades = shuffleArray(['upgrade-swivels', 'extra-swivels', 'upgrade-cannons', 'extra-cannons', 'armored', 'ram', 'sails'])
@@ -50,7 +49,7 @@ const rollShip = async (
     if (upgraded && upgraded[0].name === 'Improved sails') d.upgrades.push('sails')
 
     const drawn = await rollTable(tables.captain, { displayChat: false })
-    if (drawn && drawn[0].name) xp = drawn[0].name
+    if (drawn && drawn[0].name) d.captain.xp = drawn[0].name
     if (drawn && drawn.length > 1 && drawn[1].document) d.specialty.push(drawn[1].document)
   }
 
@@ -59,7 +58,7 @@ const rollShip = async (
   d.crewSize = crewSize && crewSize[0].name ? crewSize[0].name : 'Medium'
 
   // Check for specialty crew
-  const gunner = d.naval || d.pirate || d.nationality === 'Dutch'
+  const gunner = martial || d.nationality === 'Dutch'
     ? tables.crew.special.gunner.martial
     : tables.crew.special.gunner.commercial
   const drunk = d.pirate
@@ -80,8 +79,7 @@ const rollShip = async (
     if (check && check[0].document) d.specialty.push(check[0].document)
   }
 
-  const captain = await generateCaptain(d.nationality, xp, d.specialty.includes(specialty.captain))
-  await describeCaptain(captain, d, xp)
+  const captain = await generateCaptain(d)
   await fileActor(captain, d)
 
   return { details: d, captain }

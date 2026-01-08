@@ -1,0 +1,8 @@
+_id: j8BssomUR0AQ1C0E
+_key: "!macros!j8BssomUR0AQ1C0E"
+name: Generate Ship
+type: script
+scope: global
+img: icons/svg/d20-grey.svg
+command: |
+  await game.modules.get('revolutionary-pbshipgen').api.openGenerateShipDialog()

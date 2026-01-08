@@ -1,5 +1,15 @@
+import { tables } from './ids.ts'
 import randomizeBetween from './randomizers/between.ts'
 import randomChance from './randomizers/chance.ts'
+import rollTable from './roll-table.ts'
+import isLegendary from './utilities/legendary.ts'
+import chance from './randomizers/chance.ts'
+
+const isCulture = (candidate: unknown): candidate is Culture => {
+  if (typeof candidate !== 'string') return false
+  const cultures = ['Spanish', 'English', 'Scottish', 'Welsh', 'Irish', 'French', 'Dutch']
+  return cultures.includes(candidate)
+}
 
 const generateCaptainHP = (
   xp: string,
@@ -49,14 +59,28 @@ const getWeapon = (xp: string): {
   }
 }
 
-const generateCaptain = async (
-  nation: Nationality,
-  xp: string,
-  legendary: boolean = false
-): Promise<Actor> => {
+const chooseCulture = async (details: ShipDetails): Promise<Culture> => {
+  if (details.use === 'Naval') return details.captain.culture
+  const reroll = details.pirate || chance(1, 10)
+  const englishToCeltic = details.nationality === 'British' && chance(1, 3)
+  if (!reroll && !englishToCeltic) return details.captain.culture
+
+  const table = details.pirate
+    ? tables.cultures.pirate
+    : englishToCeltic ? tables.cultures.celtic : tables.cultures.legit
+  const drawn = await rollTable(table, { displayChat: false })
+  const desc = drawn && drawn[0] ? drawn[0].description : undefined
+  return isCulture(desc) ? desc : details.captain.culture
+}
+
+const generateCaptain = async (details: ShipDetails): Promise<Actor> => {
+  const { xp } = details.captain
+  const legendary = isLegendary(details)
+  const culture = await chooseCulture(details)
+
   const namer = game.modules.get('revolutionary-piratenames')
   const name = namer
-    ? `Captain ${await namer.api.generateName(nation, 'Masculine')}`
+    ? `Captain ${await namer.api.generateName(culture, 'Masculine')}`
     : 'Captain'
 
   const capt = await foundry.documents.Actor.create({ name, type: 'creature', img: 'systems/pirateborg/icons/misc/monster.png' })

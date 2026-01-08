@@ -42,6 +42,7 @@ Hooks.once('ready', async () => {
     const path = `captains.nation.${nation}`
     const root = await createFolder(`${path}.root`, captains)
     await createFolder(`${path}.merchant`, root)
+    await createFolder(`${path}.privateer`, root)
     await createFolder(`${path}.naval`, root)
   }
 
@@ -52,6 +53,7 @@ Hooks.once('ready', async () => {
     const path = `ships.nation.${nation}`
     const root = await createFolder(`${path}.root`, ships)
     await createFolder(`${path}.merchant`, root)
+    await createFolder(`${path}.privateer`, root)
     await createFolder(`${path}.naval`, root)
   }
 })

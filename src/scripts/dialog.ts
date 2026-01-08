@@ -9,29 +9,45 @@ const isNationality = (candidate: unknown): candidate is Nationality => {
   return valid.includes(candidate)
 }
 
+const isUse = (candidate: unknown): candidate is Use => {
+  if (typeof candidate !== 'string') return false
+  const valid = ['Merchant', 'Naval', 'Privateer']
+  return valid.includes(candidate)
+}
+
+const setOption = (opt: HTMLOptionElement, hide: boolean = false) => {
+  opt.hidden = hide
+  opt.disabled = hide
+}
+
 const filterTypeOptions = (
   nationalities: NodeListOf<HTMLInputElement>,
-  purposes: HTMLSelectElement,
+  uses: HTMLSelectElement,
   types: HTMLSelectElement
 ) => {
   const nation = Array.from(nationalities).find(input => input.checked)?.value
-  const purpose = purposes.value
+  const use = uses.value
   const options = Array.from(types.options)
 
-  for (const option of options) {
+  for (const use of Array.from(uses.options)) {
+    let hide = false
+    if (nation === 'Dutch' && use.value === 'Naval') hide = true
+    if (nation === 'Pirate' && use.value !== 'Privateer') hide = true
+    setOption(use, hide)
+  }
+
+  for (const type of Array.from(types.options)) {
     const requirements = {
-      nation: option.dataset.nationality,
-      purpose: option.dataset.purpose
+      nation: type.dataset.nationality,
+      use: type.dataset.use
     }
 
     let hide = false
     if (requirements.nation && requirements.nation !== nation) hide = true
-    if (requirements.purpose && requirements.purpose !== purpose) hide = true
+    if (requirements.use && requirements.use !== use) hide = true
+    setOption(type, hide)
 
-    option.hidden = hide
-    option.disabled = hide
-
-    if (hide && option.selected) {
+    if (hide && type.selected) {
       const rnd = options.find(opt => opt.value === 'random')
       if (rnd) rnd.selected = true
     }
@@ -53,9 +69,7 @@ const defaultOnComplete = async (
     ? localize(`${MODULE_ID}.message.content.pirate`, links)
     : details.nationality === 'Dutch'
       ? localize(`${MODULE_ID}.message.content.dutch`, links)
-      : details.naval
-        ? localize(`${MODULE_ID}.message.content.${details.nationality.toLowerCase()}.naval`, links)
-        : localize(`${MODULE_ID}.message.content.${details.nationality.toLowerCase()}.merchant`, links)
+      : localize(`${MODULE_ID}.message.content.${details.nationality.toLowerCase()}.${details.use.toLowerCase()}`, links)
 
   await foundry.documents.ChatMessage.create({
     speaker: { alias: localize(`${MODULE_ID}.message.speaker`) },
@@ -80,8 +94,8 @@ const openGenerateShipDialog = async (
     return `<li>${input}\n${label}</li>`
   }).join('\n')
 
-  const purposes = ['random', 'merchant', 'naval'].map(t => {
-    const value = localize(`${MODULE_ID}.dialog.purpose.options.${t}`)
+  const uses = ['Random', 'Merchant', 'Privateer', 'Naval'].map(t => {
+    const value = localize(`${MODULE_ID}.dialog.use.options.${t}`)
     return t === 'random'
       ? `<option value="${t}" selected>${value}</option>`
       : `<option value="${t}">${value}</option>`
@@ -90,7 +104,7 @@ const openGenerateShipDialog = async (
   const types = ['random', 'brigantine', 'fluyt', 'frigate', 'manowar', 'sloop'].map(t => {
     const data: Record<string, string> = {}
     if (t === 'fluyt') data.nationality = 'Dutch'
-    if (t === 'manowar') data.purpose = 'naval'
+    if (t === 'manowar') data.use = 'Naval'
     let attrs = Object.keys(data)
       .map(key => `data-${key}="${data[key]}"`)
       .join(' ')
@@ -114,14 +128,14 @@ const openGenerateShipDialog = async (
           </ul>
         </fieldset>
         <fieldset class="generate-ship-dialog-other">
-          <label for="generate-ship-dialog-purpose">
-            ${localize(`${MODULE_ID}.dialog.purpose.label`)}
+          <label for="generate-ship-dialog-use">
+            ${localize(`${MODULE_ID}.dialog.use.label`)}
           </label>
           <p class="hint">
-            ${localize(`${MODULE_ID}.dialog.purpose.hint`)}
+            ${localize(`${MODULE_ID}.dialog.use.hint`)}
           </p>
-          <select name="purpose" id="generate-ship-dialog-purpose">
-            ${purposes}
+          <select name="use" id="generate-ship-dialog-use">
+            ${uses}
           </select>
           
           <label for="generate-ship-dialog-type">
@@ -144,19 +158,17 @@ const openGenerateShipDialog = async (
           if (!coll) return
 
           const nation: string | undefined = (coll.namedItem('nationality') as RadioNodeList).value
-          const purpose: string | undefined = (coll.namedItem('purpose') as HTMLSelectElement).value
+          const use: string | undefined = (coll.namedItem('use') as HTMLSelectElement).value
           const type: string | undefined = (coll.namedItem('type') as HTMLSelectElement).value
 
           const determined: Partial<ShipDetails> = {}
           if (isNationality(nation)) determined.nationality = nation
           if (nation === 'Pirate') determined.pirate = true
-          if (purpose === 'naval') determined.naval = true
-          if (purpose === 'merchant') determined.naval = false
+          if (isUse(use)) determined.use = use
           if (type !== 'random') determined.type = type
 
           const { captain, details } = await rollShip(determined)
           const ship = await generateShip(details, captain)
-
           await onComplete(details, ship, captain)
         }
       },
@@ -172,15 +184,15 @@ const openGenerateShipDialog = async (
 
   await dialog.render(true)
   const html = dialog.element
-  const elements: { nations: NodeListOf<HTMLInputElement>, purposes: HTMLSelectElement, types: HTMLSelectElement } = {
+  const elements: { nations: NodeListOf<HTMLInputElement>, uses: HTMLSelectElement, types: HTMLSelectElement } = {
     nations: html.querySelectorAll('input[name="nationality"]') as NodeListOf<HTMLInputElement>,
-    purposes: html.querySelector('select[name="purpose"]') as HTMLSelectElement,
+    uses: html.querySelector('select[name="use"]') as HTMLSelectElement,
     types: html.querySelector('select[name="type"]') as HTMLSelectElement
   }
 
-  const handler = () => filterTypeOptions(elements.nations, elements.purposes, elements.types)
+  const handler = () => filterTypeOptions(elements.nations, elements.uses, elements.types)
   elements.nations.forEach(input => input.addEventListener('change', handler))
-  elements.purposes.addEventListener('change', handler)
+  elements.uses.addEventListener('change', handler)
   handler()
 }
 

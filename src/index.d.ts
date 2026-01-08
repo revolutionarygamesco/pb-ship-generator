@@ -155,7 +155,9 @@ declare const foundry: {
   }
 }
 
+type Culture = 'Spanish' | 'English' | 'Scottish' | 'Welsh' | 'Irish' | 'French' | 'Dutch'
 type Nationality = 'Spanish' | 'British' | 'French' | 'Dutch'
+type Use = 'Merchant' | 'Naval' | 'Privateer'
 
 interface RollTableResult {
   type?: string
@@ -175,11 +177,15 @@ interface RollTableOptions {
 
 interface ShipDetails {
   nationality: Nationality
-  naval: boolean
+  use: Use
   pirate: boolean
   upgrades: string[]
   specialty: string[]
   name: string
   type: string
   crewSize: string
+  captain: {
+    culture: Culture,
+    xp: string
+  }
 }

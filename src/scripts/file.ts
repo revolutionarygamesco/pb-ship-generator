@@ -28,9 +28,7 @@ const fileActor = async (
 
   const national = `${base}.nation.${details.nationality.toLowerCase()}`
   path.push(`${national}.root`)
-
-  const sub = details.naval ? 'naval' : 'merchant'
-  path.push(`${national}.${sub}`)
+  path.push(`${national}.${details.use.toLowerCase()}`)
 
   const folder = findFolder(path.map(path => localize(path)).join('/'))
   if (folder) await actor.update({ folder })

@@ -13,13 +13,14 @@
           "Random": "Random"
         }
       },
-      "purpose": {
-        "label": "Purpose",
-        "hint": "Is this a naval ship or a civilian merchant ship?",
+      "use": {
+        "label": "Use",
+        "hint": "Is this a merchant ship, a private man-of-war (privateer), or a navy vessel?",
         "options": {
-          "merchant": "Merchant Ship",
-          "naval": "Naval Ship",
-          "random": "Random"
+          "Merchant": "Merchant Ship (Merchantman)",
+          "Privateer": "Private Man-of-War (Privateer)",
+          "Naval": "Navy Vessel",
+          "Random": "Random"
         }
       },
       "type": {
@@ -47,14 +48,17 @@
         "dutch": "{ship}, a {type} of the Dutch West India Company commanded by {captain}",
         "spanish": {
           "naval": "{ship}, a {type} of the Spanish Royal Armada commanded by {captain}",
+          "privateer": "{ship}, an armed {type} commanded by {captain}, bearing a letter of marque signed by the King of Spain",
           "merchant": "{ship}, a Spanish merchant {type} commanded by {captain}"
         },
         "british": {
           "naval": "{ship}, a {type} of the British Royal Navy commanded by {captain}",
+          "privateer": "{ship}, an armed {type} commanded by {captain}, bearing a letter of marque signed by the King of England",
           "merchant": "{ship}, a British merchant {type} commanded by {captain}"
         },
         "french": {
           "naval": "{ship}, a {type} of the French Royal Navy commanded by {captain}",
+          "privateer": "{ship}, an armed {type} commanded by {captain}, bearing a letter of marque signed by the King of France",
           "merchant": "{ship}, a French merchant {type} commanded by {captain}"
         }
       }
@@ -68,17 +72,20 @@
           "spanish": {
             "root": "Spanish Captains",
             "merchant": "Spanish Merchant Captains",
-            "naval": "Spanish Royal Armada Captains"
+            "naval": "Spanish Royal Armada Captains",
+            "privateer": "Spanish Privateers"
           },
           "british": {
             "root": "British Captains",
             "merchant": "British Merchant Captains",
-            "naval": "British Royal Navy Captains"
+            "naval": "British Royal Navy Captains",
+            "privateer": "British Privateers"
           },
           "french": {
             "root": "French Captains",
             "merchant": "French Merchant Captains",
-            "naval": "French Royal Navy Captains"
+            "naval": "French Royal Navy Captains",
+            "privateer": "French Privateers"
           },
           "dutch": "Dutch West India Company"
         }
@@ -90,21 +97,55 @@
           "spanish": {
             "root": "Spanish Ships",
             "merchant": "Spanish Merchantmen",
+            "privateer": "Spanish Privateer Ships",
             "naval": "Spanish Royal Armada"
           },
           "british": {
             "root": "British Ships",
             "merchant": "British Merchantmen",
+            "privateer": "British Privateer Ships",
             "naval": "British Royal Navy"
           },
           "french": {
             "root": "French Ships",
             "merchant": "French Merchantmen",
+            "privateer": "French Privateer Ships",
             "naval": "French Royal Navy"
           },
           "dutch": "Dutch West India Company"
         }
       }
+    },
+    "captains": {
+      "naval": {
+        "legendary": "{name} is a legendary captain of the {navy} {type}, the {ship}.",
+        "high": "{name} is a decorated and respected captain of the {navy} {type}, the {ship}.",
+        "medium": "{name} is a captain in the {navy} {type}, the {ship}.",
+        "low": "{name} is an inexperienced captain in the {navy} {type}, the {ship}."
+      },
+      "privateer": {
+        "legendary": "{name} is the legendary {nation} captain of the {ship}. He bears a letter of marque signed by the {sovereign}.",
+        "high": "{name} is the experienced and respected {nation} captain of the {ship}. He bears a letter of marque signed by the {sovereign}.",
+        "medium": "{name} is the {nation} captain of the {ship}. He bears a letter of marque signed by the {sovereign}.",
+        "low": "{name} is the inexperienced {nation} captain of the {ship}. He bears a letter of marque signed by the {sovereign}."
+      },
+      "merchant": {
+        "legendary": "{name} is the captain of the {ship} and a legend among {nation} traders and merchants for his ability to outrun pirates and bring his cargo to port.",
+        "high": "{name} is the respected captain of the {nation} {type}, the {ship}.",
+        "medium": "{name} is the captain of the {nation} {type}, the {ship}.",
+        "low": "{name} has earned enough confidence from {nation} investors to secure a captaincy, but not yet the confidence of the {ship}."
+      },
+      "pirate": {
+        "legendary": "{name} is the notorious captain of the pirate {type}, the {ship}.",
+        "high": "{name} is the seasoned captain of the pirate {type}, the {ship}.",
+        "medium": "{name} is the captain of the pirate {type}, the {ship}.",
+        "low": "{name} is the inexperienced captain of the pirate {type}, the {ship}."
+      }
+    },
+    "sovereigns": {
+      "Spanish": "King of Spain",
+      "British": "King of England",
+      "French": "King of France"
     }
   }
 }

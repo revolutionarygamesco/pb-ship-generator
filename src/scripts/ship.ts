@@ -2,6 +2,7 @@ import randomizeBetween from './randomizers/between.ts'
 import upgradeDie from './upgrade.ts'
 import fileActor from './file.ts'
 import { isPremium, icons, tokens } from './premium.ts'
+import describeCaptain from './describe.ts'
 
 const baseShip = { type: 'vehicle', img: 'systems/pirateborg/icons/misc/ship.png' }
 const premiumRoot = 'modules/pirate-borg-premium/'
@@ -207,7 +208,7 @@ const generateShip = async (
   }
 
   // Superior Firepower: Naval ships increase attack dice by one size (p. 112)
-  if (details.naval) {
+  if (details.use === 'Naval') {
     await ship.update({
       'system.weapons.broadsides.die': upgradeDie(ship.system?.weapons?.broadsides?.die ?? 'd4'),
       'system.weapons.smallArms.die': upgradeDie(ship.system?.weapons?.smallArms?.die ?? 'd4'),
@@ -239,6 +240,7 @@ const generateShip = async (
   }
 
   await ship.update(upgrades)
+  await describeCaptain(captain, ship, details)
   await fileActor(ship, details)
 
   return ship

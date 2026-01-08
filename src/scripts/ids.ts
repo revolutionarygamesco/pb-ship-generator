@@ -1,9 +1,15 @@
 export const tables = {
+  cultures: {
+    legit: 'Compendium.revolutionary-piratenames.rolltables.RollTable.h0phd8lv3WDfTIob',
+    pirate: 'Compendium.revolutionary-piratenames.rolltables.RollTable.S3jEhiwdL6Pry0nK',
+    celtic: 'Compendium.revolutionary-piratenames.rolltables.RollTable.600RHZKkT52dIm3K'
+  },
   types: {
     base: 'Compendium.revolutionary-pbshipgen.tables.RollTable.l5ETTdXVDY41fmYp',
     dutch: 'Compendium.revolutionary-pbshipgen.tables.RollTable.1uqKawwe6iemyGy3',
     naval: 'Compendium.revolutionary-pbshipgen.tables.RollTable.u16yVy6G9F2wkNeV'
   },
+  uses: 'Compendium.revolutionary-pbshipgen.tables.RollTable.sg7YFtSjHjlasO7m',
   upgrades: {
     martial: 'Compendium.revolutionary-pbshipgen.tables.RollTable.gBflC3QT9aDiD60p',
     commercial: 'Compendium.revolutionary-pbshipgen.tables.RollTable.QfQEHZpRe2eHxeG3'

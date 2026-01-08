@@ -1,0 +1,32 @@
+_id: sg7YFtSjHjlasO7m
+_key: "!tables!sg7YFtSjHjlasO7m"
+name: Ship Uses
+description: Is the ship a merchantman, a private man-of-war (privateer vessel),
+  or a ship of the royal navy?
+img: icons/svg/d20-grey.svg
+formula: 1d20
+results:
+  - _id: 8GhF0AyJzKFEbhDI
+    _key: "!tables.results!sg7YFtSjHjlasO7m.8GhF0AyJzKFEbhDI"
+    range:
+      - 1
+      - 1
+    weight: 1
+    type: text
+    name: Naval
+  - _id: fLotCQKCm628fCJ5
+    _key: "!tables.results!sg7YFtSjHjlasO7m.fLotCQKCm628fCJ5"
+    range:
+      - 2
+      - 3
+    weight: 2
+    type: text
+    name: Privateer
+  - _id: Fir2blPJQAa8FCwr
+    _key: "!tables.results!sg7YFtSjHjlasO7m.Fir2blPJQAa8FCwr"
+    range:
+      - 4
+      - 20
+    weight: 17
+    type: text
+    name: Merchant
