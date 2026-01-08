@@ -112,8 +112,8 @@ const openGenerateShipDialog = async (
     const value = localize(`${MODULE_ID}.dialog.type.options.${t}`)
     if (t === 'random') attrs += ' selected'
     return attrs.length > 0
-      ? `<option value="${t}" ${attrs}>${value}</option>`
-      : `<option value="${t}">${value}</option>`
+      ? `<option value="${value}" ${attrs}>${value}</option>`
+      : `<option value="${value}">${value}</option>`
   }).join('\n')
 
   const dialog = new foundry.applications.api.DialogV2({

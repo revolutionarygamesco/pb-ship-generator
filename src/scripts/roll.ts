@@ -27,13 +27,15 @@ const rollShip = async (
   }
 
   // Check for ship type
-  const typeTable = d.type === 'Naval'
-    ? tables.types.naval
-    : d.nationality === 'Dutch'
-      ? tables.types.dutch
-      : tables.types.base
-  const type = await rollTable(typeTable, { displayChat: false })
-  d.type = type && type[0].name ? type[0].name : 'Sloop'
+  if (!d.type || d.type === 'Random') {
+    const typeTable = d.type === 'Naval'
+      ? tables.types.naval
+      : d.nationality === 'Dutch'
+        ? tables.types.dutch
+        : tables.types.base
+    const type = await rollTable(typeTable, {displayChat: false})
+    d.type = type && type[0].name ? type[0].name : 'Sloop'
+  }
 
   // Check for upgrades & captain experience
   if (martial) {
