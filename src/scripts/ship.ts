@@ -51,7 +51,7 @@ const generateSloop = async (details: ShipDetails): Promise<Actor> => {
 
   if (isPremium()) {
     update['img'] = premiumRoot + icons.sloop
-    update['prototypeToken.texture.source'] = premiumRoot + tokens.sloop
+    update['prototypeToken.texture.src'] = premiumRoot + tokens.sloop
   }
 
   await ship.update(update)
