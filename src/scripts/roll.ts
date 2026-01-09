@@ -35,7 +35,7 @@ const rollShip = async (
       : d.nationality === 'Dutch'
         ? tables.types.dutch
         : tables.types.base
-    const type = await rollTable(typeTable, {displayChat: false})
+    const type = await rollTable(typeTable, { displayChat: false })
     d.type = type && type[0].name ? type[0].name : 'Sloop'
   }
 
@@ -50,7 +50,7 @@ const rollShip = async (
     d.upgrades = [...d.upgrades, ...upgrades.slice(0, n - d.upgrades.length)]
   } else {
     const upgraded = await rollTable(tables.upgrades.commercial, { displayChat: false })
-    if (upgraded && upgraded[0].name === 'Improved sails') d.upgrades.push('sails')
+    if (upgraded && upgraded[0].name === 'Improved Sails') d.upgrades.push('sails')
 
     const drawn = await rollTable(tables.captain, { displayChat: false })
     if (drawn && drawn[0].name) d.captain.xp = drawn[0].name
