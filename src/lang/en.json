@@ -45,7 +45,10 @@
       "flavor": "Draws a ship.",
       "content": {
         "pirate": "{ship}, a pirate {type} commanded by {captain}",
-        "dutch": "{ship}, a {type} of the Dutch West India Company commanded by {captain}",
+        "dutch": {
+          "privateer": "{ship}, an armed {type} of the Dutch West India Company commanded by {captain}",
+          "merchant": "{ship}, a {type} of the Dutch West India Company commanded by {captain}"
+        },
         "spanish": {
           "naval": "{ship}, a {type} of the Spanish Royal Armada commanded by {captain}",
           "privateer": "{ship}, an armed {type} commanded by {captain}, bearing a letter of marque signed by the King of Spain",
@@ -117,6 +120,12 @@
       }
     },
     "captains": {
+      "dutch": {
+        "legendary": "{name} is a legendary captain employed by the Dutch West India Company, currently assigned to the {ship}.",
+        "high": "{name} is an experienced and respected captain employed by the Dutch West India Company, currently assigned to the {ship}.",
+        "medium": "{name} is a captain employed by the Dutch West India Company, currently assigned to the {ship}.",
+        "low": "{name} is an inexperienced captain employed by the Dutch West India Company, currently assigned to the {ship}."
+      },
       "naval": {
         "legendary": "{name} is a legendary captain of the {navy}, currently assigned to the {ship}.",
         "high": "{name} is a decorated and respected captain of the {navy}, currently assigned to the {ship}.",

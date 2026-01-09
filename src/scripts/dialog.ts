@@ -69,9 +69,7 @@ const defaultOnComplete = async (
 
   const content = details.pirate
     ? localize(`${MODULE_ID}.message.content.pirate`, links)
-    : details.nationality === 'Dutch'
-      ? localize(`${MODULE_ID}.message.content.dutch`, links)
-      : localize(`${MODULE_ID}.message.content.${details.nationality.toLowerCase()}.${details.use.toLowerCase()}`, links)
+    : localize(`${MODULE_ID}.message.content.${details.nationality.toLowerCase()}.${details.use.toLowerCase()}`, links)
 
   await foundry.documents.ChatMessage.create({
     speaker: { alias: localize(`${MODULE_ID}.message.speaker`) },

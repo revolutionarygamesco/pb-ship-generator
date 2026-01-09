@@ -23,7 +23,7 @@ const describeCaptain = async (
   }
 
   const level = isLegendary(details) ? 'legendary' : details.captain.xp.toLowerCase()
-  const kind = details.pirate ? 'pirate' : details.use.toLowerCase()
+  const kind = details.pirate ? 'pirate' : details.nationality === 'Dutch' ? 'dutch' : details.use.toLowerCase()
   const flavor = localize(`${MODULE_ID}.captains.${kind}.${level}`, data)
 
   const desc = `<p><em>${flavor}</em></p>${captain.system?.description}`
