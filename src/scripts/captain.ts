@@ -4,13 +4,13 @@ import randomChance from './randomizers/chance.ts'
 import rollTable from './roll-table.ts'
 import isLegendary from './utilities/legendary.ts'
 
-const isCulture = (candidate: unknown): candidate is Culture => {
+export const isCulture = (candidate: unknown): candidate is Culture => {
   if (typeof candidate !== 'string') return false
   const cultures = ['Spanish', 'English', 'Scottish', 'Welsh', 'Irish', 'French', 'Dutch']
   return cultures.includes(candidate)
 }
 
-const generateCaptainHP = (
+export const generateCaptainHP = (
   xp: string,
   legendary: boolean = false
 ): number => {
@@ -26,7 +26,7 @@ const generateCaptainHP = (
     : randomizeBetween(min, max)
 }
 
-const generateCaptainMorale = (
+export const generateCaptainMorale = (
   xp: string,
   legendary: boolean = false
 ): number => {
@@ -42,7 +42,7 @@ const generateCaptainMorale = (
     : randomizeBetween(min, max)
 }
 
-const getWeapon = (xp: string): {
+export const getWeapon = (xp: string): {
   description: string,
   formula: string
 } => {
