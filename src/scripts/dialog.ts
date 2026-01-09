@@ -176,7 +176,7 @@ const openGenerateShipDialog = async (
             usage = 'Privateer'
           } else if (use === 'Random') {
             const result = await rollTable(tables.uses, { displayChat: false })
-            if (result && isUse(result[0].description)) { usage = result[0].description }
+            if (result && isUse(result[0].name)) { usage = result[0].name }
           }
 
           if (nation === 'Pirate' && usage !== 'Privateer') { usage = 'Privateer' }
