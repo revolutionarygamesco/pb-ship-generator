@@ -3,7 +3,6 @@ import randomizeBetween from './randomizers/between.ts'
 import randomChance from './randomizers/chance.ts'
 import rollTable from './roll-table.ts'
 import isLegendary from './utilities/legendary.ts'
-import chance from './randomizers/chance.ts'
 
 const isCulture = (candidate: unknown): candidate is Culture => {
   if (typeof candidate !== 'string') return false
@@ -61,8 +60,8 @@ const getWeapon = (xp: string): {
 
 const chooseCulture = async (details: ShipDetails): Promise<Culture> => {
   if (details.use === 'Naval') return details.captain.culture
-  const reroll = details.pirate || chance(1, 100)
-  const englishToCeltic = details.nationality === 'British' && chance(1, 3)
+  const reroll = details.pirate || randomChance(1, 100).check
+  const englishToCeltic = details.nationality === 'British' && randomChance(1, 3).check
   if (!reroll && !englishToCeltic) return details.captain.culture
 
   const table = details.pirate
