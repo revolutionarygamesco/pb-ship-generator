@@ -2,11 +2,11 @@ import randomizeBetween from './randomizers/between.ts'
 import upgradeDie from './upgrade.ts'
 import fileActor from './file.ts'
 import describeCaptain from './describe.ts'
-import { isPremium, icons, tokens } from './premium.ts'
+import { isPremium } from './premium.ts'
 import { fromUuid } from './wrapper.ts'
+import shipStats from './ship.stats.ts'
 
 const baseShip = { type: 'vehicle', img: 'systems/pirateborg/icons/misc/ship.png' }
-const premiumRoot = 'modules/pirate-borg-premium/'
 
 const calculateCrewSize = (range: [number, number], min: number, max: number): number => {
   const window = max - min
@@ -25,188 +25,42 @@ const getCrewSize = (desc: string, min: number, max: number): number => {
   }
 }
 
-const generateSloop = async (details: ShipDetails): Promise<Actor> => {
-  const ship = await foundry.documents.Actor.create({ name: details.name, ...baseShip })
-  const update: Record<string, any> = {
-    'system.attributes.hp.max': 30,
-    'system.attributes.hp.value': 30,
-    'system.attributes.hull.min': 0,
-    'system.attributes.hull.max': 2,
-    'system.attributes.hull.value': 1,
-    'system.abilities.agility.value': 2,
-    'system.attributes.speed.max': 5,
-    'system.attributes.speed.value': 5,
-    'system.attributes.speed.min': 0,
-    'system.abilities.skill.value': -1,
-    'system.weapons.broadsides.die': 'd6',
-    'system.weapons.broadsides.quantity': 1,
-    'system.weapons.smallArms.die': 'd4',
-    'system.weapons.smallArms.quantity': 1,
-    'system.weapons.rams.die': 'd4',
-    'system.attributes.crew.min': 3,
-    'system.attributes.crew.max': 10,
-    'system.attributes.crew.value': getCrewSize(details.crewSize, 3, 10),
-    'system.attributes.cargo.max': 2,
-    'system.attributes.cargo.value': 0
-  }
-
-  if (isPremium()) {
-    update['img'] = premiumRoot + icons.sloop
-    update['prototypeToken.texture.src'] = premiumRoot + tokens.sloop
-  }
-
-  await ship.update(update)
-  return ship
-}
-
-const generateBrigntine = async (details: ShipDetails): Promise<Actor> => {
-  const ship = await foundry.documents.Actor.create({ name: details.name, ...baseShip })
-  const update: Record<string, any> = {
-    'system.attributes.hp.max': 40,
-    'system.attributes.hp.value': 40,
-    'system.attributes.hull.min': 0,
-    'system.attributes.hull.max': 3,
-    'system.attributes.hull.value': 2,
-    'system.abilities.agility.value': 1,
-    'system.attributes.speed.max': 4,
-    'system.attributes.speed.value': 4,
-    'system.attributes.speed.min': 0,
-    'system.abilities.skill.value': 0,
-    'system.weapons.broadsides.die': 'd8',
-    'system.weapons.broadsides.quantity': 1,
-    'system.weapons.smallArms.die': 'd4',
-    'system.weapons.smallArms.quantity': 1,
-    'system.weapons.rams.die': 'd6',
-    'system.attributes.crew.min': 15,
-    'system.attributes.crew.max': 30,
-    'system.attributes.crew.value': getCrewSize(details.crewSize, 15, 30),
-    'system.attributes.cargo.max': 3,
-    'system.attributes.cargo.value': 0
-  }
-
-  if (isPremium()) {
-    update['img'] = premiumRoot + icons.brigantine
-    update['prototypeToken.texture.src'] = premiumRoot + tokens.brigantine
-  }
-
-  await ship.update(update)
-  return ship
-}
-
-const generateFluyt = async (details: ShipDetails): Promise<Actor> => {
-  const ship = await foundry.documents.Actor.create({ name: details.name, ...baseShip })
-  const update: Record<string, any> = {
-    'system.attributes.hp.max': 50,
-    'system.attributes.hp.value': 50,
-    'system.attributes.hull.min': 0,
-    'system.attributes.hull.max': 3,
-    'system.attributes.hull.value': 2,
-    'system.abilities.agility.value': -1,
-    'system.attributes.speed.max': 4,
-    'system.attributes.speed.value': 4,
-    'system.attributes.speed.min': 0,
-    'system.abilities.skill.value': 0,
-    'system.weapons.broadsides.die': 'd10',
-    'system.weapons.broadsides.quantity': 1,
-    'system.weapons.smallArms.die': 'd6',
-    'system.weapons.smallArms.quantity': 1,
-    'system.weapons.rams.die': 'd6',
-    'system.attributes.crew.min': 10,
-    'system.attributes.crew.max': 40,
-    'system.attributes.crew.value': getCrewSize(details.crewSize, 10, 40),
-    'system.attributes.cargo.max': 5,
-    'system.attributes.cargo.value': 0
-  }
-
-  if (isPremium()) {
-    update['img'] = premiumRoot + icons.fluyt
-    update['prototypeToken.texture.src'] = premiumRoot + tokens.frigate
-  }
-
-  await ship.update(update)
-  return ship
-}
-
-const generateFrigate = async (details: ShipDetails): Promise<Actor> => {
-  const ship = await foundry.documents.Actor.create({ name: details.name, ...baseShip })
-  const update: Record<string, any> = {
-    'system.attributes.hp.max': 60,
-    'system.attributes.hp.value': 60,
-    'system.attributes.hull.min': 0,
-    'system.attributes.hull.max': 3,
-    'system.attributes.hull.value': 2,
-    'system.abilities.agility.value': 0,
-    'system.attributes.speed.max': 4,
-    'system.attributes.speed.value': 4,
-    'system.attributes.speed.min': 0,
-    'system.abilities.skill.value': 1,
-    'system.weapons.broadsides.die': 'd8',
-    'system.weapons.broadsides.quantity': 2,
-    'system.weapons.smallArms.die': 'd6',
-    'system.weapons.smallArms.quantity': 1,
-    'system.weapons.rams.die': 'd6',
-    'system.attributes.crew.min': 24,
-    'system.attributes.crew.max': 48,
-    'system.attributes.crew.value': getCrewSize(details.crewSize, 24, 48),
-    'system.attributes.cargo.max': 4,
-    'system.attributes.cargo.value': 0
-  }
-
-  if (isPremium()) {
-    update['img'] = premiumRoot + icons.frigate
-    update['prototypeToken.texture.src'] = premiumRoot + tokens.frigate
-  }
-
-  await ship.update(update)
-  return ship
-}
-
-const generateManOWar = async (details: ShipDetails): Promise<Actor> => {
-  const ship = await foundry.documents.Actor.create({ name: details.name, ...baseShip })
-  const update: Record<string, any> = {
-    'system.attributes.hp.max': 75,
-    'system.attributes.hp.value': 75,
-    'system.attributes.hull.min': 0,
-    'system.attributes.hull.max': 3,
-    'system.attributes.hull.value': 3,
-    'system.abilities.agility.value': -2,
-    'system.attributes.speed.max': 3,
-    'system.attributes.speed.value': 3,
-    'system.attributes.speed.min': 0,
-    'system.abilities.skill.value': 2,
-    'system.weapons.broadsides.die': 'd8',
-    'system.weapons.broadsides.quantity': 3,
-    'system.weapons.smallArms.die': 'd8',
-    'system.weapons.smallArms.quantity': 1,
-    'system.weapons.rams.die': 'd8',
-    'system.attributes.crew.min': 50,
-    'system.attributes.crew.max': 150,
-    'system.attributes.crew.value': getCrewSize(details.crewSize, 50, 150),
-    'system.attributes.cargo.max': 4,
-    'system.attributes.cargo.value': 0
-  }
-
-  if (isPremium()) {
-    update['img'] = premiumRoot + icons.manowar
-    update['prototypeToken.texture.src'] = premiumRoot + tokens.manowar
-  }
-
-  await ship.update(update)
-  return ship
-}
-
 const generateShip = async (
   details: ShipDetails,
   captain: Actor
 ): Promise<Actor> => {
-  let ship: Actor
-  switch (details.type) {
-    case 'Brigantine': ship = await generateBrigntine(details); break
-    case 'Fluyt': ship = await generateFluyt(details); break
-    case 'Frigate': ship = await generateFrigate(details); break
-    case 'Man-of-War': ship = await generateManOWar(details); break
-    default: ship = await generateSloop(details); break
+  const key = details.type in shipStats ? details.type : 'Sloop'
+  const { stats, img, token } = shipStats[key]
+  const ship = await foundry.documents.Actor.create({ name: details.name, ...baseShip })
+  const update: Record<string, any> = {
+    'system.attributes.hp.max': stats.hp,
+    'system.attributes.hp.value': stats.hp,
+    'system.attributes.hull.min': 0,
+    'system.attributes.hull.max': stats.hull,
+    'system.attributes.hull.value': stats.hull,
+    'system.abilities.agility.value': stats.agility,
+    'system.attributes.speed.max': stats.speed,
+    'system.attributes.speed.value': stats.speed,
+    'system.attributes.speed.min': 0,
+    'system.abilities.skill.value': stats.skill,
+    'system.weapons.broadsides.die': `d${stats.broadsides.die}`,
+    'system.weapons.broadsides.quantity': stats.broadsides.quantity,
+    'system.weapons.smallArms.die': `d${stats.small.die}`,
+    'system.weapons.smallArms.quantity': stats.small.quantity,
+    'system.weapons.rams.die': `d${stats.ram.die}`,
+    'system.attributes.crew.min': stats.crew.min,
+    'system.attributes.crew.max': stats.crew.max,
+    'system.attributes.crew.value': getCrewSize(details.crewSize, stats.crew.min, stats.crew.max),
+    'system.attributes.cargo.max': stats.cargo,
+    'system.attributes.cargo.value': 0
   }
+
+  if (isPremium()) {
+    update['img'] = img
+    update['prototypeToken.texture.src'] = token
+  }
+
+  await ship.update(update)
 
   // Superior Firepower: Naval ships increase attack dice by one size (p. 112)
   if (details.use === 'Naval') {
