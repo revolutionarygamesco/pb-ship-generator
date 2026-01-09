@@ -1,7 +1,9 @@
 import { MODULE_ID } from './settings.ts'
 import { localize } from './wrapper.ts'
+import { tables } from './ids.ts'
 import rollShip from './roll.ts'
 import generateShip from './ship.ts'
+import rollTable from './roll-table.ts'
 
 const isNationality = (candidate: unknown): candidate is Nationality => {
   if (typeof candidate !== 'string') return false
@@ -161,10 +163,26 @@ const openGenerateShipDialog = async (
           const use: string | undefined = (coll.namedItem('use') as HTMLSelectElement).value
           const type: string | undefined = (coll.namedItem('type') as HTMLSelectElement).value
 
-          const determined: Partial<ShipDetails> = {}
-          if (isNationality(nation)) determined.nationality = nation
-          if (nation === 'Pirate') determined.pirate = true
-          if (isUse(use)) determined.use = use
+          let nationality: Nationality = isNationality(nation) ? nation : 'British'
+          if (nation === 'Pirate') {
+            nationality = 'British'
+          } else if (nation === 'Random') {
+            const result = await rollTable(tables.colors, { displayChat: false })
+            if (result && isNationality(result[0].description)) { nationality = result[0].description }
+          }
+
+          let usage: Use = isUse(use) ? use : 'Merchant'
+          if (nation === 'Pirate') {
+            usage = 'Privateer'
+          } else if (use === 'Random') {
+            const result = await rollTable(tables.uses, { displayChat: false })
+            if (result && isUse(result[0].description)) { usage = result[0].description }
+          }
+
+          if (nation === 'Pirate' && usage !== 'Privateer') { usage = 'Privateer' }
+          if (nation === 'Dutch' && usage === 'Naval') { usage = 'Merchant' }
+
+          const determined: Partial<ShipDetails> = { nationality, use: usage }
           if (type !== 'random') determined.type = type
 
           const { captain, details } = await rollShip(determined)
