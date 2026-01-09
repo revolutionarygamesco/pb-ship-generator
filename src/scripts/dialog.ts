@@ -182,7 +182,7 @@ const openGenerateShipDialog = async (
           if (nation === 'Pirate' && usage !== 'Privateer') { usage = 'Privateer' }
           if (nation === 'Dutch' && usage === 'Naval') { usage = 'Merchant' }
 
-          const determined: Partial<ShipDetails> = { nationality, use: usage }
+          const determined: Partial<ShipDetails> = { nationality, use: usage, pirate: nation === 'Pirate' }
           if (type !== 'random') determined.type = type
 
           const { captain, details } = await rollShip(determined)
