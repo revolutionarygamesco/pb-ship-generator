@@ -1,7 +1,7 @@
 {
   "name": "@revolutionarygamesco/fvttmod-starter",
   "description": "A starting point for Foundry VTT modules.",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "build": "tsc -p tsconfig.build.json && vite build && npm run pack",
