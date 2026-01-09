@@ -15,7 +15,7 @@ const rollShip = async (
   details?: Partial<ShipDetails>
 ): Promise<{details: ShipDetails, captain: Actor }> => {
   const d = createShipDetails(details)
-  const martial = d.type === 'Naval' || d.type === 'Privateer' || d.pirate
+  const martial = d.use === 'Naval' || d.use === 'Privateer' || d.pirate
 
   // Name the ship
   const namer = game.modules.get('revolutionary-piratenames')
