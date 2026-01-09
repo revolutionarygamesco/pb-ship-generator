@@ -213,7 +213,7 @@ const generateShip = async (
     await ship.update({
       'system.weapons.broadsides.die': upgradeDie(ship.system?.weapons?.broadsides?.die ?? 'd4'),
       'system.weapons.smallArms.die': upgradeDie(ship.system?.weapons?.smallArms?.die ?? 'd4'),
-      'system.weapons.rams.die': upgradeDie(ship.system?.weapons?.ram?.die ?? 'd4')
+      'system.weapons.ram.die': upgradeDie(ship.system?.weapons?.ram?.die ?? 'd4')
     })
   }
 
