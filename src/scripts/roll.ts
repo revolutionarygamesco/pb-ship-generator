@@ -13,7 +13,7 @@ const parseNumberUpgrades = (str: string | undefined): number => {
 
 const rollShip = async (
   details?: Partial<ShipDetails>
-): Promise<{details: ShipDetails, captain: Actor }> => {
+): Promise<{ details: ShipDetails, captain: Actor }> => {
   const d = createShipDetails(details)
   const martial = d.use === 'Naval' || d.use === 'Privateer' || d.pirate
 
