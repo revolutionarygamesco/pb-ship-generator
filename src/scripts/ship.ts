@@ -1,8 +1,9 @@
 import randomizeBetween from './randomizers/between.ts'
 import upgradeDie from './upgrade.ts'
 import fileActor from './file.ts'
-import { isPremium, icons, tokens } from './premium.ts'
 import describeCaptain from './describe.ts'
+import { isPremium, icons, tokens } from './premium.ts'
+import { fromUuid } from './wrapper.ts'
 
 const baseShip = { type: 'vehicle', img: 'systems/pirateborg/icons/misc/ship.png' }
 const premiumRoot = 'modules/pirate-borg-premium/'
@@ -216,6 +217,9 @@ const generateShip = async (
     })
   }
 
+  const items = await Promise.all(details.specialty.map(uuid => fromUuid(uuid))) as Document[]
+  await ship.createEmbeddedDocuments('Item', items)
+
   // Apply upgrades
   const upgrades: Record<string, any> = {
     'system.crews': [captain.id],
@@ -236,6 +240,7 @@ const generateShip = async (
         upgrades['system.attributes.speed.value'] = speed + 1
         upgrades['system.attributes.speed.max'] = speed + 1
         upgrades['system.abilities.agility.value'] = agility + 1
+        break;
     }
   }
 
