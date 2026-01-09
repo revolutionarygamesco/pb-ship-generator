@@ -4,33 +4,34 @@ export const tables = {
     pirate: 'Compendium.revolutionary-piratenames.rolltables.RollTable.S3jEhiwdL6Pry0nK',
     celtic: 'Compendium.revolutionary-piratenames.rolltables.RollTable.600RHZKkT52dIm3K'
   },
+  colors: 'Compendium.revolutionary-piratenames.rolltables.RollTable.CrljZ2S8EdjWco9K',
   types: {
-    base: 'Compendium.revolutionary-pbshipgen.tables.RollTable.l5ETTdXVDY41fmYp',
-    dutch: 'Compendium.revolutionary-pbshipgen.tables.RollTable.1uqKawwe6iemyGy3',
-    naval: 'Compendium.revolutionary-pbshipgen.tables.RollTable.u16yVy6G9F2wkNeV'
+    base: 'Compendium.revolutionary-pbshipgen.rolltables.RollTable.l5ETTdXVDY41fmYp',
+    dutch: 'Compendium.revolutionary-pbshipgen.rolltables.RollTable.1uqKawwe6iemyGy3',
+    naval: 'Compendium.revolutionary-pbshipgen.rolltables.RollTable.u16yVy6G9F2wkNeV'
   },
-  uses: 'Compendium.revolutionary-pbshipgen.tables.RollTable.sg7YFtSjHjlasO7m',
+  uses: 'Compendium.revolutionary-pbshipgen.rolltables.RollTable.sg7YFtSjHjlasO7m',
   upgrades: {
-    martial: 'Compendium.revolutionary-pbshipgen.tables.RollTable.gBflC3QT9aDiD60p',
-    commercial: 'Compendium.revolutionary-pbshipgen.tables.RollTable.QfQEHZpRe2eHxeG3'
+    martial: 'Compendium.revolutionary-pbshipgen.rolltables.RollTable.gBflC3QT9aDiD60p',
+    commercial: 'Compendium.revolutionary-pbshipgen.rolltables.RollTable.QfQEHZpRe2eHxeG3'
   },
-  captain: 'Compendium.revolutionary-pbshipgen.tables.RollTable.CVMx8AU4argJvxt9',
+  captain: 'Compendium.revolutionary-pbshipgen.rolltables.RollTable.CVMx8AU4argJvxt9',
   crew: {
-    size: 'Compendium.revolutionary-pbshipgen.tables.RollTable.6bVsKF0H16v6EUKx',
+    size: 'Compendium.revolutionary-pbshipgen.rolltables.RollTable.6bVsKF0H16v6EUKx',
     drunk: {
-      legit: 'Compendium.revolutionary-pbshipgen.tables.RollTable.Ma0YEv1KxfstZMmw',
-      pirate: 'Compendium.revolutionary-pbshipgen.tables.RollTable.7CEm9hB6JH0t9uiJ'
+      legit: 'Compendium.revolutionary-pbshipgen.rolltables.RollTable.Ma0YEv1KxfstZMmw',
+      pirate: 'Compendium.revolutionary-pbshipgen.rolltables.RollTable.7CEm9hB6JH0t9uiJ'
     },
     special: {
-      magic: 'Compendium.revolutionary-pbshipgen.tables.RollTable.gqZlY1m95IzB0XXN',
-      carpenter: 'Compendium.revolutionary-pbshipgen.tables.RollTable.phJInv1Iy6nCRZdI',
+      magic: 'Compendium.revolutionary-pbshipgen.rolltables.RollTable.gqZlY1m95IzB0XXN',
+      carpenter: 'Compendium.revolutionary-pbshipgen.rolltables.RollTable.phJInv1Iy6nCRZdI',
       gunner: {
-        martial: 'Compendium.revolutionary-pbshipgen.tables.RollTable.N4St5jvbmOZY1bgl',
-        commercial: 'Compendium.revolutionary-pbshipgen.tables.RollTable.7dr4d7PEXDdL1RKT'
+        martial: 'Compendium.revolutionary-pbshipgen.rolltables.RollTable.N4St5jvbmOZY1bgl',
+        commercial: 'Compendium.revolutionary-pbshipgen.rolltables.RollTable.7dr4d7PEXDdL1RKT'
       },
-      master: 'Compendium.revolutionary-pbshipgen.tables.RollTable.52kXirfJrABVh9Qa',
-      bosun: 'Compendium.revolutionary-pbshipgen.tables.RollTable.2NccJx0hJ4gDyk28',
-      quartermaster: 'Compendium.revolutionary-pbshipgen.tables.RollTable.ewPtPqWpahcj078J'
+      master: 'Compendium.revolutionary-pbshipgen.rolltables.RollTable.52kXirfJrABVh9Qa',
+      bosun: 'Compendium.revolutionary-pbshipgen.rolltables.RollTable.2NccJx0hJ4gDyk28',
+      quartermaster: 'Compendium.revolutionary-pbshipgen.rolltables.RollTable.ewPtPqWpahcj078J'
     }
   }
 }
