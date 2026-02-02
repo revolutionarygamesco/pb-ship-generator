@@ -15,6 +15,12 @@ declare class DialogV2 extends ApplicationV2 {
   close: (options?: any) => Promise<DialogV2>
 }
 
+declare class Roll {
+  constructor(expr: string)
+  evaluate: () => Promise<Roll>
+  total: number
+}
+
 interface Collection<K, V> extends Map<K, V> {
   find(predicate: (value: V, key: K, collection: this) => boolean): V | undefined
   filter(predicate: (value: V, key: K, collection: this) => boolean): V[]

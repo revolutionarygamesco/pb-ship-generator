@@ -72,17 +72,29 @@ const chooseCulture = async (details: ShipDetails): Promise<Culture> => {
   return isCulture(desc) ? desc : details.captain.culture
 }
 
-const generateCaptain = async (details: ShipDetails): Promise<Actor> => {
+const shantiesExpr: Record<string, string> = {
+  'Low': 'd2-1',
+  'Medium': 'd2',
+  'High': 'd4',
+}
+
+const generateCaptain = async (
+  details: ShipDetails
+): Promise<{ captain: Actor, shanties: number }> => {
   const { xp } = details.captain
   const legendary = isLegendary(details)
   const culture = await chooseCulture(details)
+
+  const expr = legendary ? 'd6' : xp in shantiesExpr ? shantiesExpr[xp] : 'd2 - 1'
+  const roll = await new Roll(expr).evaluate()
+  const shanties = roll.total
 
   const namer = game.modules.get('revolutionary-piratenames')
   const name = namer
     ? `Captain ${await namer.api.generateName(culture, 'Masculine')}`
     : 'Captain'
 
-  const capt = await foundry.documents.Actor.create({ name, type: 'creature', img: 'systems/pirateborg/icons/misc/monster.png' })
+  const captain = await foundry.documents.Actor.create({ name, type: 'creature', img: 'systems/pirateborg/icons/misc/captain.png' })
   const hp = generateCaptainHP(xp, legendary)
   const morale = generateCaptainMorale(xp, legendary)
   const weapon = getWeapon(xp)
@@ -98,7 +110,7 @@ const generateCaptain = async (details: ShipDetails): Promise<Actor> => {
   if (legendary) descriptions.push(`<p><strong>Legendary Captain</strong>: Take an extra crew action each round in naval combat, even if it has already been taken.</p>`)
   if (xp === 'High') descriptions.push(`<p><strong>Experienced Leader</strong>: Nearby allies are +2 DR to attack or defend against.</p>`)
 
-  await capt.update({
+  await captain.update({
     'system.attributes.hp.max': hp,
     'system.attributes.hp.value': hp,
     'system.attributes.morale': morale,
@@ -112,7 +124,7 @@ const generateCaptain = async (details: ShipDetails): Promise<Actor> => {
     'system.description': descriptions.join('')
   })
 
-  return capt
+  return { captain, shanties }
 }
 
 export default generateCaptain
