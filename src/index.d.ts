@@ -190,6 +190,7 @@ interface ShipDetails {
   name: string
   type: string
   crewSize: string
+  shanties: number
   captain: {
     culture: Culture,
     xp: string

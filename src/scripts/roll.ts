@@ -83,7 +83,8 @@ const rollShip = async (
     if (check && check[0].document) d.specialty.push(check[0].document)
   }
 
-  const captain = await generateCaptain(d)
+  const { captain, shanties } = await generateCaptain(d)
+  d.shanties = shanties
   await fileActor(captain, d)
 
   return { details: d, captain }

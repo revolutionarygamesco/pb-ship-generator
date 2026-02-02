@@ -18,6 +18,7 @@ const createShipDetails = (
     specialty: [],
     name: 'Santa Maria (Hispaniola)',
     crewSize: 'Medium',
+    shanties: 0,
     captain: {
       culture: defaultCulture[nationality],
       xp: overrides.captain?.xp ?? 'Medium'

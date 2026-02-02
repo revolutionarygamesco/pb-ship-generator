@@ -2,11 +2,27 @@ import randomizeBetween from './randomizers/between.ts'
 import upgradeDie from './upgrade.ts'
 import fileActor from './file.ts'
 import describeCaptain from './describe.ts'
+import shuffleArray from './randomizers/shuffle.ts'
 import { isPremium } from './premium.ts'
 import { fromUuid } from './wrapper.ts'
 import shipStats from './ship.stats.ts'
 
 const baseShip = { type: 'vehicle', img: 'systems/pirateborg/icons/misc/ship.png' }
+
+const shantyIDs = [
+  'Compendium.pirateborg.ships-mystic-shanties.Item.EqhO6liqxQIjj4fx',
+  'Compendium.pirateborg.ships-mystic-shanties.Item.GsLWJKY8b0mX75Ak',
+  'Compendium.pirateborg.ships-mystic-shanties.Item.6GtPUU2uRHWitZNf',
+  'Compendium.pirateborg.ships-mystic-shanties.Item.5sGIaD4NrgbDmBhF',
+  'Compendium.pirateborg.ships-mystic-shanties.Item.almpFrxdxUPaflde',
+  'Compendium.pirateborg.ships-mystic-shanties.Item.OanvNBBhECR1Smf2',
+  'Compendium.pirateborg.ships-mystic-shanties.Item.Hvwq3xmyx0ZYQ4p7',
+  'Compendium.pirateborg.ships-mystic-shanties.Item.zECCg4TTGgZKkiu1',
+  'Compendium.pirateborg.ships-mystic-shanties.Item.zECCg4TTGgZKkiu1',
+  'Compendium.pirateborg.ships-mystic-shanties.Item.3CRnf7GzD9B12qhv',
+  'Compendium.pirateborg.ships-mystic-shanties.Item.Ww0BTi6vlINYTVO9',
+  'Compendium.pirateborg.ships-mystic-shanties.Item.M6rg2aULaFFomBSE'
+]
 
 const calculateCrewSize = (range: [number, number], min: number, max: number): number => {
   const window = max - min
@@ -42,6 +58,9 @@ const generateShip = async (
     'system.attributes.speed.max': stats.speed,
     'system.attributes.speed.value': stats.speed,
     'system.attributes.speed.min': 0,
+    'system.attributes.shanties.max': details.shanties,
+    'system.attributes.shanties.value': details.shanties,
+    'system.attributes.shanties.min': 0,
     'system.abilities.skill.value': stats.skill,
     'system.weapons.broadsides.die': `d${stats.broadsides.die}`,
     'system.weapons.broadsides.quantity': stats.broadsides.quantity,
@@ -73,6 +92,10 @@ const generateShip = async (
 
   const items = await Promise.all(details.specialty.map(uuid => fromUuid(uuid))) as Document[]
   await ship.createEmbeddedDocuments('Item', items)
+
+  const shuffled = shuffleArray(shantyIDs).slice(0, details.shanties)
+  const shanties = await Promise.all(shuffled.map(uuid => fromUuid(uuid))) as Document[]
+  await ship.createEmbeddedDocuments('Item', shanties)
 
   // Apply upgrades
   const upgrades: Record<string, any> = {
