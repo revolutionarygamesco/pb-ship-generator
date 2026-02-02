@@ -1,3 +1,6 @@
+### 1.1.0
+* Ships now have randomized mystic sea shanties. Crews with inexperienced captains know d2-1, crews with moderately experienced captains know d2, crews with highly experienced captains know d4, and crews with legendary captains know d6.
+
 ### 1.0.0
 * Generate Spanish, British, French, Dutch, or pirate ships.
 * Pirate ships are always privateers. Dutch ships can be privateers or merchant vessels. All others can be merchant, privateer, or naval vessels.
