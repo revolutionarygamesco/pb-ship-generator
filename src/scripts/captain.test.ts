@@ -74,7 +74,7 @@ describe('Captain generation methods', () => {
 
     it('returns 7-10 for an experienced captain', () => {
       const actual = generateCaptainMorale('High', false)
-      expect(actual).toBeGreaterThanOrEqual(8)
+      expect(actual).toBeGreaterThanOrEqual(7)
       expect(actual).toBeLessThanOrEqual(12)
     })
 
