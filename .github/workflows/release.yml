@@ -1,72 +1,59 @@
-name: Release Module
-
-env:
-  project_url: "https://github.com/${{github.repository}}"
-  latest_manifest_url: "https://github.com/${{github.repository}}/releases/latest/download/module.json"
-  release_module_url: "https://github.com/${{github.repository}}/releases/download/${{github.event.release.tag_name}}/module.zip"
-  bugs_url: "https://github.com/${{github.repository}}/issues"
-  changelog_url: "https://github.com/${{github.repository}}/blob/main/CHANGELOG.md"
-  license_url: "https://github.com/${{github.repository}}/blob/main/LICENSE"
-  readme_url: "https://github.com/${{github.repository}}/blob/main/README.md"
+name: Release new version
 
 on:
   release:
     types: [published]
-  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  id-token: write
 
 jobs:
-  build:
+  publish:
+    name: Publish to npm
     runs-on: ubuntu-latest
+    environment: npm-publish
+
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
-          node-version: '18'
-          cache: 'npm'
+          node-version: 24
+          registry-url: 'https://registry.npmjs.org'
+          cache: npm
 
-      - name: Install Dependencies
+      - name: Upgrade npm
+        run: npm install -g npm@latest
+
+      - name: Install dependencies
         run: npm ci
 
-      - name: Build Module
-        run: npm run build
-
-      - name: Get version from tag
-        id: get_version
+      - name: Verify tag matches package.json version
         run: |
-          VERSION="${{ github.event.release.tag_name }}"
-          VERSION="${VERSION#v}"
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "Version extracted: $VERSION"
+          PKG_VERSION="$(node -p "require('./package.json').version")"
+          TAG_VERSION="${GITHUB_REF_NAME#v}"
+          if [ "$PKG_VERSION" != "$TAG_VERSION" ]; then
+            echo "::error::Release tag ${GITHUB_REF_NAME} does not match package.json version ${PKG_VERSION}"
+            exit 1
+          fi
+          echo "Publishing version ${PKG_VERSION}"
 
-      - name: Update Manifest
-        id: sub_manifest_link_version
-        uses: microsoft/variable-substitution@v1
-        with:
-          files: './dist/module.json'
-        env:
-          version: ${{ steps.get_version.outputs.version }}
-          url: ${{ env.project_url }}
-          manifest: ${{ env.latest_manifest_url }}
-          download: ${{ env.release_module_url }}
-          bugs: ${{ env.bugs_url }}
-          changelog: ${{ env.changelog_url }}
-          license: ${{ env.license_url }}
-          readme: ${{ env.readme_url }}
+      - name: Test
+        run: npm test
 
-      - name: Zip Files
-        working-directory: ./dist
-        run: zip -r ../module.zip .
+      - name: Skip if this version is already on npm
+        id: check
+        run: |
+          PKG="$(node -p "require('./package.json').name")"
+          VER="$(node -p "require('./package.json').version")"
+          if npm view "$PKG@$VER" version > /dev/null 2>&1; then
+            echo "already-published=true" >> "$GITHUB_OUTPUT"
+            echo "::notice::$PKG@$VER is already on npm — skipping publish."
+          else
+            echo "already-published=false" >> "$GITHUB_OUTPUT"
+          fi
 
-      - name: Update Release with Artifacts
-        uses: softprops/action-gh-release@v2
-        with:
-          files: |
-            ./dist/module.json
-            ./module.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish
+        if: steps.check.outputs.already-published == 'false'
+        run: npm publish
