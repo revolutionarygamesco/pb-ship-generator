@@ -26,6 +26,7 @@
   "dependencies": {
     "@revolutionarygamesco/common": "^1.2.6",
     "@revolutionarygamesco/common-foundryvtt": "^0.3.5",
+    "slugify": "^1.6.9"
   },
   "allowScripts": {
     "@parcel/watcher@2.6.0": true,
