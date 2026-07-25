@@ -1,5 +1,5 @@
 import { selectRandomBetween, shuffleArray } from '@revolutionarygamesco/common'
-import upgradeDie from './upgrade.ts'
+import upgradeDie from './utilities/upgrade.ts'
 import fileActor from './file.ts'
 import describeCaptain from './describe.ts'
 import { isPremium } from './premium.ts'
