@@ -28,7 +28,7 @@ details? That’s exactly what the _Pirate Borg Ship Generator_ does.
 * Merchant ships might have improved sails.
 * Navy vessels have **superior firepower** (all attack dice increased by one
   size; see _Pirate Borg_, p. 112).
-* Navy and privateeer vessels might have improved sails, upgraded or extra
+* Navy and privateer vessels might have improved sails, upgraded or extra
   swivels, upgraded or extra cannons, an armored hull, and/or a ram upgrade.
 * Any vessel could have a legendary captain, a strict bosun, a master gunner,
   a master of sails, and/or a master carpenter. Any ship might have a deck
