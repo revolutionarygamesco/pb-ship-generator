@@ -1,19 +1,13 @@
+import { shuffleArray, parseIntOr } from '@revolutionarygamesco/common'
+import { drawStr, rollTable } from '@revolutionarygamesco/common-foundryvtt'
 import { tables } from './ids.ts'
 import createShipDetails from './details.ts'
-import rollTable from './roll-table.ts'
-import shuffleArray from './randomizers/shuffle.ts'
 import generateCaptain from './captain.ts'
 import fileActor from './file.ts'
 
-const parseNumberUpgrades = (str: string | undefined): number => {
-  const sub = str ? str.substring(0, 1) : '0'
-  const parsed = parseInt(sub)
-  return isNaN(parsed) ? 0 : parsed
-}
-
 const rollShip = async (
   details?: Partial<ShipDetails>
-): Promise<{ details: ShipDetails, captain: Actor }> => {
+): Promise<{ details: ShipDetails, captain: foundry.documents.Actor }> => {
   const d = createShipDetails(details)
   const martial = d.use === 'Naval' || d.use === 'Privateer' || d.pirate
 
@@ -35,31 +29,27 @@ const rollShip = async (
       : d.nationality === 'Dutch'
         ? tables.types.dutch
         : tables.types.base
-    const type = await rollTable(typeTable, { displayChat: false })
-    d.type = type && type[0].name ? type[0].name : 'Sloop'
+    d.type = await drawStr(typeTable, 'Sloop')
   }
 
   // Check for upgrades & captain experience
   if (martial) {
-    const level = await rollTable(tables.upgrades.martial, { displayChat: false })
-    const n = level ? parseNumberUpgrades(level[0].name) : 0
-    if (level && level.length > 1 && level[1].name) d.captain.xp = level[1].name
-    if (level && level.length > 2 && level[2].document) d.specialty.push(level[2].document)
-
+    const level = await drawStr(tables.upgrades.martial,'0')
+    const n = parseIntOr(level, 0)
     const upgrades = shuffleArray(['upgrade-swivels', 'extra-swivels', 'upgrade-cannons', 'extra-cannons', 'armored', 'ram', 'sails'])
     d.upgrades = [...d.upgrades, ...upgrades.slice(0, n - d.upgrades.length)]
   } else {
-    const upgraded = await rollTable(tables.upgrades.commercial, { displayChat: false })
-    if (upgraded && upgraded[0].name === 'Improved Sails') d.upgrades.push('sails')
+    const upgraded = await drawStr(tables.upgrades.commercial,'No Upgrades')
+    if (upgraded === 'Improved Sails') d.upgrades.push('sails')
 
-    const drawn = await rollTable(tables.captain, { displayChat: false })
-    if (drawn && drawn[0].name) d.captain.xp = drawn[0].name
-    if (drawn && drawn.length > 1 && drawn[1].document) d.specialty.push(drawn[1].document)
+    const drawn = await rollTable(tables.captain)
+    if (drawn && drawn.results[0].name) d.captain.xp = drawn.results[0].name
+    if (drawn && drawn.results.length > 1 && drawn.results[1].documentUuid) d.specialty.push(drawn.results[1].documentUuid)
   }
 
   // Check for crew size
   const crewSize = await rollTable(tables.crew.size, { displayChat: false })
-  d.crewSize = crewSize && crewSize[0].name ? crewSize[0].name : 'Medium'
+  d.crewSize = crewSize && crewSize.results[0].name ? crewSize.results[0].name : 'Medium'
 
   // Check for specialty crew
   const gunner = martial || d.nationality === 'Dutch'
@@ -80,7 +70,7 @@ const rollShip = async (
 
   for await (const table of special) {
     const check = await rollTable(table, { displayChat: false })
-    if (check && check[0].document) d.specialty.push(check[0].document)
+    if (check && check.results[0].documentUuid) d.specialty.push(check.results[0].documentUuid)
   }
 
   const { captain, shanties } = await generateCaptain(d)

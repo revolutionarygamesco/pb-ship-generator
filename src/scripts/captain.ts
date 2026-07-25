@@ -1,7 +1,6 @@
+import { selectRandomBetween, chance } from '@revolutionarygamesco/common'
+import { drawGuarded, roll } from '@revolutionarygamesco/common-foundryvtt'
 import { tables } from './ids.ts'
-import randomizeBetween from './randomizers/between.ts'
-import randomChance from './randomizers/chance.ts'
-import rollTable from './roll-table.ts'
 import isLegendary from './utilities/legendary.ts'
 
 export const isCulture = (candidate: unknown): candidate is Culture => {
@@ -22,8 +21,8 @@ export const generateCaptainHP = (
   const index = xp in ranges ? xp : 'Medium'
   const [min, max] = ranges[index]
   return legendary
-    ? randomizeBetween(min, max) + randomizeBetween(1, 12)
-    : randomizeBetween(min, max)
+    ? selectRandomBetween(min, max) + selectRandomBetween(1, 12)
+    : selectRandomBetween(min, max)
 }
 
 export const generateCaptainMorale = (
@@ -38,15 +37,15 @@ export const generateCaptainMorale = (
   const index = xp in ranges ? xp : 'Medium'
   const [min, max] = ranges[index]
   return legendary
-    ? randomizeBetween(min, max) + 1
-    : randomizeBetween(min, max)
+    ? selectRandomBetween(min, max) + 1
+    : selectRandomBetween(min, max)
 }
 
 export const getWeapon = (xp: string): {
   description: string,
   formula: string
 } => {
-  const { check: prefersRapier} = randomChance(1, 4)
+  const prefersRapier = chance(1, 3)
   if (prefersRapier && xp === 'High') {
     return { description: 'Finely-crafted rapier', formula: 'd8' }
   } else if (prefersRapier) {
@@ -60,16 +59,14 @@ export const getWeapon = (xp: string): {
 
 const chooseCulture = async (details: ShipDetails): Promise<Culture> => {
   if (details.use === 'Naval') return details.captain.culture
-  const reroll = details.pirate || randomChance(1, 100).check
-  const englishToCeltic = details.nationality === 'British' && randomChance(1, 3).check
+  const reroll = details.pirate || chance(1, 100)
+  const englishToCeltic = details.nationality === 'British' && chance(1, 3)
   if (!reroll && !englishToCeltic) return details.captain.culture
 
   const table = details.pirate
     ? tables.cultures.pirate
     : englishToCeltic ? tables.cultures.celtic : tables.cultures.legit
-  const drawn = await rollTable(table, { displayChat: false })
-  const desc = drawn && drawn[0] ? drawn[0].description : undefined
-  return isCulture(desc) ? desc : details.captain.culture
+  return drawGuarded(table, isCulture, details.nationality === 'British' ? 'English' : details.nationality)
 }
 
 const shantiesExpr: Record<string, string> = {
@@ -80,14 +77,13 @@ const shantiesExpr: Record<string, string> = {
 
 const generateCaptain = async (
   details: ShipDetails
-): Promise<{ captain: Actor, shanties: number }> => {
+): Promise<{ captain: foundry.documents.Actor, shanties: number }> => {
   const { xp } = details.captain
   const legendary = isLegendary(details)
   const culture = await chooseCulture(details)
 
   const expr = legendary ? 'd6' : xp in shantiesExpr ? shantiesExpr[xp] : 'd2 - 1'
-  const roll = await new Roll(expr).evaluate()
-  const shanties = roll.total
+  const shanties = roll(expr)
 
   const namer = game.modules.get('revolutionary-piratenames')
   const name = namer
@@ -95,6 +91,8 @@ const generateCaptain = async (
     : 'Captain'
 
   const captain = await foundry.documents.Actor.create({ name, type: 'creature', img: 'systems/pirateborg/icons/misc/captain.png' })
+  if (!captain) throw new Error('Could not create captain')
+
   const hp = generateCaptainHP(xp, legendary)
   const morale = generateCaptainMorale(xp, legendary)
   const weapon = getWeapon(xp)

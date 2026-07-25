@@ -1,9 +1,8 @@
+import { scopeLocalizer, drawGuarded } from '@revolutionarygamesco/common-foundryvtt'
 import { MODULE_ID } from './settings.ts'
-import { localize } from './wrapper.ts'
 import { tables } from './ids.ts'
 import rollShip from './roll.ts'
 import generateShip from './ship.ts'
-import rollTable from './roll-table.ts'
 
 const isNationality = (candidate: unknown): candidate is Nationality => {
   if (typeof candidate !== 'string') return false
@@ -58,9 +57,10 @@ const filterTypeOptions = (
 
 const defaultOnComplete = async (
   details: ShipDetails,
-  ship: Actor,
-  captain: Actor
+  ship: foundry.documents.Actor,
+  captain: foundry.documents.Actor
 ) => {
+  const t = scopeLocalizer([MODULE_ID, 'message'].join('.'))
   const links: { ship: string, type: string, captain: string } = {
     ship: `@UUID[Actor.${ship.id}]{${ship.name}}`,
     type: details.type.toLowerCase(),
@@ -68,24 +68,29 @@ const defaultOnComplete = async (
   }
 
   const content = details.pirate
-    ? localize(`${MODULE_ID}.message.content.pirate`, links)
-    : localize(`${MODULE_ID}.message.content.${details.nationality.toLowerCase()}.${details.use.toLowerCase()}`, links)
+    ? t(['content', 'pirate'], links)
+    : t(['content', details.nationality.toLowerCase(), details.use.toLowerCase()], links)
 
   await foundry.documents.ChatMessage.create({
-    speaker: { alias: localize(`${MODULE_ID}.message.speaker`) },
-    flavor: localize(`${MODULE_ID}.message.flavor`),
+    speaker: { alias: t('speaker') },
+    flavor: t('flavor'),
     content,
     whisper: [game.user.id]
   })
 }
 
 const openGenerateShipDialog = async (
-  onComplete: (details: ShipDetails, ship: Actor, captain: Actor) => Promise<void> = defaultOnComplete
+  onComplete: (
+    details: ShipDetails,
+    ship: foundry.documents.Actor,
+    captain: foundry.documents.Actor
+  ) => Promise<void> = defaultOnComplete
 ): Promise<void> => {
-  const title = localize(`${MODULE_ID}.dialog.title`)
+  const t = scopeLocalizer([MODULE_ID, 'dialog'].join('.'))
+  const title = t('title')
 
   const nationalities = ['Random', 'Spanish', 'British', 'French', 'Dutch', 'Pirate'].map(nation => {
-    const value = localize(`${MODULE_ID}.dialog.nationalities.options.${nation}`)
+    const value = t(['nationalities', 'options', nation])
     const input = nation === 'Random'
       ? `<input type="radio" name="nationality" value="${nation}" id="nationality-${nation}" checked />`
       : `<input type="radio" name="nationality" value="${nation}" id="nationality-${nation}" />`
@@ -94,23 +99,23 @@ const openGenerateShipDialog = async (
     return `<li>${input}\n${label}</li>`
   }).join('\n')
 
-  const uses = ['Random', 'Merchant', 'Privateer', 'Naval'].map(t => {
-    const value = localize(`${MODULE_ID}.dialog.use.options.${t}`)
-    return t === 'random'
+  const uses = ['Random', 'Merchant', 'Privateer', 'Naval'].map(option => {
+    const value = t(['use', 'options', option])
+    return option === 'random'
       ? `<option value="${t}" selected>${value}</option>`
       : `<option value="${t}">${value}</option>`
   }).join('\n')
 
-  const types = ['random', 'brigantine', 'fluyt', 'frigate', 'manowar', 'sloop'].map(t => {
+  const types = ['random', 'brigantine', 'fluyt', 'frigate', 'manowar', 'sloop'].map(option => {
     const data: Record<string, string> = {}
-    if (t === 'fluyt') data.nationality = 'Dutch'
-    if (t === 'manowar') data.use = 'Naval'
+    if (option === 'fluyt') data.nationality = 'Dutch'
+    if (option === 'manowar') data.use = 'Naval'
     let attrs = Object.keys(data)
       .map(key => `data-${key}="${data[key]}"`)
       .join(' ')
 
-    const value = localize(`${MODULE_ID}.dialog.type.options.${t}`)
-    if (t === 'random') attrs += ' selected'
+    const value = t(['type', 'options', option])
+    if (option === 'random') attrs += ' selected'
     return attrs.length > 0
       ? `<option value="${value}" ${attrs}>${value}</option>`
       : `<option value="${value}">${value}</option>`
@@ -122,27 +127,27 @@ const openGenerateShipDialog = async (
     position: { width: 600 },
     content: `
         <fieldset class="generate-ship-dialog-nationality">
-          <legend>${localize(`${MODULE_ID}.dialog.nationalities.label`)}</legend>
+          <legend>${t(['nationalities', 'label'])}</legend>
           <ul>
             ${nationalities}
           </ul>
         </fieldset>
         <fieldset class="generate-ship-dialog-other">
           <label for="generate-ship-dialog-use">
-            ${localize(`${MODULE_ID}.dialog.use.label`)}
+            ${t(['use', 'label'])}
           </label>
           <p class="hint">
-            ${localize(`${MODULE_ID}.dialog.use.hint`)}
+            ${t(['use', 'hint'])}
           </p>
           <select name="use" id="generate-ship-dialog-use">
             ${uses}
           </select>
           
           <label for="generate-ship-dialog-type">
-            ${localize(`${MODULE_ID}.dialog.type.label`)}
+            ${t(['type', 'label'])}
           </label>
           <p class="hint">
-            ${localize(`${MODULE_ID}.dialog.type.hint`)}
+            ${t(['type', 'hint'])}
           </p>
           <select name="type" id="generate-ship-dialog-type">
             ${types}
@@ -152,7 +157,7 @@ const openGenerateShipDialog = async (
     buttons: [
       {
         action: 'generate',
-        label: localize(`${MODULE_ID}.dialog.actions.generate`),
+        label: t(['actions', 'generate']),
         callback: async (_event: Event, button: HTMLButtonElement) => {
           const coll = button.form?.elements
           if (!coll) return
@@ -165,16 +170,14 @@ const openGenerateShipDialog = async (
           if (nation === 'Pirate') {
             nationality = 'British'
           } else if (nation === 'Random') {
-            const result = await rollTable(tables.colors, { displayChat: false })
-            if (result && isNationality(result[0].description)) { nationality = result[0].description }
+            nationality = await drawGuarded(tables.colors, isNationality, 'Spanish')
           }
 
           let usage: Use = isUse(use) ? use : 'Merchant'
           if (nation === 'Pirate') {
             usage = 'Privateer'
           } else if (use === 'Random') {
-            const result = await rollTable(tables.uses, { displayChat: false })
-            if (result && isUse(result[0].name)) { usage = result[0].name }
+            usage = await drawGuarded(tables.uses, isUse, 'Merchant')
           }
 
           if (nation === 'Pirate' && usage !== 'Privateer') { usage = 'Privateer' }
@@ -190,7 +193,7 @@ const openGenerateShipDialog = async (
       },
       {
         action: 'cancel',
-        label: localize(`${MODULE_ID}.dialog.actions.cancel`),
+        label: t(['actions', 'cancel']),
         callback: async () => {
           await dialog.close()
         }

@@ -1,8 +1,6 @@
+import '@revolutionarygamesco/common-foundryvtt/systems/pirateborg'
 import { MODULE_ID } from './settings'
 
-import { localize } from './wrapper.ts'
-
-import rollTable from './roll-table.ts'
 import rollShip from './roll.ts'
 import generateShip from './ship.ts'
 import openGenerateShipDialog from './dialog.ts'
@@ -12,7 +10,6 @@ Hooks.once('init', async () => {
   if (!generator) return
 
   generator.api = {
-    rollTable,
     rollShip,
     generateShip,
     openGenerateShipDialog
@@ -20,16 +17,18 @@ Hooks.once('init', async () => {
 })
 
 Hooks.once('ready', async () => {
-  const rootFolder = localize(`${MODULE_ID}.folders.root`)
+  const rootFolder = game.i18n.localize(`${MODULE_ID}.folders.root`)
   const found = game.folders.find(folder => folder.name === rootFolder && folder.type === 'Actor')
   if (found) return
 
-  const createFolder = async (path: string, parent?: Folder): Promise<Folder> => {
-    return await foundry.documents.Folder.create({
-      name: localize(`${MODULE_ID}.folders.${path}`),
+  const createFolder = async (path: string, parent?: foundry.documents.Folder): Promise<foundry.documents.Folder> => {
+    const folder = await foundry.documents.Folder.create({
+      name: game.i18n.localize(`${MODULE_ID}.folders.${path}`),
       type: 'Actor',
       folder: parent
     })
+    if (!folder) throw new Error('Could not create folder')
+    return folder
   }
 
   const nations = ['spanish', 'british', 'french']

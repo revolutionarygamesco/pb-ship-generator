@@ -1,10 +1,8 @@
-import randomizeBetween from './randomizers/between.ts'
+import { selectRandomBetween, shuffleArray } from '@revolutionarygamesco/common'
 import upgradeDie from './upgrade.ts'
 import fileActor from './file.ts'
 import describeCaptain from './describe.ts'
-import shuffleArray from './randomizers/shuffle.ts'
 import { isPremium } from './premium.ts'
-import { fromUuid } from './wrapper.ts'
 import shipStats from './ship.stats.ts'
 
 const baseShip = { type: 'vehicle', img: 'systems/pirateborg/icons/misc/ship.png' }
@@ -28,7 +26,7 @@ const calculateCrewSize = (range: [number, number], min: number, max: number): n
   const window = max - min
   const lower = Math.floor(range[0] * window) + min
   const upper = Math.floor(range[1] * window) + min
-  return randomizeBetween(lower, upper)
+  return selectRandomBetween(lower, upper)
 }
 
 const getCrewSize = (desc: string, min: number, max: number): number => {
@@ -43,11 +41,13 @@ const getCrewSize = (desc: string, min: number, max: number): number => {
 
 const generateShip = async (
   details: ShipDetails,
-  captain: Actor
-): Promise<Actor> => {
+  captain: foundry.documents.Actor
+): Promise<foundry.documents.Actor> => {
   const key = details.type in shipStats ? details.type : 'Sloop'
   const { stats, img, token } = shipStats[key]
   const ship = await foundry.documents.Actor.create({ name: details.name, ...baseShip })
+  if (!ship) throw new Error('Could not create ship.')
+
   const update: Record<string, any> = {
     'system.attributes.hp.max': stats.hp,
     'system.attributes.hp.value': stats.hp,
@@ -90,11 +90,11 @@ const generateShip = async (
     })
   }
 
-  const items = await Promise.all(details.specialty.map(uuid => fromUuid(uuid))) as Document[]
+  const items = await Promise.all(details.specialty.map(uuid => foundry.utils.fromUuid(uuid))) as foundry.documents.Item[]
   await ship.createEmbeddedDocuments('Item', items)
 
   const shuffled = shuffleArray(shantyIDs).slice(0, details.shanties)
-  const shanties = await Promise.all(shuffled.map(uuid => fromUuid(uuid))) as Document[]
+  const shanties = await Promise.all(shuffled.map(uuid => foundry.utils.fromUuid(uuid))) as foundry.documents.Item[]
   await ship.createEmbeddedDocuments('Item', shanties)
 
   // Apply upgrades
@@ -109,10 +109,10 @@ const generateShip = async (
       case 'extra-swivels': upgrades['system.weapons.smallArms.quantity'] = (ship.system?.weapons?.smallArms?.quantity ?? 1) + 1; break
       case 'upgrade-cannons': upgrades['system.weapons.broadsides.warning'] = 'Upgraded Cannons: Broadsides deal +2 damage.'; break
       case 'extra-cannons': upgrades['system.weapons.broadsides.quantity'] = (ship.system?.weapons?.broadsides?.quantity ?? 1) + 1; break
-      case 'armored': upgrades['system.attributes.hull.value'] = Math.min((ship.system?.attributes.hull?.value ?? 0) + 1, (ship.system?.attributes.hull?.max ?? 3)); break
+      case 'armored': upgrades['system.attributes.hull.value'] = Math.min((ship.system?.attributes?.hull?.value ?? 0) + 1, (ship.system?.attributes?.hull?.max ?? 3)); break
       case 'ram': upgrades['system.weapons.ram.die'] = `2${ship.system?.weapons?.ram?.die ?? 'd4'}`; break
       case 'sails':
-        const speed = ship.system?.attributes.speed?.value ?? 4
+        const speed = ship.system?.attributes?.speed?.value ?? 4
         const agility = ship.system?.abilities?.agility?.value ?? 0
         upgrades['system.attributes.speed.value'] = speed + 1
         upgrades['system.attributes.speed.max'] = speed + 1
