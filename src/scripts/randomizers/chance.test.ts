@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest'
 import randomChance from './chance.ts'
 
 describe('randomChance', () => {

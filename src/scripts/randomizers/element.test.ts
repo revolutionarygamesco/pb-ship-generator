@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest'
 import randomElement from './element.ts'
 
 describe('randomElement', () => {

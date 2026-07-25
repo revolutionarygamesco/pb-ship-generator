@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest'
 import { linkActor } from './link.ts'
 
 describe('linkActor', () => {

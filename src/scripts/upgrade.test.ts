@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest'
 import upgradeDie from './upgrade.ts'
 
 describe('upgradeDie', () => {
