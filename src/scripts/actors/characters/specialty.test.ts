@@ -1,5 +1,5 @@
 import { beforeEach, describe, it, expect } from 'vitest'
-import addSpecialty, { specialties } from './specialty.ts'
+import addSpecialty, { crewSpecialties } from './specialty.ts'
 
 describe('addSpecialty', () => {
   let features: string[]
@@ -8,13 +8,12 @@ describe('addSpecialty', () => {
     features = []
   })
 
-  it('defaults to nothing', () => {
-    addSpecialty(features)
-    expect(features).toEqual([])
-  })
-
-  it.each(specialties)('adds %s', (specialty, expected) => {
+  it.each(crewSpecialties)('adds %s', (specialty) => {
     addSpecialty(features, specialty)
-    expect(features).toEqual([...expected])
+    const options = ['a', 'b', 'c', 'd']
+      .map(opt => `revolutionary-pbshipgen.crew.specialty.${specialty}.options.${opt}`)
+    expect(features).toHaveLength(2)
+    expect(features[0]).toBe(`revolutionary-pbshipgen.crew.specialty.${specialty}.core`)
+    expect(options).toContain(features[1])
   })
 })

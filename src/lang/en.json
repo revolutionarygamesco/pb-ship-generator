@@ -119,6 +119,237 @@
         }
       }
     },
+    "crew": {
+      "weapons": {
+        "fisticuffs": {
+          "name": "Fisticuffs"
+        },
+        "bottle": {
+          "name": "Broken Bottle"
+        },
+        "knife": {
+          "name": "Knife"
+        },
+        "dagger": {
+          "name": "Dagger"
+        },
+        "hook": {
+          "name": "Hook"
+        },
+        "bayonet": {
+          "name": "Bayonet"
+        },
+        "belaying-pin": {
+          "name": "Belaying Pin"
+        },
+        "marlinspike": {
+          "name": "Marlinspike"
+        },
+        "plank": {
+          "name": "Wood Plank"
+        },
+        "whale-bone": {
+          "name": "Whale Bone"
+        },
+        "smallsword": {
+          "name": "Smallsword"
+        },
+        "cudgel": {
+          "name": "Cudgel"
+        },
+        "cat-o-nine-tails": {
+          "name": "Cat o’ Nine Tails",
+          "special": "10' reach"
+        },
+        "heavy-club": {
+          "name": "Heavy Club"
+        },
+        "chain": {
+          "name": "Chain"
+        },
+        "grappling-hook": {
+          "name": "Grappling Hook"
+        },
+        "machete": {
+          "name": "Machete"
+        },
+        "boarding-axe": {
+          "name": "Boarding Axe"
+        },
+        "hatchet": {
+          "name": "Hatchet"
+        },
+        "tomahawk": {
+          "name": "Tomahawk"
+        },
+        "cutlass": {
+          "name": "Cutlass"
+        },
+        "cutlass-fine": {
+          "name": "Officer’s Cutlass"
+        },
+        "scimitar": {
+          "name": "Scimitar"
+        },
+        "rapier": {
+          "name": "Rapier"
+        },
+        "rapier-fine": {
+          "name": "Finely Crafted Rapier"
+        },
+        "broadsword": {
+          "name": "Broadsword"
+        },
+        "harpoon": {
+          "name": "Harpoon"
+        },
+        "anchor": {
+          "name": "Anchor",
+          "special": "two-handed"
+        },
+        "boarding-pike": {
+          "name": "Boarding Pike",
+          "special": "two-handed, 10' reach"
+        },
+        "throwing-knives": {
+          "name": "Throwing Knives"
+        },
+        "throwing-axes": {
+          "name": "Throwing Axes"
+        },
+        "harpoon-gun": {
+          "name": "Harpoon Gun",
+          "special": "Strength DR 12 or pulled to shooter"
+        },
+        "flintlock": {
+          "name": "Flintlock",
+          "special": "reload 2 actions, range 30'"
+        },
+        "blunderbuss": {
+          "name": "Blunderbuss",
+          "special": "reload 2 actions, range 30', d10 damage under 10'"
+        },
+        "musket": {
+          "name": "Musket",
+          "special": "reload 2 actions, range 150'"
+        },
+        "musket-fine": {
+          "name": "Buccaneer Musket",
+          "special": "reload 2 actions, range 150'"
+        }
+      },
+      "armor": {
+        "none": {
+          "name": "No Armor"
+        },
+        "rags": {
+          "name": "Rags"
+        },
+        "clothes": {
+          "name": "Common Clothes"
+        },
+        "clothes-fine": {
+          "name": "Fancy Clothes"
+        },
+        "uniform": {
+          "name": "Uniform"
+        },
+        "uniform-old": {
+          "name": "Old Uniform"
+        },
+        "leather": {
+          "name": "Leather Armor"
+        },
+        "leather-doublet": {
+          "name": "Leather Doublet"
+        },
+        "hide": {
+          "name": "Hide Armor"
+        },
+        "chain": {
+          "name": "Chain Shirt",
+          "special": "DR +2 on Agility tests (including defense)"
+        },
+        "plate": {
+          "name": "Conquistador Plate",
+          "special": "DR +4 on Agility tests, defense is DR +2. You’ll most likely sink and drown in water"
+        }
+      },
+      "specialty": {
+        "captain": {
+          "core": "<p><strong>Legendary Captain:</strong> While in command, the ship can take an extra crew action each round, even if it has already been taken.</p>",
+          "options": {
+            "a": "<p><strong>Issue Command:</strong> The captain can take an action to give another member of the crew an action.</p>",
+            "b": "<p><strong>Aggressive Leader:</strong> Agility DR 14 to defend against the captain’s nearby allies’ attacks.</p>",
+            "c": "<p><strong>Careful Leader:</strong> DR 14 to attack the captain’s nearby allies.</p>",
+            "d": "<p><strong>Skilled Fighter:</strong> The captain attacks twice each round.</p>"
+          }
+        },
+        "quartermaster": {
+          "core": "<p><strong>Veteran Quartermaster:</strong> While on board the ship, crew morale tests are +3. Cargo sells for 50% more in port.</p>",
+          "options": {
+            "a": "<p><strong>Careful Leader:</strong> DR 14 to attack the quartermaster’s nearby allies.</p>",
+            "b": "<p><strong>Fences:</strong> Cargo sells for double in three specific ports (name them).</p>",
+            "c": "<p><strong>Trusted Advocate:</strong> The crew has a +1 bonus to morale while the quartermaster is in office.</p>",
+            "d": "<p><strong>Shipwrights:</strong> The quartermaster knows shipwrights in three specific ports (name them). {S} can arrange for 50% off repairs and upgrades, but what will they want in return?</p>"
+          }
+        },
+        "bosun": {
+          "core": "<p><strong>Strict Bosun:</strong> While serving as bosun, once per combat the ship can reroll one Crew Action test.</p>",
+          "options": {
+            "a": "<p><strong>To Arms, You Dogs:</strong> The bosun takes an action, DR 14 to defend against the bosun’s nearby allies for the next round.</p>",
+            "b": "<p><strong>Terrifying Presence:</strong> The bosun makes a threatening display. Nearby enemies must make a morale test.</p>",
+            "c": "<p><strong>Skilled Fighter:</strong> The bosun attacks twice each round.</p>",
+            "d": "<p><strong>Swearing Sailor:</strong> The bosun threatens an enemy {s} can see with an impressive display of coarse language. Test Spirit DR 14 or be stunned for the next round.</p>"
+          }
+        },
+        "gunner": {
+          "core": "<p><strong>Master Gunner:</strong> While serving as master gunner, ship attacks are -2 DR.</p>",
+          "options": {
+            "a": "<p><strong>Black Powder Poet:</strong> The gunner has [[d4]] bombs, and is -2 DR when throwing them.</p>",
+            "b": "<p><strong>Reliable Gunner:</strong> The gunner does not fumble with black powder weapons.</p>",
+            "c": "<p><strong>Flintlock Fanatic:</strong> The gunner has three flintlock pistols and can attack with all of them in a single round. {S} can reload a pistol in a single round.</p>",
+            "d": "<p><strong>Old Broadsides:</strong> The gunner adds a +2 bonus to the broadsides action.</p>"
+          }
+        },
+        "master": {
+          "core": "<p><strong>Master of Sails:</strong> While serving as sailing master, the  ship’s Agility tests are -2 DR.</p>",
+          "options": {
+            "a": "<p><strong>Speed Sailor:</strong> Adds +2 bonus to full sail action.</p>",
+            "b": "<p><strong>Nimble Sailor:</strong> Adds +2 bonus to come about action.</p>",
+            "c": "<p><strong>Extra Canvas:</strong> In naval combat, provides two additional actions: <em>more canvas</em> increases speed by +1 by adding +2 DR to the ship’s agility tests, <em>less canvas</em> restores the ship to its normal configuration.</p>",
+            "d": "<p><strong>Old Salt:</strong> The crew can sing an additional sea shanty per day.</p>"
+          }
+        },
+        "sorcerer": {
+          "core": "<p><strong>Deck Sorcerer:</strong> Once per naval combat, change the speed and direction of the wind.</p>",
+          "options": {
+            "a": "<p><strong>Wither:</strong> One creature the sorcerer can see tests Toughness DR 14 or takes [[/r d6]] damage.</p>",
+            "b": "<p><strong>Raise Dead:</strong> The sorcerer summons a skeletal thrall from a nearby corpse. It has 4 HP and bites or claws for [[/r d4]] damage. The skeleton obeys the sorcerer, but tumbles into lifeless bones at sunrise.</p>",
+            "c": "<p><strong>Ritualist:</strong> The sorcerer knows a random arcane ritual and can perform it once a day.</p>",
+            "d": "<p><strong>Familiar:</strong> The sorcerer has a familiar. {S} can speak with it, and it can report back to {o}.</p>"
+          }
+        },
+        "priest": {
+          "core": "<p><strong>Deck Priest:</strong> Once per naval combat, change the speed and direction of the wind.</p>",
+          "options": {
+            "a": "<p><strong>Lay on Hands:</strong> Touch one creature to heal [[/r d4]] HP.</p>",
+            "b": "<p><strong>Holy Flame:</strong> A creature the priest can see tests Spirit DR 14 or takes [[/r d6]] damage.</p>",
+            "c": "<p><strong>Forbiddance:</strong> A creature the priest can see tests Spirit DR 14 or is stunned for one turn.</p>",
+            "d": "<p><strong>Religious Zeal:</strong> Agility DR 14 to defend against the priest’s nearby allies.</p>"
+          }
+        },
+        "carpenter": {
+          "core": "<p><strong>Master Carpenter:</strong> While serving as master carpenter, the ship’s repair actions are -5 DR.</p>",
+          "options": {
+            "a": "<p><strong>Derelict Preserver:</strong> If the ship is derelict and take additional damage, roll twice and take the lower result.</p>",
+            "b": "<p><strong>Skilled Careener:</strong> After overseeing careening, the ship can sail for four months before taking penalties instead of three, and each day of careening accounts for 20 max HP rather than 10.</p>",
+            "c": "<p><strong>Effective Craftsman:</strong> Crew repairs recover 4 HP/day instead of 2.</p>",
+            "d": "<p><strong>Frugal Craftsman:</strong> Crew repairs cost 15s per HP instead of 25.</p>"
+          }
+        }
+      }
+    },
     "captains": {
       "dutch": {
         "legendary": "{name} is a legendary captain employed by the Dutch West India Company, currently assigned to the {ship}.",

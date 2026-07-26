@@ -1,57 +1,52 @@
-import slugify from 'slugify'
 import { isString } from '@revolutionarygamesco/common'
+import { scopeLocalizer } from '@revolutionarygamesco/common-foundryvtt'
+import { MODULE_ID } from '../../settings.ts'
+import { isSpecialArm, type Arm, type SpecialArm } from './arm.ts'
 
-export interface Armor {
-  id: string
-  name: string
-  formula: string
-  special?: string
-}
+export const armors: Map<string, { formula: string, special: boolean }> = new Map()
+armors.set('none', { formula: '0', special: false })
+armors.set('rags', { formula: '0', special: false })
+armors.set('clothes', { formula: '0', special: false })
+armors.set('clothes-fine', { formula: '0', special: true })
+armors.set('uniform', { formula: '0', special: false })
+armors.set('uniform-old', { formula: '0', special: false })
+armors.set('leather', { formula: '-d2', special: false })
+armors.set('leather-doublet', { formula: '-d2', special: false })
+armors.set('hide', { formula: '-d2', special: false })
+armors.set('chain', { formula: '-d4', special: true })
+armors.set('plate', { formula: '-d6', special: true })
 
-export const armors: Map<string, Armor> = new Map<string, Armor>()
-
-const data: Array<Omit<Armor, 'id'>> = [
-  { name: 'No Armor', formula: '0' },
-  { name: 'Rags', formula: '0' },
-  { name: 'Common Clothes', formula: '0' },
-  { name: 'Old Uniform', formula: '0' },
-  { name: 'Fancy Clothes', formula: '0' },
-  { name: 'Leather Armor', formula: '-d2' },
-  { name: 'Hide Armor', formula: '-d2' },
-  { name: 'Chain Shirt', formula: '-d4', special: 'DR +2 on Agility tests including defense' },
-  { name: 'Conquistador Plate', formula: '-d6', special: 'DR +4 on Agility tests, defense is DR +2. You’ll most likely sink and drown in water.' }
-]
-
-for (const armor of data) {
-  const id = slugify(armor.name, { strict: true }).toLowerCase()
-  armors.set(id, { id, ...armor })
+const findStandardArmor = (key: string = 'none'): Arm | SpecialArm => {
+  const k = armors.has(key) ? key : 'none'
+  const { formula, special: hasSpecial } = armors.get(k)!
+  const t = scopeLocalizer([MODULE_ID, 'crew', 'armor', key].join('.'))
+  const arm: Arm = { name: t('name'), formula }
+  return hasSpecial
+    ? { ...arm, special: t('special') } as SpecialArm
+    : arm
 }
 
 const armor = (
   actor: Partial<foundry.documents.Actor>,
   features: string[],
-  equipment: string | Armor = 'no-armor'
+  equipment: string | Arm | SpecialArm = 'none'
 ): void => {
-  const a = isString(equipment) ? armors.get(equipment) : equipment
-  if (!a) return
+  const arm = isString(equipment) ? findStandardArmor(equipment) : equipment
+  const { name: description, formula } = arm
+  const special = isSpecialArm(arm) ? arm.special : null
 
   if (!actor.system) actor.system = {}
   if (!actor.system.attributes) actor.system.attributes = {}
-  if (!actor.system.attributes.armor) actor.system.attributes.armor = { formula: '0', description: 'No Armor' }
+  if (!actor.system.attributes.armor) actor.system.attributes.armor = { formula, description }
 
-  const { name, formula, special } = a
-  actor.system.attributes.armor.formula = formula
-  actor.system.attributes.armor.description = name
-
-  if (formula === '0' && !special) {
-    features.push(`<p><strong>${name}</strong></p>`)
-  } else if (formula === '0') {
-    features.push(`<p><strong>${name}:</strong> ${special}</p>`)
-  } else if (special) {
-    features.push(`<p><strong>${name}:</strong> ${formula}, ${special}</p>`)
-  } else {
-    features.push(`<p><strong>${name}:</strong> ${formula}</p>`)
-  }
+  const texts = []
+  if (formula !== '0') texts.push(formula)
+  if (special) texts.push(special)
+  const text = texts.join(', ')
+  const feature = text.length > 0
+    ? `<p><strong>${description}:</strong> ${text}</p>`
+    : `<p><strong>${description}</strong></p>`
+  features.push(feature)
 }
 
 export default armor
