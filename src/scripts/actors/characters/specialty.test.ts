@@ -16,4 +16,17 @@ describe('addSpecialty', () => {
     expect(features[0]).toBe(`revolutionary-pbshipgen.crew.specialty.${specialty}.core`)
     expect(options).toContain(features[1])
   })
+
+  it('can limit options', () => {
+    addSpecialty(features, 'priest', ['a'])
+    expect(features).toEqual([
+      'revolutionary-pbshipgen.crew.specialty.priest.core',
+      'revolutionary-pbshipgen.crew.specialty.priest.options.a'
+    ])
+  })
+
+  it('doesn’t add a second feature if you eliminate everything', () => {
+    addSpecialty(features, 'priest', [])
+    expect(features).toEqual(['revolutionary-pbshipgen.crew.specialty.priest.core'])
+  })
 })
