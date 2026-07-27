@@ -1,6 +1,12 @@
 import '@revolutionarygamesco/common-foundryvtt/systems/pirateborg'
-import { scopeLocalizer } from '@revolutionarygamesco/common-foundryvtt'
+import { scopeLocalizer, registerAPI } from '@revolutionarygamesco/common-foundryvtt'
 import { MODULE_ID } from './settings'
+
+import generateShip from './generators/ship.ts'
+
+registerAPI(MODULE_ID, {
+  generateShip
+})
 
 Hooks.once('ready', async () => {
   const t = scopeLocalizer(`${MODULE_ID}.folders`)
@@ -8,29 +14,16 @@ Hooks.once('ready', async () => {
   const found = game.folders.find(folder => folder.name === rootFolder && folder.type === 'Actor')
   if (found) return
 
-  const createFolder = async (
-    path: string,
-    parent?: foundry.documents.Folder
-  ): Promise<foundry.documents.Folder> => {
-    const folder = await foundry.documents.Folder.create({
-      name: t(path),
-      type: 'Actor',
-      folder: parent
-    })
-    if (!folder) throw new Error('Could not create folder')
-    return folder
-  }
-
   const nations = ['spanish', 'british', 'french']
-  const root = await createFolder('root')
+  const root = await foundry.documents.Folder.create({ name: t('root'), type: 'Actor' })
 
   for await (const nation of nations) {
-    const nationRoot = await createFolder(`${nation}.root`, root)
-    await createFolder(`${nation}.merchant`, nationRoot)
-    await createFolder(`${nation}.privateers`, nationRoot)
-    await createFolder(`${nation}.navy`, nationRoot)
+    const nationRoot = await foundry.documents.Folder.create({ name: t([nation, 'root']), type: 'Actor', folder: root })
+    await foundry.documents.Folder.create({ name: t([nation, 'privateers']), type: 'Actor', folder: nationRoot })
+    await foundry.documents.Folder.create({ name: t([nation, 'navy']), type: 'Actor', folder: nationRoot })
+    await foundry.documents.Folder.create({ name: t([nation, 'merchant']), type: 'Actor', folder: nationRoot })
   }
 
-  await createFolder('dutch', root)
-  await createFolder('pirate', root)
+  await foundry.documents.Folder.create({ name: t('dutch'), type: 'Actor', folder: root })
+  await foundry.documents.Folder.create({ name: t('pirate'), type: 'Actor', folder: root })
 })
