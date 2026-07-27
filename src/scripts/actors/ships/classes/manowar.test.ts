@@ -3,10 +3,19 @@ import { isWithinRange } from '@revolutionarygamesco/common'
 import createManOfWar from './manowar.ts'
 
 describe('createManOfWar', () => {
+  const name = 'Hispaniola'
   let actor: Partial<foundry.documents.Actor>
 
   beforeEach(() => {
-    actor = createManOfWar()
+    actor = createManOfWar(name)
+  })
+
+  it('sets the name', () => {
+    expect(actor.name).toBe(name)
+  })
+
+  it('sets type to vehicle', () => {
+    expect(actor.type).toBe('vehicle')
   })
 
   it('sets the man-of-war’s HP to 75', () => {

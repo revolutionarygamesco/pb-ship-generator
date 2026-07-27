@@ -12,8 +12,10 @@ import setRamming from '../ram.ts'
 import setCrewSize from '../crew-size.ts'
 import setCargoCapacity from '../cargo.ts'
 
-const createFrigate = (): Partial<foundry.documents.Actor> => {
-  const actor: Partial<foundry.documents.Actor> = {}
+const createFrigate = (
+  name: string = 'Hispaniola'
+): Partial<foundry.documents.Actor> => {
+  const actor: Partial<foundry.documents.Actor> = { name, type: 'vehicle' }
   const t = scopeLocalizer([MODULE_ID, 'ships', 'frigate'].join('.'))
 
   setShipHP(actor, 60)

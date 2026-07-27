@@ -3,10 +3,19 @@ import { isWithinRange } from '@revolutionarygamesco/common'
 import createFluyt from './fluyt.ts'
 
 describe('createFluyt', () => {
+  const name= 'Rommelpot'
   let actor: Partial<foundry.documents.Actor>
 
   beforeEach(() => {
-    actor = createFluyt()
+    actor = createFluyt(name)
+  })
+
+  it('sets the name', () => {
+    expect(actor.name).toBe(name)
+  })
+
+  it('sets type to vehicle', () => {
+    expect(actor.type).toBe('vehicle')
   })
 
   it('sets the fluyt’s HP to 50', () => {

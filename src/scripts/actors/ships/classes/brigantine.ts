@@ -12,8 +12,10 @@ import setRamming from '../ram.ts'
 import setCrewSize from '../crew-size.ts'
 import setCargoCapacity from '../cargo.ts'
 
-const createBrigantine = (): Partial<foundry.documents.Actor> => {
-  const actor: Partial<foundry.documents.Actor> = {}
+const createBrigantine = (
+  name: string = 'Hispaniola'
+): Partial<foundry.documents.Actor> => {
+  const actor: Partial<foundry.documents.Actor> = { name, type: 'vehicle' }
 
   setShipHP(actor, 40)
   setHull(actor, '-d4')

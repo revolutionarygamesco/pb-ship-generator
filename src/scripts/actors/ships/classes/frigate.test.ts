@@ -3,10 +3,19 @@ import { isWithinRange } from '@revolutionarygamesco/common'
 import createFrigate from './frigate.ts'
 
 describe('createFrigate', () => {
+  const name = 'Hispaniola'
   let actor: Partial<foundry.documents.Actor>
 
   beforeEach(() => {
-    actor = createFrigate()
+    actor = createFrigate(name)
+  })
+
+  it('sets the name', () => {
+    expect(actor.name).toBe(name)
+  })
+
+  it('sets type to vehicle', () => {
+    expect(actor.type).toBe('vehicle')
   })
 
   it('sets the frigate’s HP to 50', () => {

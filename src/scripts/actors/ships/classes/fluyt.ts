@@ -12,8 +12,10 @@ import setRamming from '../ram.ts'
 import setCrewSize from '../crew-size.ts'
 import setCargoCapacity from '../cargo.ts'
 
-const createFluyt = (): Partial<foundry.documents.Actor> => {
-  const actor: Partial<foundry.documents.Actor> = {}
+const createFluyt = (
+  name: string = 'Rommelpot'
+): Partial<foundry.documents.Actor> => {
+  const actor: Partial<foundry.documents.Actor> = { name, type: 'vehicle' }
 
   setShipHP(actor, 50)
   setHull(actor, '-d4')

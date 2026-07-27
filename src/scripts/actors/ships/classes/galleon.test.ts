@@ -3,10 +3,19 @@ import { isWithinRange } from '@revolutionarygamesco/common'
 import createGalleon from './galleon.ts'
 
 describe('createGalleon', () => {
+  const name = 'Hispaniola'
   let actor: Partial<foundry.documents.Actor>
 
   beforeEach(() => {
-    actor = createGalleon()
+    actor = createGalleon(name)
+  })
+
+  it('sets the name', () => {
+    expect(actor.name).toBe(name)
+  })
+
+  it('sets type to vehicle', () => {
+    expect(actor.type).toBe('vehicle')
   })
 
   it('sets the galleon’s HP to 65', () => {

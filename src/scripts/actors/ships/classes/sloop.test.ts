@@ -3,10 +3,19 @@ import { isWithinRange } from '@revolutionarygamesco/common'
 import createSloop from './sloop.ts'
 
 describe('createSloop', () => {
+  const name = 'Hispaniola'
   let actor: Partial<foundry.documents.Actor>
 
   beforeEach(() => {
-    actor = createSloop()
+    actor = createSloop(name)
+  })
+
+  it('sets the name', () => {
+    expect(actor.name).toBe(name)
+  })
+
+  it('sets type to vehicle', () => {
+    expect(actor.type).toBe('vehicle')
   })
 
   it('sets the sloop’s HP to 30', () => {
