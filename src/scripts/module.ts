@@ -2,21 +2,6 @@ import '@revolutionarygamesco/common-foundryvtt/systems/pirateborg'
 import { scopeLocalizer } from '@revolutionarygamesco/common-foundryvtt'
 import { MODULE_ID } from './settings'
 
-import rollShip from './roll.ts'
-import generateShip from './ship.ts'
-import openGenerateShipDialog from './dialog.ts'
-
-Hooks.once('init', async () => {
-  const generator = game.modules.get(MODULE_ID)
-  if (!generator) return
-
-  generator.api = {
-    rollShip,
-    generateShip,
-    openGenerateShipDialog
-  }
-})
-
 Hooks.once('ready', async () => {
   const t = scopeLocalizer(`${MODULE_ID}.folders`)
   const rootFolder = t('root')
