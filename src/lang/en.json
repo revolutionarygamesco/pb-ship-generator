@@ -311,6 +311,38 @@
             "b": "<p><strong>Aggressive Leader:</strong> Agility DR 14 to defend against the captain’s nearby allies’ attacks.</p>",
             "c": "<p><strong>Careful Leader:</strong> DR 14 to attack the captain’s nearby allies.</p>",
             "d": "<p><strong>Skilled Fighter:</strong> The captain attacks twice each round.</p>"
+          },
+          "description": {
+            "dutch": {
+              "legendary": "{captain} is a legendary captain employed by the Dutch West India Company, currently assigned to the {ship}.",
+              "high": "{captain} is an experienced and respected captain employed by the Dutch West India Company, currently assigned to the {ship}.",
+              "medium": "{captain} is a captain employed by the Dutch West India Company, currently assigned to the {ship}.",
+              "low": "{captain} is an inexperienced captain employed by the Dutch West India Company, currently assigned to the {ship}."
+            },
+            "naval": {
+              "legendary": "{captain} is a legendary captain of the {navy}, currently assigned to the {ship}.",
+              "high": "{captain} is a decorated and respected captain of the {navy}, currently assigned to the {ship}.",
+              "medium": "{captain} is a captain of the {navy}, currently assigned to the {ship}.",
+              "low": "{captain} is an inexperienced captain of the {navy}, currently serving aboard his first command, the {ship}."
+            },
+            "privateer": {
+              "legendary": "{captain} is the legendary captain of the {ship}. He bears a letter of marque from the {sovereign}.",
+              "high": "{captain} is the experienced and respected captain of the {ship}. He bears a letter of marque from the {sovereign}.",
+              "medium": "{captain} is the captain of the {ship}. He bears a letter of marque from the {sovereign}.",
+              "low": "{captain} is the inexperienced captain of the {ship}. He bears a letter of marque from the {sovereign}."
+            },
+            "merchant": {
+              "legendary": "{captain} is the captain of the {ship} and a legend among {nationality} traders and merchants for his ability to outrun pirates and bring his cargo to port.",
+              "high": "{captain} is the respected captain of the {nationality} {class}, the {ship}.",
+              "medium": "{captain} is the captain of the {nationality} {class}, the {ship}.",
+              "low": "{captain} has earned enough confidence from {nationality} investors to secure a captaincy, but not yet the confidence of the crew of the {ship}."
+            },
+            "pirate": {
+              "legendary": "{captain} is the notorious captain of the pirate {class}, the {ship}.",
+              "high": "{captain} is the seasoned captain of the pirate {class}, the {ship}.",
+              "medium": "{captain} is the captain of the pirate {class}, the {ship}.",
+              "low": "{captain} is the inexperienced captain of the pirate {class}, the {ship}."
+            }
           }
         },
         "quartermaster": {
@@ -320,7 +352,8 @@
             "b": "<p><strong>Fences:</strong> Cargo sells for double in three specific ports (name them).</p>",
             "c": "<p><strong>Trusted Advocate:</strong> The crew has a +1 bonus to morale while the quartermaster is in office.</p>",
             "d": "<p><strong>Shipwrights:</strong> The quartermaster knows shipwrights in three specific ports (name them). {S} can arrange for 50% off repairs and upgrades, but what will they want in return?</p>"
-          }
+          },
+          "description": "{mister} is the veteran quartermaster of the {ship}."
         },
         "bosun": {
           "core": "<p><strong>Strict Bosun:</strong> While serving as bosun, once per combat the ship can reroll one Crew Action test.</p>",
@@ -329,7 +362,8 @@
             "b": "<p><strong>Terrifying Presence:</strong> The bosun makes a threatening display. Nearby enemies must make a morale test.</p>",
             "c": "<p><strong>Skilled Fighter:</strong> The bosun attacks twice each round.</p>",
             "d": "<p><strong>Swearing Sailor:</strong> The bosun threatens an enemy {s} can see with an impressive display of coarse language. Test Spirit DR 14 or be stunned for the next round.</p>"
-          }
+          },
+          "description": "{mister} is the boatswain of the {ship}, known for running a tight ship."
         },
         "gunner": {
           "core": "<p><strong>Master Gunner:</strong> While serving as master gunner, ship attacks are -2 DR.</p>",
@@ -338,7 +372,8 @@
             "b": "<p><strong>Reliable Gunner:</strong> The gunner does not fumble with black powder weapons.</p>",
             "c": "<p><strong>Flintlock Fanatic:</strong> The gunner has three flintlock pistols and can attack with all of them in a single round. {S} can reload a pistol in a single round.</p>",
             "d": "<p><strong>Old Broadsides:</strong> The gunner adds a +2 bonus to the broadsides action.</p>"
-          }
+          },
+          "description": "{mister} is the master gunner of the {ship}."
         },
         "master": {
           "core": "<p><strong>Master of Sails:</strong> While serving as sailing master, the  ship’s Agility tests are -2 DR.</p>",
@@ -347,7 +382,8 @@
             "b": "<p><strong>Nimble Sailor:</strong> Adds +2 bonus to come about action.</p>",
             "c": "<p><strong>Extra Canvas:</strong> In naval combat, provides two additional actions: <em>more canvas</em> increases speed by +1 by adding +2 DR to the ship’s agility tests, <em>less canvas</em> restores the ship to its normal configuration.</p>",
             "d": "<p><strong>Old Salt:</strong> The crew can sing an additional sea shanty per day.</p>"
-          }
+          },
+          "description": "{mister} is the sailing master aboard the {ship}."
         },
         "sorcerer": {
           "core": "<p><strong>Deck Sorcerer:</strong> Once per naval combat, change the speed and direction of the wind.</p>",
@@ -356,7 +392,8 @@
             "b": "<p><strong>Raise Dead:</strong> The sorcerer summons a skeletal thrall from a nearby corpse. It has 4 HP and bites or claws for [[/r d4]] damage. The skeleton obeys the sorcerer, but tumbles into lifeless bones at sunrise.</p>",
             "c": "<p><strong>Ritualist:</strong> The sorcerer knows a random arcane ritual and can perform it once a day.</p>",
             "d": "<p><strong>Familiar:</strong> The sorcerer has a familiar. {S} can speak with it, and it can report back to {o}.</p>"
-          }
+          },
+          "description": "{mister} is the deck sorcerer aboard the {ship}."
         },
         "priest": {
           "core": "<p><strong>Deck Priest:</strong> Once per naval combat, change the speed and direction of the wind.</p>",
@@ -365,7 +402,8 @@
             "b": "<p><strong>Holy Flame:</strong> A creature the priest can see tests Spirit DR 14 or takes [[/r d6]] damage.</p>",
             "c": "<p><strong>Forbiddance:</strong> A creature the priest can see tests Spirit DR 14 or is stunned for one turn.</p>",
             "d": "<p><strong>Religious Zeal:</strong> Agility DR 14 to defend against the priest’s nearby allies.</p>"
-          }
+          },
+          "description": "{priest} is the deck priest aboard the {ship}."
         },
         "carpenter": {
           "core": "<p><strong>Master Carpenter:</strong> While serving as master carpenter, the ship’s repair actions are -5 DR.</p>",
@@ -374,7 +412,8 @@
             "b": "<p><strong>Skilled Careener:</strong> After overseeing careening, the ship can sail for four months before taking penalties instead of three, and each day of careening accounts for 20 max HP rather than 10.</p>",
             "c": "<p><strong>Effective Craftsman:</strong> Crew repairs recover 4 HP/day instead of 2.</p>",
             "d": "<p><strong>Frugal Craftsman:</strong> Crew repairs cost 15s per HP instead of 25.</p>"
-          }
+          },
+          "description": "{mister} is the master carpenter aboard the {ship}."
         }
       }
     },
