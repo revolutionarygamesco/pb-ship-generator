@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@revolutionarygamesco/common": "^1.2.6",
-    "@revolutionarygamesco/common-foundryvtt": "^0.3.6",
+    "@revolutionarygamesco/common-foundryvtt": "^0.3.7",
     "slugify": "^1.6.9"
   },
   "allowScripts": {
