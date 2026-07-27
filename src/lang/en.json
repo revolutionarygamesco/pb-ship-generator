@@ -68,56 +68,26 @@
     },
     "folders": {
       "root": "Generated Ships",
-      "captains": {
-        "root": "Captains",
-        "nation": {
-          "pirates": "Pirate Captains",
-          "spanish": {
-            "root": "Spanish Captains",
-            "merchant": "Spanish Merchant Captains",
-            "naval": "Spanish Royal Armada Captains",
-            "privateer": "Spanish Privateers"
-          },
-          "british": {
-            "root": "British Captains",
-            "merchant": "British Merchant Captains",
-            "naval": "British Royal Navy Captains",
-            "privateer": "British Privateers"
-          },
-          "french": {
-            "root": "French Captains",
-            "merchant": "French Merchant Captains",
-            "naval": "French Royal Navy Captains",
-            "privateer": "French Privateers"
-          },
-          "dutch": "Dutch West India Company"
-        }
+      "spanish": {
+        "root": "Spanish Ships",
+        "navy": "Spanish Royal Armada",
+        "merchant": "Spanish Merchant Ships",
+        "privateers": "Guarda Costa Ships"
       },
-      "ships": {
-        "root": "Ships",
-        "nation": {
-          "pirates": "Pirate Ships",
-          "spanish": {
-            "root": "Spanish Ships",
-            "merchant": "Spanish Merchantmen",
-            "privateer": "Spanish Privateer Ships",
-            "naval": "Spanish Royal Armada"
-          },
-          "british": {
-            "root": "British Ships",
-            "merchant": "British Merchantmen",
-            "privateer": "British Privateer Ships",
-            "naval": "British Royal Navy"
-          },
-          "french": {
-            "root": "French Ships",
-            "merchant": "French Merchantmen",
-            "privateer": "French Privateer Ships",
-            "naval": "French Royal Navy"
-          },
-          "dutch": "Dutch West India Company"
-        }
-      }
+      "british": {
+        "root": "British Ships",
+        "navy": "British Royal Navy",
+        "merchant": "British Merchant Ships",
+        "privateers": "British Privateers"
+      },
+      "french": {
+        "root": "French Ships",
+        "navy": "French Royal Navy",
+        "merchant": "French Merchant Ships",
+        "privateers": "French Privateers"
+      },
+      "dutch": "Dutch West India Company Ships",
+      "pirate": "Pirate Ships"
     },
     "ships": {
       "sloop": {

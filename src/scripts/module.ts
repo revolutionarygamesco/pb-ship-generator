@@ -1,4 +1,5 @@
 import '@revolutionarygamesco/common-foundryvtt/systems/pirateborg'
+import { scopeLocalizer } from '@revolutionarygamesco/common-foundryvtt'
 import { MODULE_ID } from './settings'
 
 import rollShip from './roll.ts'
@@ -17,13 +18,17 @@ Hooks.once('init', async () => {
 })
 
 Hooks.once('ready', async () => {
-  const rootFolder = game.i18n.localize(`${MODULE_ID}.folders.root`)
+  const t = scopeLocalizer(`${MODULE_ID}.folders`)
+  const rootFolder = t('root')
   const found = game.folders.find(folder => folder.name === rootFolder && folder.type === 'Actor')
   if (found) return
 
-  const createFolder = async (path: string, parent?: foundry.documents.Folder): Promise<foundry.documents.Folder> => {
+  const createFolder = async (
+    path: string,
+    parent?: foundry.documents.Folder
+  ): Promise<foundry.documents.Folder> => {
     const folder = await foundry.documents.Folder.create({
-      name: game.i18n.localize(`${MODULE_ID}.folders.${path}`),
+      name: t(path),
       type: 'Actor',
       folder: parent
     })
@@ -34,25 +39,13 @@ Hooks.once('ready', async () => {
   const nations = ['spanish', 'british', 'french']
   const root = await createFolder('root')
 
-  const captains = await createFolder('captains.root', root)
-  await createFolder('captains.nation.pirates', captains)
-  await createFolder('captains.nation.dutch', captains)
   for await (const nation of nations) {
-    const path = `captains.nation.${nation}`
-    const root = await createFolder(`${path}.root`, captains)
-    await createFolder(`${path}.merchant`, root)
-    await createFolder(`${path}.privateer`, root)
-    await createFolder(`${path}.naval`, root)
+    const nationRoot = await createFolder(`${nation}.root`, root)
+    await createFolder(`${nation}.merchant`, nationRoot)
+    await createFolder(`${nation}.privateers`, nationRoot)
+    await createFolder(`${nation}.navy`, nationRoot)
   }
 
-  const ships = await createFolder('ships.root', root)
-  await createFolder('ships.nation.pirates', ships)
-  await createFolder('ships.nation.dutch', ships)
-  for await (const nation of nations) {
-    const path = `ships.nation.${nation}`
-    const root = await createFolder(`${path}.root`, ships)
-    await createFolder(`${path}.merchant`, root)
-    await createFolder(`${path}.privateer`, root)
-    await createFolder(`${path}.naval`, root)
-  }
+  await createFolder('dutch', root)
+  await createFolder('pirate', root)
 })
