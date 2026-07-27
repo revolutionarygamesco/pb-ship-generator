@@ -16,37 +16,36 @@ import createPriestTitles from './titles/priest.ts'
 type Gender = 'Masculine' | 'Female'
 type Weekday = 'Sunday' | 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday' | 'Eke' | 'Oye' | 'Afor' | 'Nkwo'
 
-interface FamilyData {
+export interface FamilyData {
   nationality: Nationality
   size: number
-  name: string
-  patriarch: string
-  anglicization: string
-  caste: 'Foro' | 'Nyamakala' | 'Jali' | 'Jakhanke'
-  full: string
-  other: {
-    father: string
-    mother: string[]
+  name?: string
+  patriarch?: string
+  anglicization?: string
+  caste?: 'Foro' | 'Nyamakala' | 'Jali' | 'Jakhanke'
+  full?: string
+  other?: {
+    father?: string
+    mother?: string[]
   }
 }
 
-interface BirthContextData {
+export interface BirthContextData {
   family: FamilyData
   order: number
   twin: 1 | 2 | false
   weekday: Weekday
-  special: string
+  special: string | null
 }
 
-interface PersonalNameForms {
+export interface PersonalNameForms {
   nationality: Nationality
   full: string
-  short: string
   personal: string
   [key: string]: string
 }
 
-interface PersonalNameData {
+export interface PersonalNameData {
   gender: Gender
   nationality: Nationality,
   birth: BirthContextData,
