@@ -7,6 +7,7 @@ import getShipActorName from '../names/selectors/ship-actor.ts'
 import findCategoryFolder from '../utilities/find-folder.ts'
 import selectRandomThreatProfile from '../randomizers/threat.ts'
 import addShanties from '../randomizers/shanties.ts'
+import applyUpgrades from '../actors/ships/upgrades/apply.ts'
 
 import createBrigantine from '../actors/ships/classes/brigantine.ts'
 import createFluyt from '../actors/ships/classes/fluyt.ts'
@@ -47,12 +48,12 @@ const generateShip = async (
     if (folder) base.folder = folder
   }
 
+  const { upgrades, shanties } = selectRandomThreatProfile()
+  applyUpgrades(base, upgrades)
+
   const actor = await foundry.documents.Actor.create(base)
   if (!actor) throw new Error('Failed to create ship actor')
-
-  const { shanties } = selectRandomThreatProfile()
   await addShanties(actor, shanties)
-
   return actor
 }
 
