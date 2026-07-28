@@ -1,3 +1,4 @@
+import { chance } from '@revolutionarygamesco/common'
 import { selectRandomColors, type Colors } from '../types/enums/colors.ts'
 import { selectRandomShipRole, type ShipRole } from '../types/enums/role.ts'
 import { selectRandomShipClass, type ShipClass } from '../types/enums/class.ts'
@@ -33,7 +34,7 @@ const generateShip = async (
 ): Promise<foundry.documents.Actor> => {
   const colors = params?.colors ?? await selectRandomColors()
   const role = params?.role ?? selectRandomShipRole()
-  const privateer = params?.privateer ?? false
+  const privateer = params?.privateer ?? chance(2, 3)
   const shipClass = params?.shipClass ?? selectRandomShipClass()
   const names = await nameShip(colors, role, privateer)
   const name = getShipActorName(colors, names)
