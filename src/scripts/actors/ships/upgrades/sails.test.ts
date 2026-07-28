@@ -1,8 +1,13 @@
-import { describe, it, expect } from 'vitest'
+import { beforeEach, describe, it, expect } from 'vitest'
+import { mockModules } from '@revolutionarygamesco/common-foundryvtt/mocks'
 import createSloop from '../classes/sloop.ts'
 import improveSails from './sails.ts'
 
 describe('improveSails', () => {
+  beforeEach(() => {
+    mockModules([])
+  })
+
   it('throws an error if speed isn’t already established', () => {
     const actor: Partial<foundry.documents.Actor> = { system: { attributes: { speed: { max: 5, min: 0, value: 5 } } } }
     expect(() => improveSails(actor)).toThrow()

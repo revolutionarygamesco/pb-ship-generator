@@ -1,8 +1,13 @@
-import { describe, it, expect } from 'vitest'
+import { beforeEach, describe, it, expect } from 'vitest'
+import { mockModules } from '@revolutionarygamesco/common-foundryvtt/mocks'
 import createSloop from '../classes/sloop.ts'
 import addExtraCannons from './cannon-extra.ts'
 
 describe('addExtraCannons', () => {
+  beforeEach(() => {
+    mockModules([])
+  })
+
   it('throws an error if broadsides aren’t already established', () => {
     const actor: Partial<foundry.documents.Actor> = {}
     expect(() => addExtraCannons(actor)).toThrow()

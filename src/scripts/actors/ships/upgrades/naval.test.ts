@@ -1,4 +1,5 @@
 import { beforeEach, describe, it, expect } from 'vitest'
+import { mockModules } from '@revolutionarygamesco/common-foundryvtt/mocks'
 import createSloop from '../classes/sloop.ts'
 import addNavalFirepower from './naval.ts'
 
@@ -6,6 +7,7 @@ describe('addNavalFirepower', () => {
   let actor: Partial<foundry.documents.Actor>
 
   beforeEach(() => {
+    mockModules([])
     actor = createSloop()
   })
 
