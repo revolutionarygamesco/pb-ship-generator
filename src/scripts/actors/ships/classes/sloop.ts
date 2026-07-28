@@ -41,7 +41,6 @@ const createSloop = (
   setCargoCapacity(actor, 2)
 
   actor.system!.special = t('special')
-  actor.system!.description = t('description')
   return actor
 }
 

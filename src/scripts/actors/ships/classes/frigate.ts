@@ -40,7 +40,6 @@ const createFrigate = (
   setCrewSize(actor, 24 ,48)
   setCargoCapacity(actor, 4)
 
-  actor.system!.description = t('description')
   return actor
 }
 

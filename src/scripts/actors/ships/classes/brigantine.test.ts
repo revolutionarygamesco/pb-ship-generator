@@ -94,10 +94,6 @@ describe('createBrigantine', () => {
     expect(isWithinRange(actor.system?.attributes?.crew?.value ?? 0, [15, 30])).toBe(true)
   })
 
-  it('sets description', () => {
-    expect(actor.system?.description).toBe('revolutionary-pbshipgen.ships.brigantine.description')
-  })
-
   it('sets special', () => {
     expect(actor.system?.special).not.toBeDefined()
   })

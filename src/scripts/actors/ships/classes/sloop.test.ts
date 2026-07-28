@@ -94,10 +94,6 @@ describe('createSloop', () => {
     expect(isWithinRange(actor.system?.attributes?.crew?.value ?? 0, [3, 10])).toBe(true)
   })
 
-  it('sets description', () => {
-    expect(actor.system?.description).toBe('revolutionary-pbshipgen.ships.sloop.description')
-  })
-
   it('sets special', () => {
     expect(actor.system?.special).toBe('revolutionary-pbshipgen.ships.sloop.special')
   })

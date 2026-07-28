@@ -94,10 +94,6 @@ describe('createFrigate', () => {
     expect(isWithinRange(actor.system?.attributes?.crew?.value ?? 0, [24, 48])).toBe(true)
   })
 
-  it('sets description', () => {
-    expect(actor.system?.description).toBe('revolutionary-pbshipgen.ships.frigate.description')
-  })
-
   it('sets special', () => {
     expect(actor.system?.special).not.toBeDefined()
   })

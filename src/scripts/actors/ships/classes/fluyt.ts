@@ -1,5 +1,3 @@
-import { scopeLocalizer } from '@revolutionarygamesco/common-foundryvtt'
-import { MODULE_ID } from '../../../settings.ts'
 import { getIcon, getToken } from '../../../premium.ts'
 
 import setShipHP from '../hp.ts'
@@ -16,7 +14,6 @@ import setCargoCapacity from '../cargo.ts'
 const createFluyt = (
   name: string = 'Rommelpot'
 ): Partial<foundry.documents.Actor> => {
-  const t = scopeLocalizer([MODULE_ID, 'ships', 'fluyt'].join('.'))
   const actor: Partial<foundry.documents.Actor> = {
     name,
     type: 'vehicle',
@@ -40,7 +37,6 @@ const createFluyt = (
   setCrewSize(actor, 10 ,40)
   setCargoCapacity(actor, 5)
 
-  actor.system!.description = t('description')
   return actor
 }
 

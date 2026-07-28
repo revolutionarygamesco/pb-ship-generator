@@ -40,7 +40,6 @@ const createManOfWar = (
   setCrewSize(actor, 50 ,150)
   setCargoCapacity(actor, 4)
 
-  actor.system!.description = t('description')
   return actor
 }
 

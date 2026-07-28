@@ -94,10 +94,6 @@ describe('createManOfWar', () => {
     expect(isWithinRange(actor.system?.attributes?.crew?.value ?? 0, [50, 150])).toBe(true)
   })
 
-  it('sets description', () => {
-    expect(actor.system?.description).toBe('revolutionary-pbshipgen.ships.manowar.description')
-  })
-
   it('sets special', () => {
     expect(actor.system?.special).not.toBeDefined()
   })
