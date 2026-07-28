@@ -1,5 +1,6 @@
 import { scopeLocalizer } from '@revolutionarygamesco/common-foundryvtt'
 import { MODULE_ID } from '../../../settings.ts'
+import { getIcon, getToken } from '../../../premium.ts'
 
 import setShipHP from '../hp.ts'
 import setHull from '../hull.ts'
@@ -15,8 +16,18 @@ import setCargoCapacity from '../cargo.ts'
 const createManOfWar = (
   name: string = 'Hispaniola'
 ): Partial<foundry.documents.Actor> => {
-  const actor: Partial<foundry.documents.Actor> = { name, type: 'vehicle' }
   const t = scopeLocalizer([MODULE_ID, 'ships', 'manowar'].join('.'))
+  const actor: Partial<foundry.documents.Actor> = {
+    name,
+    type: 'vehicle',
+    img: getIcon('Man-of-War'),
+    // @ts-ignore
+    prototypeToken: {
+      texture: {
+        src: getToken('Man-of-War')
+      }
+    }
+  }
 
   setShipHP(actor, 75)
   setHull(actor, '-d6')

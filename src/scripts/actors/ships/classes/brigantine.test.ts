@@ -1,4 +1,5 @@
 import { beforeEach, describe, it, expect } from 'vitest'
+import { mockModules } from '@revolutionarygamesco/common-foundryvtt/mocks'
 import { isWithinRange } from '@revolutionarygamesco/common'
 import createBrigantine from './brigantine.ts'
 
@@ -7,6 +8,7 @@ describe('createBrigantine', () => {
   let actor: Partial<foundry.documents.Actor>
 
   beforeEach(() => {
+    mockModules([])
     actor = createBrigantine(name)
   })
 
@@ -16,6 +18,26 @@ describe('createBrigantine', () => {
 
   it('sets type to vehicle', () => {
     expect(actor.type).toBe('vehicle')
+  })
+
+  it('sets the icon', () => {
+    expect(actor.img).toBe('systems/pirateborg/icons/misc/ship.png')
+  })
+
+  it('can get the premium icon', () => {
+    mockModules(['pirate-borg-premium'])
+    actor = createBrigantine(name)
+    expect(actor.img).toBe('modules/pirate-borg-premium/Icons/brigantine-icon.webp')
+  })
+
+  it('sets the token', () => {
+    expect(actor.prototypeToken?.texture.src).toBe('systems/pirateborg/icons/misc/ship.png')
+  })
+
+  it('can get the premium icon', () => {
+    mockModules(['pirate-borg-premium'])
+    actor = createBrigantine(name)
+    expect(actor.prototypeToken?.texture.src).toBe('modules/pirate-borg-premium/Tokens/Brigantine-Original-Token.webp')
   })
 
   it('sets the brigantine’s HP to 40', () => {

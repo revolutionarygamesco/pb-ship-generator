@@ -11,11 +11,23 @@ import setSmallArms from '../small-arms.ts'
 import setRamming from '../ram.ts'
 import setCrewSize from '../crew-size.ts'
 import setCargoCapacity from '../cargo.ts'
+import {getIcon, getToken} from '../../../premium.ts'
 
 const createSloop = (
   name: string = 'Hispaniola'
 ): Partial<foundry.documents.Actor> => {
-  const actor: Partial<foundry.documents.Actor> = { name, type: 'vehicle' }
+  const t = scopeLocalizer([MODULE_ID, 'ships', 'sloop'].join('.'))
+  const actor: Partial<foundry.documents.Actor> = {
+    name,
+    type: 'vehicle',
+    img: getIcon('Sloop'),
+    // @ts-ignore
+    prototypeToken: {
+      texture: {
+        src: getToken('Sloop')
+      }
+    }
+  }
 
   setShipHP(actor, 30)
   setHull(actor, '-d2')
@@ -28,7 +40,6 @@ const createSloop = (
   setCrewSize(actor, 3 ,10)
   setCargoCapacity(actor, 2)
 
-  const t = scopeLocalizer([MODULE_ID, 'ships', 'sloop'].join('.'))
   actor.system!.special = t('special')
   actor.system!.description = t('description')
   return actor
