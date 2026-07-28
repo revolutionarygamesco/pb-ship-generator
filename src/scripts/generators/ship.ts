@@ -8,6 +8,7 @@ import findCategoryFolder from '../utilities/find-folder.ts'
 import selectRandomThreatProfile from '../randomizers/threat.ts'
 import addShanties from '../randomizers/shanties.ts'
 import applyUpgrades from '../actors/ships/upgrades/apply.ts'
+import addNavalFirepower from '../actors/ships/upgrades/naval.ts'
 
 import createBrigantine from '../actors/ships/classes/brigantine.ts'
 import createFluyt from '../actors/ships/classes/fluyt.ts'
@@ -40,6 +41,8 @@ const generateShip = async (
   const names = await nameShip(colors, role, privateer)
   const name = getShipActorName(colors, names)
   const base = actorCreators[shipClass](name)
+
+  if (role === 'Man-of-War' && !privateer) addNavalFirepower(base)
 
   let folder: foundry.documents.Folder | undefined
   const category = findCategoryFolder(colors, role, privateer)
