@@ -1,5 +1,6 @@
 import { selectRandomElement, stockArray, selectRandomBetween, shuffleArray } from '@revolutionarygamesco/common'
 import { type CaptainExperience } from '../actors/characters/descriptions/captain.ts'
+import { type ShipClass } from '../types/enums/class.ts'
 import { shipUpgrades, type ShipUpgrade } from '../types/enums/upgrade.ts'
 
 export interface ThreatProfile {
@@ -14,12 +15,22 @@ interface ThreatBand {
   shanties: number
 }
 
-const selectRandomThreatProfile = (): ThreatProfile => {
+const chances: Record<ShipClass, Record<CaptainExperience, number>> = {
+  Sloop: { legendary: 1, high: 5, medium: 25, low: 50 },
+  Brigantine: { legendary: 1, high: 4, medium: 16, low: 32 },
+  Frigate: { legendary: 1, high: 2, medium: 4, low: 8 },
+  Fluyt: { legendary: 1, high: 4, medium: 16, low: 32 },
+  'Man-of-War': { legendary: 1, high: 2, medium: 4, low: 4 },
+}
+
+const selectRandomThreatProfile = (
+  shipClass: ShipClass = 'Sloop'
+): ThreatProfile => {
   const { experience, shanties, upgrades: n } = selectRandomElement(stockArray<ThreatBand>([
-    { n: 1, item: { experience: 'legendary', upgrades: selectRandomBetween(0, 3), shanties: selectRandomBetween(0, 5) } },
-    { n: 10, item: { experience: 'high', upgrades: selectRandomBetween(0, 2), shanties: selectRandomBetween(0, 4) } },
-    { n: 50, item: { experience: 'medium', upgrades: selectRandomBetween(0, 1), shanties: selectRandomBetween(0, 3) } },
-    { n: 50, item: { experience: 'low', upgrades: 0, shanties: selectRandomBetween(0, 2) } }
+    { n: chances[shipClass].legendary, item: { experience: 'legendary', upgrades: selectRandomBetween(0, 3), shanties: selectRandomBetween(0, 5) } },
+    { n: chances[shipClass].high, item: { experience: 'high', upgrades: selectRandomBetween(0, 2), shanties: selectRandomBetween(0, 4) } },
+    { n: chances[shipClass].medium, item: { experience: 'medium', upgrades: selectRandomBetween(0, 1), shanties: selectRandomBetween(0, 3) } },
+    { n: chances[shipClass].low, item: { experience: 'low', upgrades: 0, shanties: selectRandomBetween(0, 2) } }
   ]))
 
   const upgrades = shuffleArray<ShipUpgrade>([...shipUpgrades]).slice(0, n)
