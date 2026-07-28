@@ -9,7 +9,7 @@ const shanties: string[] = [
   'Dead Horse',
   'Down Among the Dead Men',
   'Drunken Sailor',
-  'Fifteen Men on Dead Man\'s Chest',
+  'Fifteen Men on a Dead Man\'s Chest',
   'Fire Down Below',
   'Fish in the Sea',
   'Leave Her Johnny',
