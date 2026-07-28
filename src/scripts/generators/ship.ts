@@ -4,6 +4,8 @@ import { selectRandomShipClass, type ShipClass } from '../types/enums/class.ts'
 import nameShip from '../names/ship.ts'
 import getShipActorName from '../names/selectors/ship-actor.ts'
 import findCategoryFolder from '../utilities/find-folder.ts'
+import selectRandomThreatProfile from '../randomizers/threat.ts'
+import addShanties from '../randomizers/shanties.ts'
 
 import createBrigantine from '../actors/ships/classes/brigantine.ts'
 import createFluyt from '../actors/ships/classes/fluyt.ts'
@@ -46,7 +48,10 @@ const generateShip = async (
 
   const actor = await foundry.documents.Actor.create(base)
   if (!actor) throw new Error('Failed to create ship actor')
-  console.log(actor)
+
+  const { shanties } = selectRandomThreatProfile()
+  await addShanties(actor, shanties)
+
   return actor
 }
 
