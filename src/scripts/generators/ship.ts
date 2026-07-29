@@ -15,7 +15,10 @@ import createFluyt from '../actors/ships/classes/fluyt.ts'
 import createFrigate from '../actors/ships/classes/frigate.ts'
 import createManOfWar from '../actors/ships/classes/manowar.ts'
 import createSloop from '../actors/ships/classes/sloop.ts'
+
+import randomizeQuartermaster from '../randomizers/crew/quartermaster.ts'
 import randomizeBosun from '../randomizers/crew/bosun.ts'
+import createQuartermaster from '../actors/characters/archetypes/quartermaster.ts'
 import createBosun from '../actors/characters/archetypes/bosun.ts'
 
 const actorCreators: Record<ShipClass, (name: string) => Partial<foundry.documents.Actor>> = {
@@ -54,7 +57,7 @@ const generateShip = async (
     if (folder) base.folder = folder
   }
 
-  const { upgrades, shanties } = selectRandomThreatProfile()
+  const { upgrades, shanties, experience } = selectRandomThreatProfile()
   applyUpgrades(base, upgrades)
 
   const actor = await foundry.documents.Actor.create(base)
@@ -64,7 +67,14 @@ const generateShip = async (
   const specialtyCrew: string[] = []
   const crews: string[] = []
 
+  const quartermaster = randomizeQuartermaster(colors, experience)
   const bosun = randomizeBosun()
+
+  if (quartermaster) {
+    const { id } = await createQuartermaster(actor, folder)
+    specialtyCrew.push(quartermaster)
+    crews.push(id!)
+  }
 
   if (bosun) {
     const { id } = await createBosun(colors, actor, folder, isNaval)
