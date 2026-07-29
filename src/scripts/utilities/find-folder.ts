@@ -14,10 +14,11 @@ const findCategoryFolder = (
   if (colors === 'Dutch') return findFolder([root, t('dutch')].join('/'))
 
   const nation = colors.toLowerCase()
-  if (privateer) return findFolder([root, t(`${nation}.root`), t(`${nation}.privateer`)].join('/'))
-  return role === 'Man-of-War'
-    ? findFolder([root, t(`${nation}.root`), t(`${nation}.navy`)].join('/'))
-    : findFolder([root, t(`${nation}.root`), t(`${nation}.merchant`)].join('/'))
+  return role === 'Merchantman'
+    ? findFolder([root, t(`${nation}.root`), t(`${nation}.merchant`)].join('/'))
+    : privateer
+      ? findFolder([root, t(`${nation}.root`), t(`${nation}.privateer`)].join('/'))
+      : findFolder([root, t(`${nation}.root`), t(`${nation}.navy`)].join('/'))
 }
 
 export default findCategoryFolder
