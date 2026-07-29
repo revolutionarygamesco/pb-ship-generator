@@ -18,8 +18,10 @@ import createSloop from '../actors/ships/classes/sloop.ts'
 
 import randomizeQuartermaster from '../randomizers/crew/quartermaster.ts'
 import randomizeBosun from '../randomizers/crew/bosun.ts'
+import randomizeMasterGunner from '../randomizers/crew/gunner.ts'
 import createQuartermaster from '../actors/characters/archetypes/quartermaster.ts'
 import createBosun from '../actors/characters/archetypes/bosun.ts'
+import createMasterGunner from '../actors/characters/archetypes/gunner.ts'
 
 const actorCreators: Record<ShipClass, (name: string) => Partial<foundry.documents.Actor>> = {
   Brigantine: createBrigantine,
@@ -69,6 +71,7 @@ const generateShip = async (
 
   const quartermaster = randomizeQuartermaster(colors, experience)
   const bosun = randomizeBosun()
+  const gunner = randomizeMasterGunner(role)
 
   if (quartermaster) {
     const { id } = await createQuartermaster(actor, folder)
@@ -82,6 +85,11 @@ const generateShip = async (
     crews.push(id!)
   }
 
+  if (gunner) {
+    const { id } = await createMasterGunner(colors, actor, folder, isNaval)
+    specialtyCrew.push(gunner)
+    crews.push(id!)
+  }
 
   const specialtyCrewFeatures = await Promise.all(specialtyCrew.map(uuid => foundry.utils.fromUuid(uuid))) as foundry.documents.Item[]
   await actor.createEmbeddedDocuments('Item', specialtyCrewFeatures)
