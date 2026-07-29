@@ -25,6 +25,13 @@ describe('addSpecialty', () => {
     ])
   })
 
+  it('can just do an option without the core', () => {
+    addSpecialty(features, 'captain', ['a'], false)
+    expect(features).toEqual([
+      'revolutionary-pbshipgen.crew.specialty.captain.options.a'
+    ])
+  })
+
   it('doesn’t add a second feature if you eliminate everything', () => {
     addSpecialty(features, 'priest', [])
     expect(features).toEqual(['revolutionary-pbshipgen.crew.specialty.priest.core'])

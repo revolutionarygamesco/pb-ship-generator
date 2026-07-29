@@ -12,10 +12,11 @@ const validOptions = ['a', 'b', 'c', 'd']
 const addSpeciality = (
   features: string[],
   specialty: SpecialtyCrew,
-  options: string[] = validOptions
+  options: string[] = validOptions,
+  includeCore: boolean = true
 ): void => {
   const t = scopeLocalizer([MODULE_ID, 'crew', 'specialty', specialty].join('.'))
-  features.push(t('core'))
+  if (includeCore) features.push(t('core'))
 
   const o = options.filter(opt => validOptions.includes(opt))
   if (o.length < 1) return
