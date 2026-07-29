@@ -14,3 +14,29 @@ export const selectRandomNationality = async (
   const id = scope === 'pirate' ? 'S3jEhiwdL6Pry0nK' : 'NLyKzSrJYnYaU6TJ'
   return await drawGuarded(getRollTableUUID(id, 'NAMES'), isNationality, 'Spanish')
 }
+
+export const indefiniteNationality = (
+  nationality: Nationality
+): string => {
+  const dict: Record<Nationality, string> = {
+    Akan: 'an Akan',
+    Bantu: 'a Bantu',
+    Dutch: 'a Dutch',
+    English: 'an English',
+    Fon: 'a Fon',
+    French: 'a French',
+    Igbo: 'an Igbo',
+    Irish: 'an Irish',
+    Kalinago: 'a Kalinago',
+    Mandinka: 'a Mandinka',
+    Miskito: 'a Miskito',
+    Portuguese: 'a Portuguese',
+    Scottish: 'a Scottish',
+    Spanish: 'a Spanish',
+    Taíno: 'a Taíno',
+    Welsh: 'a Welsh',
+    Yoruba: 'a Yoruba'
+  }
+
+  return dict[nationality]
+}
