@@ -1,4 +1,6 @@
 import { chance } from '@revolutionarygamesco/common'
+import { makeLink } from '@revolutionarygamesco/common-foundryvtt'
+import { MODULE_ID } from '../settings.ts'
 import { selectRandomColors, type Colors } from '../types/enums/colors.ts'
 import { selectRandomShipRole, type ShipRole } from '../types/enums/role.ts'
 import { selectRandomShipClass, type ShipClass } from '../types/enums/class.ts'
@@ -9,6 +11,7 @@ import selectRandomThreatProfile from '../randomizers/threat.ts'
 import addShanties from '../randomizers/shanties.ts'
 import applyUpgrades from '../actors/ships/upgrades/apply.ts'
 import addNavalFirepower from '../actors/ships/upgrades/naval.ts'
+import getFeatureUUID from '../utilities/get-feature-uuid.ts'
 
 import createBrigantine from '../actors/ships/classes/brigantine.ts'
 import createFluyt from '../actors/ships/classes/fluyt.ts'
@@ -23,6 +26,7 @@ import randomizeSailingMaster from '../randomizers/crew/master.ts'
 import randomizeMasterCarpenter from '../randomizers/crew/carpenter.ts'
 import randomizeMagician from '../randomizers/crew/magician.ts'
 
+import createCaptain from '../actors/characters/archetypes/captain.ts'
 import createQuartermaster from '../actors/characters/archetypes/quartermaster.ts'
 import createBosun from '../actors/characters/archetypes/bosun.ts'
 import createMasterGunner from '../actors/characters/archetypes/gunner.ts'
@@ -84,6 +88,19 @@ const generateShip = async (
   const carpenter = randomizeMasterCarpenter()
   const { priest, sorcerer } = randomizeMagician()
 
+  const captain = await createCaptain(
+    colors,
+    role === 'Man-of-War' && privateer,
+    experience,
+    actor,
+    shipClass.toLowerCase(),
+    folder,
+    isNaval
+  )
+
+  if (experience === 'legendary') specialtyCrew.push(getFeatureUUID('dmlGTnZhfEgWUYDm'))
+  crews.push(captain.id!)
+
   if (quartermaster) {
     const { id } = await createQuartermaster(actor, folder)
     specialtyCrew.push(quartermaster)
@@ -126,11 +143,25 @@ const generateShip = async (
     crews.push(id!)
   }
 
+  let d = 'merchant'
+  if (role === 'Man-of-War') d = privateer ? 'privateer' : 'navy'
+  if (colors === 'Dutch') d = 'dutch'
+  if (colors === 'Pirate') d = 'pirate'
+  const navy = game.i18n.localize(`${MODULE_ID}.navies.${colors}`)
+  const desc = game.i18n.localize([MODULE_ID, 'ships', shipClass.toLowerCase(), 'description', d].join('.'), {
+    name,
+    nationality: colors,
+    captain: makeLink(captain),
+    navy
+  })
+
   const specialtyCrewFeatures = await Promise.all(specialtyCrew.map(uuid => foundry.utils.fromUuid(uuid))) as foundry.documents.Item[]
   await actor.createEmbeddedDocuments('Item', specialtyCrewFeatures)
 
   await actor.update({
     'system.crews': crews,
+    'system.captain': captain.id,
+    'system.description': desc
   })
 
   return actor
