@@ -21,11 +21,15 @@ import randomizeBosun from '../randomizers/crew/bosun.ts'
 import randomizeMasterGunner from '../randomizers/crew/gunner.ts'
 import randomizeSailingMaster from '../randomizers/crew/master.ts'
 import randomizeMasterCarpenter from '../randomizers/crew/carpenter.ts'
+import randomizeMagician from '../randomizers/crew/magician.ts'
+
 import createQuartermaster from '../actors/characters/archetypes/quartermaster.ts'
 import createBosun from '../actors/characters/archetypes/bosun.ts'
 import createMasterGunner from '../actors/characters/archetypes/gunner.ts'
 import createSailingMaster from '../actors/characters/archetypes/master.ts'
 import createMasterCarpenter from '../actors/characters/archetypes/carpenter.ts'
+import createDeckPriest from '../actors/characters/archetypes/priest.ts'
+import createDeckSorcerer from '../actors/characters/archetypes/sorcerer.ts'
 
 const actorCreators: Record<ShipClass, (name: string) => Partial<foundry.documents.Actor>> = {
   Brigantine: createBrigantine,
@@ -78,6 +82,7 @@ const generateShip = async (
   const gunner = randomizeMasterGunner(role)
   const master = randomizeSailingMaster()
   const carpenter = randomizeMasterCarpenter()
+  const { priest, sorcerer } = randomizeMagician()
 
   if (quartermaster) {
     const { id } = await createQuartermaster(actor, folder)
@@ -100,6 +105,18 @@ const generateShip = async (
   if (master) {
     const { id } = await createSailingMaster(colors, actor, folder, isNaval)
     specialtyCrew.push(master)
+    crews.push(id!)
+  }
+
+  if (priest) {
+    const { id } = await createDeckPriest(colors, actor, folder, isNaval)
+    specialtyCrew.push(priest)
+    crews.push(id!)
+  }
+
+  if (sorcerer) {
+    const { id } = await createDeckSorcerer(colors, actor, folder, isNaval)
+    specialtyCrew.push(sorcerer)
     crews.push(id!)
   }
 
