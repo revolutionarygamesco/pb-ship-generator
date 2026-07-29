@@ -2,7 +2,7 @@ import '@revolutionarygamesco/common-foundryvtt/systems/pirateborg'
 import { scopeLocalizer, registerAPI } from '@revolutionarygamesco/common-foundryvtt'
 import { MODULE_ID } from './settings'
 
-import generateShip from './generators/ship.ts'
+import generateShip from './ship.ts'
 
 registerAPI(MODULE_ID, {
   generateShip
