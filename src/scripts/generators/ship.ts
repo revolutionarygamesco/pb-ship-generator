@@ -19,9 +19,11 @@ import createSloop from '../actors/ships/classes/sloop.ts'
 import randomizeQuartermaster from '../randomizers/crew/quartermaster.ts'
 import randomizeBosun from '../randomizers/crew/bosun.ts'
 import randomizeMasterGunner from '../randomizers/crew/gunner.ts'
+import randomizeSailingMaster from '../randomizers/crew/master.ts'
 import createQuartermaster from '../actors/characters/archetypes/quartermaster.ts'
 import createBosun from '../actors/characters/archetypes/bosun.ts'
 import createMasterGunner from '../actors/characters/archetypes/gunner.ts'
+import createSailingMaster from '../actors/characters/archetypes/master.ts'
 
 const actorCreators: Record<ShipClass, (name: string) => Partial<foundry.documents.Actor>> = {
   Brigantine: createBrigantine,
@@ -72,6 +74,7 @@ const generateShip = async (
   const quartermaster = randomizeQuartermaster(colors, experience)
   const bosun = randomizeBosun()
   const gunner = randomizeMasterGunner(role)
+  const master = randomizeSailingMaster()
 
   if (quartermaster) {
     const { id } = await createQuartermaster(actor, folder)
@@ -88,6 +91,12 @@ const generateShip = async (
   if (gunner) {
     const { id } = await createMasterGunner(colors, actor, folder, isNaval)
     specialtyCrew.push(gunner)
+    crews.push(id!)
+  }
+
+  if (master) {
+    const { id } = await createSailingMaster(colors, actor, folder, isNaval)
+    specialtyCrew.push(master)
     crews.push(id!)
   }
 
