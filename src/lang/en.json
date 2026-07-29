@@ -316,10 +316,10 @@
               "low": "{captain} is the inexperienced captain of the {ship}. He bears a letter of marque from the {sovereign}."
             },
             "merchant": {
-              "legendary": "{captain} is the captain of the {ship} and a legend among {nationality} traders and merchants for his ability to outrun pirates and bring his cargo to port.",
-              "high": "{captain} is the respected captain of the {nationality} {class}, the {ship}.",
-              "medium": "{captain} is the captain of the {nationality} {class}, the {ship}.",
-              "low": "{captain} has earned enough confidence from {nationality} investors to secure a captaincy, but not yet the confidence of the crew of the {ship}."
+              "legendary": "{captain} is the captain of the {ship} and a legend among {colors} traders and merchants for his ability to outrun pirates and bring his cargo to port.",
+              "high": "{captain} is the respected captain of the {colors} {class}, the {ship}.",
+              "medium": "{captain} is the captain of the {colors} {class}, the {ship}.",
+              "low": "{captain} has earned enough confidence from {colors} investors to secure a captaincy, but not yet the confidence of the crew of the {ship}."
             },
             "pirate": {
               "legendary": "{captain} is the notorious captain of the pirate {class}, the {ship}.",
@@ -337,7 +337,7 @@
             "c": "<p><strong>Trusted Advocate:</strong> The crew has a +1 bonus to morale while the quartermaster is in office.</p>",
             "d": "<p><strong>Shipwrights:</strong> The quartermaster knows shipwrights in three specific ports (name them). {S} can arrange for 50% off repairs and upgrades, but what will they want in return?</p>"
           },
-          "description": "{mister} is the veteran quartermaster of the {ship}."
+          "description": "{mister} is {nationality} pirate and the veteran quartermaster of the {ship}."
         },
         "bosun": {
           "core": "<p><strong>Strict Bosun:</strong> While serving as bosun, once per combat the ship can reroll one Crew Action test.</p>",
@@ -347,7 +347,7 @@
             "c": "<p><strong>Skilled Fighter:</strong> The bosun attacks twice each round.</p>",
             "d": "<p><strong>Swearing Sailor:</strong> The bosun threatens an enemy {s} can see with an impressive display of coarse language. Test Spirit DR 14 or be stunned for the next round.</p>"
           },
-          "description": "{mister} is the boatswain of the {ship}, known for running a tight ship."
+          "description": "{mister} is {nationality} sailor and the boatswain of the {ship}, known for running a tight ship."
         },
         "gunner": {
           "core": "<p><strong>Master Gunner:</strong> While serving as master gunner, ship attacks are -2 DR.</p>",
@@ -357,7 +357,7 @@
             "c": "<p><strong>Flintlock Fanatic:</strong> The gunner has three flintlock pistols and can attack with all of them in a single round. {S} can reload a pistol in a single round.</p>",
             "d": "<p><strong>Old Broadsides:</strong> The gunner adds a +2 bonus to the broadsides action.</p>"
           },
-          "description": "{mister} is the master gunner of the {ship}."
+          "description": "{mister} is {nationality} sailor and the master gunner of the {ship}."
         },
         "master": {
           "core": "<p><strong>Master of Sails:</strong> While serving as sailing master, the  ship’s Agility tests are -2 DR.</p>",
@@ -367,7 +367,7 @@
             "c": "<p><strong>Extra Canvas:</strong> In naval combat, provides two additional actions: <em>more canvas</em> increases speed by +1 by adding +2 DR to the ship’s agility tests, <em>less canvas</em> restores the ship to its normal configuration.</p>",
             "d": "<p><strong>Old Salt:</strong> The crew can sing an additional sea shanty per day.</p>"
           },
-          "description": "{mister} is the sailing master aboard the {ship}."
+          "description": "{mister} is {nationality} sailor with many years before the mast and the sailing master of the {ship}."
         },
         "sorcerer": {
           "core": "<p><strong>Deck Sorcerer:</strong> Once per naval combat, change the speed and direction of the wind.</p>",
@@ -397,7 +397,7 @@
             "c": "<p><strong>Effective Craftsman:</strong> Crew repairs recover 4 HP/day instead of 2.</p>",
             "d": "<p><strong>Frugal Craftsman:</strong> Crew repairs cost 15s per HP instead of 25.</p>"
           },
-          "description": "{mister} is the master carpenter aboard the {ship}."
+          "description": "{mister} is {nationality} carpenter, currently serving as the master carpenter aboard the {ship}."
         }
       }
     },
@@ -421,16 +421,16 @@
         "low": "{name} is the inexperienced {nation} captain of the {ship}. He bears a letter of marque signed by the {sovereign}."
       },
       "merchant": {
-        "legendary": "{name} is the captain of the {ship} and a legend among {nation} traders and merchants for his ability to outrun pirates and bring his cargo to port.",
-        "high": "{name} is the respected captain of the {nation} {type}, the {ship}.",
-        "medium": "{name} is the captain of the {nation} {type}, the {ship}.",
-        "low": "{name} has earned enough confidence from {nation} investors to secure a captaincy, but not yet the confidence of the {ship}."
+        "legendary": "{name} is the {nation} captain of the {ship} and a legend among {colors} traders and merchants for his ability to outrun pirates and bring his cargo to port.",
+        "high": "{name} is the respected {nation} captain of the {colors} {class}, the {ship}.",
+        "medium": "{name} is the {nation} captain of the {colors} {class}, the {ship}.",
+        "low": "{name} has earned enough confidence from {colors} investors to secure a captaincy, but not yet the confidence of the {ship}."
       },
       "pirate": {
-        "legendary": "{name} is the notorious captain of the pirate {type}, the {ship}.",
-        "high": "{name} is the seasoned captain of the pirate {type}, the {ship}.",
-        "medium": "{name} is the captain of the pirate {type}, the {ship}.",
-        "low": "{name} is the inexperienced captain of the pirate {type}, the {ship}."
+        "legendary": "{name} is the notorious captain of the pirate {class}, the {ship}.",
+        "high": "{name} is the seasoned captain of the pirate {class}, the {ship}.",
+        "medium": "{name} is the captain of the pirate {class}, the {ship}.",
+        "low": "{name} is the inexperienced captain of the pirate {class}, the {ship}."
       }
     },
     "sovereigns": {
