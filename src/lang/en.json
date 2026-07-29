@@ -442,6 +442,26 @@
       "Spanish": "Spanish Royal Armada",
       "British": "British Royal Navy",
       "French": "French Royal Navy"
+    },
+    "pronouns": {
+      "Feminine": {
+        "sub": "she",
+        "obj": "her",
+        "self": "herself",
+        "pos": {
+          "adj": "her",
+          "pro": "hers"
+        }
+      },
+      "Masculine": {
+        "sub": "he",
+        "obj": "him",
+        "self": "himself",
+        "pos": {
+          "adj": "his",
+          "pro": "his"
+        }
+      }
     }
   }
 }
