@@ -15,6 +15,8 @@ import createFluyt from '../actors/ships/classes/fluyt.ts'
 import createFrigate from '../actors/ships/classes/frigate.ts'
 import createManOfWar from '../actors/ships/classes/manowar.ts'
 import createSloop from '../actors/ships/classes/sloop.ts'
+import randomizeBosun from '../randomizers/crew/bosun.ts'
+import createBosun from '../actors/characters/archetypes/bosun.ts'
 
 const actorCreators: Record<ShipClass, (name: string) => Partial<foundry.documents.Actor>> = {
   Brigantine: createBrigantine,
@@ -41,8 +43,9 @@ const generateShip = async (
   const names = await nameShip(colors, role, privateer)
   const name = getShipActorName(colors, names)
   const base = actorCreators[shipClass](name)
+  const isNaval = role === 'Man-of-War' && !privateer
 
-  if (role === 'Man-of-War' && !privateer) addNavalFirepower(base)
+  if (isNaval) addNavalFirepower(base)
 
   let folder: foundry.documents.Folder | undefined
   const category = findCategoryFolder(colors, role, privateer)
@@ -57,6 +60,26 @@ const generateShip = async (
   const actor = await foundry.documents.Actor.create(base)
   if (!actor) throw new Error('Failed to create ship actor')
   await addShanties(actor, shanties)
+
+  const specialtyCrew: string[] = []
+  const crews: string[] = []
+
+  const bosun = randomizeBosun()
+
+  if (bosun) {
+    const { id } = await createBosun(colors, actor, folder, isNaval)
+    specialtyCrew.push(bosun)
+    crews.push(id!)
+  }
+
+
+  const specialtyCrewFeatures = await Promise.all(specialtyCrew.map(uuid => foundry.utils.fromUuid(uuid))) as foundry.documents.Item[]
+  await actor.createEmbeddedDocuments('Item', specialtyCrewFeatures)
+
+  await actor.update({
+    'system.crews': crews,
+  })
+
   return actor
 }
 
