@@ -88,11 +88,12 @@ const createCaptain = async (
   const sovereign = game.i18n.localize(`${MODULE_ID}.sovereigns.${colors}`)
   const navy = game.i18n.localize(`${MODULE_ID}.navies.${colors}`)
   const title = names.length > 1 && names[0].nationality === 'Irish'
-    ? names[1].forms.title
-    : names[0].forms.title
+    ? names[1].forms.captain
+    : names[0].forms.captain
+
   const desc = game.i18n.localize(`${MODULE_ID}.crew.specialty.captain.description.${path}.${experience}`, {
     ...getPronouns(MODULE_ID, names[0].gender),
-    name: title,
+    captain: title,
     ship: makeLink(ship),
     nationality: names[0].nationality,
     colors,
