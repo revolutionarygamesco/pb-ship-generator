@@ -42,28 +42,14 @@
     "message": {
       "speaker": "Pirate Borg Ship Generator",
       "flavor": "Draws a ship.",
-      "content": {
-        "pirate": "{ship}, a pirate {type} commanded by {captain}",
-        "dutch": {
-          "privateer": "{ship}, an armed {type} of the Dutch West India Company commanded by {captain}",
-          "merchant": "{ship}, a {type} of the Dutch West India Company commanded by {captain}"
-        },
-        "spanish": {
-          "naval": "{ship}, a {type} of the Spanish Royal Armada commanded by {captain}",
-          "privateer": "{ship}, an armed {type} commanded by {captain}, bearing a letter of marque signed by the King of Spain",
-          "merchant": "{ship}, a Spanish merchant {type} commanded by {captain}"
-        },
-        "british": {
-          "naval": "{ship}, a {type} of the British Royal Navy commanded by {captain}",
-          "privateer": "{ship}, an armed {type} commanded by {captain}, bearing a letter of marque signed by the King of England",
-          "merchant": "{ship}, a British merchant {type} commanded by {captain}"
-        },
-        "french": {
-          "naval": "{ship}, a {type} of the French Royal Navy commanded by {captain}",
-          "privateer": "{ship}, an armed {type} commanded by {captain}, bearing a letter of marque signed by the King of France",
-          "merchant": "{ship}, a French merchant {type} commanded by {captain}"
-        }
-      }
+      "description": {
+        "Naval": "A {class} of the {navy} under the command of {captain}",
+        "Merchant": "A {colors} merchant {class} under the command of {captain}",
+        "Privateer": "A {colors} privateer {class} under the command of {captain}",
+        "Dutch": "A {class} of the Dutch West India Company under the command of {captain}",
+        "Pirate": "A pirate {class} under the command of {captain}"
+      },
+      "content": "<p class=\"revolutionary-piratenames-ship-whisper\"><img src=\"{src}\" alt=\"{alt}\" />{name}<span>{description}</span></p>"
     },
     "folders": {
       "root": "Generated Ships",

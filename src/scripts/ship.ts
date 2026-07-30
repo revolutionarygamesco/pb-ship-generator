@@ -52,7 +52,7 @@ interface GenerateShipParams {
 
 const generateShip = async (
   params?: Partial<GenerateShipParams>
-): Promise<foundry.documents.Actor> => {
+): Promise<{ ship: foundry.documents.Actor, captain: foundry.documents.Actor }> => {
   const colors = params?.colors ?? await selectRandomColors()
   const role = params?.role ?? selectRandomShipRole()
   const privateer = params?.privateer ?? chance(2, 3)
@@ -74,9 +74,9 @@ const generateShip = async (
   const { upgrades, shanties, experience } = selectRandomThreatProfile()
   applyUpgrades(base, upgrades)
 
-  const actor = await foundry.documents.Actor.create(base)
-  if (!actor) throw new Error('Failed to create ship actor')
-  await addShanties(actor, shanties)
+  const ship = await foundry.documents.Actor.create(base)
+  if (!ship) throw new Error('Failed to create ship')
+  await addShanties(ship, shanties)
 
   const specialtyCrew: string[] = []
   const crews: string[] = []
@@ -92,7 +92,7 @@ const generateShip = async (
     colors,
     role === 'Man-of-War' && privateer,
     experience,
-    actor,
+    ship,
     shipClass.toLowerCase(),
     folder,
     isNaval
@@ -102,43 +102,43 @@ const generateShip = async (
   crews.push(captain.id!)
 
   if (quartermaster) {
-    const { id } = await createQuartermaster(actor, folder)
+    const { id } = await createQuartermaster(ship, folder)
     specialtyCrew.push(quartermaster)
     crews.push(id!)
   }
 
   if (bosun) {
-    const { id } = await createBosun(colors, actor, folder, isNaval)
+    const { id } = await createBosun(colors, ship, folder, isNaval)
     specialtyCrew.push(bosun)
     crews.push(id!)
   }
 
   if (gunner) {
-    const { id } = await createMasterGunner(colors, actor, folder, isNaval)
+    const { id } = await createMasterGunner(colors, ship, folder, isNaval)
     specialtyCrew.push(gunner)
     crews.push(id!)
   }
 
   if (master) {
-    const { id } = await createSailingMaster(colors, actor, folder, isNaval)
+    const { id } = await createSailingMaster(colors, ship, folder, isNaval)
     specialtyCrew.push(master)
     crews.push(id!)
   }
 
   if (priest) {
-    const { id } = await createDeckPriest(colors, actor, folder, isNaval)
+    const { id } = await createDeckPriest(colors, ship, folder, isNaval)
     specialtyCrew.push(priest)
     crews.push(id!)
   }
 
   if (sorcerer) {
-    const { id } = await createDeckSorcerer(colors, actor, folder, isNaval)
+    const { id } = await createDeckSorcerer(colors, ship, folder, isNaval)
     specialtyCrew.push(sorcerer)
     crews.push(id!)
   }
 
   if (carpenter) {
-    const { id } = await createMasterCarpenter(colors, actor, folder, isNaval)
+    const { id } = await createMasterCarpenter(colors, ship, folder, isNaval)
     specialtyCrew.push(carpenter)
     crews.push(id!)
   }
@@ -156,15 +156,15 @@ const generateShip = async (
   })
 
   const specialtyCrewFeatures = await Promise.all(specialtyCrew.map(uuid => foundry.utils.fromUuid(uuid))) as foundry.documents.Item[]
-  await actor.createEmbeddedDocuments('Item', specialtyCrewFeatures)
+  await ship.createEmbeddedDocuments('Item', specialtyCrewFeatures)
 
-  await actor.update({
+  await ship.update({
     'system.crews': crews,
     'system.captain': captain.id,
     'system.description': desc
   })
 
-  return actor
+  return { ship, captain }
 }
 
 export default generateShip

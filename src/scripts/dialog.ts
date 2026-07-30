@@ -5,6 +5,7 @@ import { colors, isColors, selectRandomColors, type Colors } from './types/enums
 import { selectRandomShipRole, type ShipRole } from './types/enums/role.ts'
 import {isShipClass, selectRandomShipClass, type ShipClass, shipClasses} from './types/enums/class.ts'
 import generateShip from './ship.ts'
+import whisperGeneratedShip from './whisper.ts'
 
 export const defaultOnComplete = async (
   c: string,
@@ -24,7 +25,8 @@ export const defaultOnComplete = async (
     privateer = role === 'Man-of-War' && chance(2, 3)
   }
 
-  await generateShip({ colors, role, privateer, shipClass })
+  const { ship, captain } = await generateShip({ colors, role, privateer, shipClass })
+  await whisperGeneratedShip(colors, role, privateer, shipClass, ship, captain, [game.user.id])
 }
 
 const openGenerateShipDialog = async (
