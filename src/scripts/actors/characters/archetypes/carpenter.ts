@@ -68,6 +68,7 @@ const createMasterCarpenter = async (
   actor.system!.description = `<p><em>${desc}</em></p>${features.join('')}`
   const created = await foundry.documents.Actor.create(actor)
   if (!created) throw new Error('Failed to create actor')
+  await created.setFlag(MODULE_ID, 'names', JSON.stringify(names))
   return created
 }
 
