@@ -54,7 +54,7 @@ const createQuartermaster = async (
     ? names[1].forms.mister
     : names[0].forms.mister
   const desc = game.i18n.localize(`${MODULE_ID}.crew.specialty.quartermaster.description`, {
-    ...getPronouns(`${MODULE_ID}.pronouns`, names[0].gender),
+    ...getPronouns(MODULE_ID, names[0].gender),
     mister,
     ship: makeLink(ship),
     nationality

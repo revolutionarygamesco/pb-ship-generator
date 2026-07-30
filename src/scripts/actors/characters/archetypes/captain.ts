@@ -91,7 +91,7 @@ const createCaptain = async (
     ? names[1].forms.title
     : names[0].forms.title
   const desc = game.i18n.localize(`${MODULE_ID}.crew.specialty.captain.description.${path}.${experience}`, {
-    ...getPronouns(`${MODULE_ID}.pronouns`, names[0].gender),
+    ...getPronouns(MODULE_ID, names[0].gender),
     name: title,
     ship: makeLink(ship),
     nationality: names[0].nationality,

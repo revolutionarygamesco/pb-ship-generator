@@ -61,7 +61,7 @@ const createDeckPriest = async (
     ? names[1].forms.priest
     : names[0].forms.priest
   const desc = game.i18n.localize(`${MODULE_ID}.crew.specialty.priest.description`, {
-    ...getPronouns(`${MODULE_ID}.pronouns`, names[0].gender),
+    ...getPronouns(MODULE_ID, names[0].gender),
     priest,
     ship: makeLink(ship),
     nationality
