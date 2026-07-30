@@ -91,38 +91,38 @@
     "ships": {
       "sloop": {
         "description": {
-          "dutch": "The {name} is a sloop of the Dutch West India Company under the command of {captain}. Small, single-masted vessels like this are the backbone of trade between the islands of the Caribbean.",
-          "merchant": "The {name} is {nationality} merchant sloop under the command of {captain}. Small, single-masted vessels like this are the backbone of trade between the islands of the Caribbean.",
-          "navy": "The {name} is a sloop-of-war of the {navy} under the command of {captain}. Small, single-masted vessels like this are used for patrols, carrying dispatches, and sweeping for pirates.",
-          "privateer": "The {name} is {nationality} sloop under the command of the privateer {captain}. These small, single-masted vessels are a favorite of small-syndicate privateering ventures because they’re fast, agile, and cheap to outfit.",
-          "pirate": "The {name} is a pirate sloop under the command of {captain}. The small, single-masted vessels are considered the “perfect” pirate ships due to their speed, shallow draft, and maneuverability."
+          "dutch": "The <em>{name}</em> is a sloop of the Dutch West India Company under the command of {captain}. Small, single-masted vessels like this are the backbone of trade between the islands of the Caribbean.",
+          "merchant": "The <em>{name}</em> is {nationality} merchant sloop under the command of {captain}. Small, single-masted vessels like this are the backbone of trade between the islands of the Caribbean.",
+          "navy": "The <em>{name}</em> is a sloop-of-war of the {navy} under the command of {captain}. Small, single-masted vessels like this are used for patrols, carrying dispatches, and sweeping for pirates.",
+          "privateer": "The <em>{name}</em> is {nationality} sloop under the command of the privateer {captain}. These small, single-masted vessels are a favorite of small-syndicate privateering ventures because they’re fast, agile, and cheap to outfit.",
+          "pirate": "The <em>{name}</em> is a pirate sloop under the command of {captain}. The small, single-masted vessels are considered the “perfect” pirate ships due to their speed, shallow draft, and maneuverability."
         },
         "special": "Can travel at full speed when Close to the Wind."
       },
       "brigantine": {
         "description": {
-          "dutch": "The {name} is a brigantine of the Dutch West India Company under the command of {captain}. Square-rigged, two-masted vessels like this provide an excellent balance of speed and cargo capacity for trade.",
-          "merchant": "The {name} is {nationality} merchant brigantine under the command of {captain}. Square-rigged, two-masted vessels like this provide an excellent balance of speed and cargo capacity for trade.",
-          "navy": "The {name} is a brigantine of the {navy} under the command of {captain}. These square-rigged, two-masted vessels are used for patrols, escorts, and carrying dispatches.",
-          "privateer": "The {name} is a {nationality} sloop under the command of the privateer {captain}. These square-rigged, two-masted vessels are popular among privateering ventures for their balance of speed and deck space for more guns.",
-          "pirate": "The {name} is a pirate brigantine under the command of {captain}. These square-rigged, two-masted vessels are favored by medium-sized crews that have outgrown a sloop."
+          "dutch": "The <em>{name}</em> is a brigantine of the Dutch West India Company under the command of {captain}. Square-rigged, two-masted vessels like this provide an excellent balance of speed and cargo capacity for trade.",
+          "merchant": "The <em>{name}</em> is {nationality} merchant brigantine under the command of {captain}. Square-rigged, two-masted vessels like this provide an excellent balance of speed and cargo capacity for trade.",
+          "navy": "The <em>{name}</em> is a brigantine of the {navy} under the command of {captain}. These square-rigged, two-masted vessels are used for patrols, escorts, and carrying dispatches.",
+          "privateer": "The <em>{name}</em> is a {nationality} sloop under the command of the privateer {captain}. These square-rigged, two-masted vessels are popular among privateering ventures for their balance of speed and deck space for more guns.",
+          "pirate": "The <em>{name}</em> is a pirate brigantine under the command of {captain}. These square-rigged, two-masted vessels are favored by medium-sized crews that have outgrown a sloop."
         }
       },
       "fluyt": {
-        "description": "The {name} is a fluyt of the Dutch West India Company under the command of {captain}. These slow, high-sided merchant vessels are favored by the company for transporting cargo, troops, and treasure."
+        "description": "The <em>{name}</em> is a fluyt of the Dutch West India Company under the command of {captain}. These slow, high-sided merchant vessels are favored by the company for transporting cargo, troops, and treasure."
       },
       "frigate": {
         "description": {
-          "dutch": "The {name} is a frigate of the Dutch West India Company under the command of {captain}. A ship of this size must cross the Atlantic with some regularity, and be the prize of the company that owns it.",
-          "merchant": "The {name} is {nationality} merchant frigate under the command of {captain}. A ship of this size must cross the Atlantic with some regularity, and be the prize of the company that owns it.",
-          "navy": "The {name} is a frigate of the {navy} under the command of {captain}. Fast, well-armed ships like this are the navy’s standard cruising ship, used to escort important merchants, hunt pirates, and engage in battle.",
-          "privateer": "The {name} is a {nationality} frigate under the command of the privateer {captain}. Only the largest, most well-funded privateering ventures could afford a ship like this.",
-          "pirate": "The {name} is a pirate frigate under the command of {captain}. While not as nimble as a sloop, a fast ship like this makes a decent pirate flagship due to its size and armament."
+          "dutch": "The <em>{name}</em> is a frigate of the Dutch West India Company under the command of {captain}. A ship of this size must cross the Atlantic with some regularity, and be the prize of the company that owns it.",
+          "merchant": "The <em>{name}</em> is {nationality} merchant frigate under the command of {captain}. A ship of this size must cross the Atlantic with some regularity, and be the prize of the company that owns it.",
+          "navy": "The <em>{name}</em> is a frigate of the {navy} under the command of {captain}. Fast, well-armed ships like this are the navy’s standard cruising ship, used to escort important merchants, hunt pirates, and engage in battle.",
+          "privateer": "The <em>{name}</em> is a {nationality} frigate under the command of the privateer {captain}. Only the largest, most well-funded privateering ventures could afford a ship like this.",
+          "pirate": "The <em>{name}</em> is a pirate frigate under the command of {captain}. While not as nimble as a sloop, a fast ship like this makes a decent pirate flagship due to its size and armament."
         },
         "broadsides": "Makes 2 broadsides when over half HP."
       },
       "manowar": {
-        "description": "The {name} is a warship of the {navy} under the command of {captain}. It is a large, heavily-armed vessel built for naval combat that requires a large, trained crew to operate. It is the power in these waters.",
+        "description": "The <em>{name}</em> is a warship of the {navy} under the command of {captain}. It is a large, heavily-armed vessel built for naval combat that requires a large, trained crew to operate. It is the power in these waters.",
         "broadsides": "Makes 3 broadsides when > 2/3 HP; 2 > 1/3 HP."
       }
     },
