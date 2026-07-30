@@ -80,10 +80,10 @@ const createCaptain = async (
   addSpeciality(features, 'captain', undefined, experience === 'legendary')
 
   let path = 'merchant'
-  if (colors === 'Dutch') path = 'dutch'
-  if (colors === 'Pirate') path = 'pirate'
   if (privateer) path = 'privateer'
   if (naval) path = 'naval'
+  if (colors === 'Dutch') path = 'dutch'
+  if (colors === 'Pirate') path = 'pirate'
 
   const sovereign = game.i18n.localize(`${MODULE_ID}.sovereigns.${colors}`)
   const navy = game.i18n.localize(`${MODULE_ID}.navies.${colors}`)
