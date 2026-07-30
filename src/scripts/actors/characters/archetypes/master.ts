@@ -54,7 +54,7 @@ const createSailingMaster = async (
     : selectRandomElement(['knife', 'dagger', 'smallsword', 'hatchet',
       'machete', 'cutlass'])
   arm(actor, features, weapon)
-  addSpeciality(features, 'master')
+  addSpeciality(features, 'master', undefined, names[0].gender)
 
   const nationality = indefiniteNationality(names[0].nationality)
   const mister = names.length > 1 && names[0].nationality === 'Irish'

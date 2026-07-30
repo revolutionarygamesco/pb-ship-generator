@@ -52,7 +52,7 @@ const createMasterCarpenter = async (
 
   const weapon = naval ? 'cutlass' : 'hatchet'
   arm(actor, features, weapon)
-  addSpeciality(features, 'carpenter')
+  addSpeciality(features, 'carpenter', undefined, names[0].gender)
 
   const nationality = indefiniteNationality(names[0].nationality)
   const mister = names.length > 1 && names[0].nationality === 'Irish'

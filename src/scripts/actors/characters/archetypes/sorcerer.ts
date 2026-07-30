@@ -54,7 +54,7 @@ const createDeckSorcerer = async (
     ? 'cudgel'
     : selectRandomElement(['belaying-pin', 'marlinspike', 'whale-bone', 'cudgel'])
   arm(actor, features, weapon)
-  addSpeciality(features, 'sorcerer')
+  addSpeciality(features, 'sorcerer', undefined, names[0].gender)
 
   const nationality = indefiniteNationality(names[0].nationality)
   const mister = names.length > 1 && names[0].nationality === 'Irish'

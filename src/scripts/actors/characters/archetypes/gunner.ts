@@ -53,7 +53,7 @@ const createMasterGunner = async (
       'machete', 'hatchet', 'tomahawk', 'cutlass', 'broadsword'])
   arm(actor, features, weapon)
   addGun(features, 'flintlock')
-  addSpeciality(features, 'gunner')
+  addSpeciality(features, 'gunner', undefined, names[0].gender)
 
   const nationality = indefiniteNationality(names[0].nationality)
   const mister = names.length > 1 && names[0].nationality === 'Irish'

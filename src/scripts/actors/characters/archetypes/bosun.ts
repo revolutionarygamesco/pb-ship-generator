@@ -70,7 +70,7 @@ const createBosun = async (
   arm(actor, features, weapon)
 
   const options = isFighter ? ['c'] : ['a', 'b', 'd']
-  addSpeciality(features, 'bosun', options)
+  addSpeciality(features, 'bosun', options, names[0].gender)
 
   const nationality = indefiniteNationality(names[0].nationality)
   const mister = names.length > 1 && names[0].nationality === 'Irish'

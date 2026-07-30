@@ -47,7 +47,7 @@ const createQuartermaster = async (
     'rapier'])
   arm(actor, features, weapon)
   addGun(features, 'flintlock')
-  addSpeciality(features, 'quartermaster')
+  addSpeciality(features, 'quartermaster', undefined, names[0].gender)
 
   const nationality = indefiniteNationality(names[0].nationality)
   const mister = names.length > 1 && names[0].nationality === 'Irish'

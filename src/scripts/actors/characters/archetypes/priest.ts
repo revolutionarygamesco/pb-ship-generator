@@ -54,7 +54,7 @@ const createDeckPriest = async (
     ? 'cutlass'
     : selectRandomElement(['knife', 'dagger', 'smallsword', 'cudgel'])
   arm(actor, features, weapon)
-  addSpeciality(features, 'priest')
+  addSpeciality(features, 'priest', undefined, names[0].gender)
 
   const nationality = indefiniteNationality(names[0].nationality)
   const priest = names.length > 1 && names[0].nationality === 'Irish'

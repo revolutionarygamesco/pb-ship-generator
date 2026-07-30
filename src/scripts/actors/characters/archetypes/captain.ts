@@ -77,7 +77,7 @@ const createCaptain = async (
 
   arm(actor, features, selectRandomElement(armory[experience]))
   addGun(features, 'flintlock')
-  addSpeciality(features, 'captain', undefined, experience === 'legendary')
+  addSpeciality(features, 'captain', undefined, names[0].gender, experience === 'legendary')
 
   let path = 'merchant'
   if (privateer) path = 'privateer'

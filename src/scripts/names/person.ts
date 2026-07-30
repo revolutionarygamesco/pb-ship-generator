@@ -13,7 +13,7 @@ import createTitles, { type Titles } from './titles/base.ts'
 import createCaptainTitles from './titles/captain.ts'
 import createPriestTitles from './titles/priest.ts'
 
-type Gender = 'Masculine' | 'Female'
+type Gender = 'Masculine' | 'Feminine'
 type Weekday = 'Sunday' | 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday' | 'Eke' | 'Oye' | 'Afor' | 'Nkwo'
 
 export interface FamilyData {
