@@ -2,7 +2,7 @@
   "revolutionary-pbshipgen": {
     "dialog": {
       "title": "Generate Ship",
-      "nationalities": {
+      "colors": {
         "label": "Colors",
         "options": {
           "Spanish": "The Spanish Empire",
@@ -13,31 +13,30 @@
           "Random": "Random"
         }
       },
-      "use": {
-        "label": "Use",
-        "hint": "Is this a merchant ship, a private man-of-war (privateer), or a navy vessel?",
+      "role": {
+        "label": "Role",
+        "hint": "Would you like to generate a merchant ship, a private man-of-war (privateer), or a navy warship?",
         "options": {
-          "Merchant": "Merchant Ship (Merchantman)",
-          "Privateer": "Private Man-of-War (Privateer)",
-          "Naval": "Navy Vessel",
-          "Random": "Random"
-        }
-      },
-      "type": {
-        "label": "Type",
-        "hint": "What type of ship is it?",
-        "options": {
-          "brigantine": "Brigantine",
-          "fluyt": "Fluyt",
-          "frigate": "Frigate",
-          "manowar": "Man-of-War",
-          "sloop": "Sloop",
+          "merchant": "Merchant Ship (Merchantman)",
+          "privateer": "Private Man-of-War (Privateer)",
+          "naval": "Navy Vessel",
           "random": "Random"
         }
       },
+      "class": {
+        "label": "Class",
+        "hint": "What class of ship would you like to generate?",
+        "options": {
+          "Brigantine": "Brigantine",
+          "Fluyt": "Fluyt",
+          "Frigate": "Frigate",
+          "Man-of-War": "Man-of-War",
+          "Sloop": "Sloop",
+          "Random": "Random"
+        }
+      },
       "actions": {
-        "generate": "Generate Ship",
-        "cancel": "Cancel"
+        "generate": "Generate Ship"
       }
     },
     "message": {

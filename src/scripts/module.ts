@@ -3,9 +3,11 @@ import { scopeLocalizer, registerAPI } from '@revolutionarygamesco/common-foundr
 import { MODULE_ID } from './settings'
 
 import generateShip from './ship.ts'
+import openGenerateShipDialog from './dialog.ts'
 
 registerAPI(MODULE_ID, {
-  generateShip
+  generateShip,
+  openGenerateShipDialog
 })
 
 Hooks.once('ready', async () => {
