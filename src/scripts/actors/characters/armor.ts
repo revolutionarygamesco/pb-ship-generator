@@ -7,7 +7,7 @@ export const armors: Map<string, { formula: string, special: boolean }> = new Ma
 armors.set('none', { formula: '0', special: false })
 armors.set('rags', { formula: '0', special: false })
 armors.set('clothes', { formula: '0', special: false })
-armors.set('clothes-fine', { formula: '0', special: true })
+armors.set('clothes-fine', { formula: '0', special: false })
 armors.set('uniform', { formula: '0', special: false })
 armors.set('uniform-old', { formula: '0', special: false })
 armors.set('leather', { formula: '-d2', special: false })
