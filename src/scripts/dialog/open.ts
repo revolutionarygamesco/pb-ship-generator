@@ -1,33 +1,9 @@
-import { chance } from '@revolutionarygamesco/common'
 import { scopeLocalizer } from '@revolutionarygamesco/common-foundryvtt'
-import { MODULE_ID } from './settings.ts'
-import { colors, isColors, selectRandomColors, type Colors } from './types/enums/colors.ts'
-import { selectRandomShipRole, type ShipRole } from './types/enums/role.ts'
-import {isShipClass, selectRandomShipClass, type ShipClass, shipClasses} from './types/enums/class.ts'
-import generateShip from './ship.ts'
-import whisperGeneratedShip from './whisper.ts'
-
-export const defaultOnComplete = async (
-  c: string,
-  r: string,
-  s: string
-): Promise<void> => {
-  const colors: Colors = isColors(c) ? c : await selectRandomColors()
-  const shipClass: ShipClass = isShipClass(s) ? s : selectRandomShipClass()
-  let role: ShipRole
-  let privateer: boolean
-
-  if (['merchant', 'privateer', 'naval'].includes(r)) {
-    role = r === 'merchant' ? 'Merchantman' : 'Man-of-War'
-    privateer = r === 'privateer'
-  } else {
-    role = selectRandomShipRole()
-    privateer = role === 'Man-of-War' && chance(2, 3)
-  }
-
-  const { ship, captain } = await generateShip({ colors, role, privateer, shipClass })
-  await whisperGeneratedShip(colors, role, privateer, shipClass, ship, captain, [game.user.id])
-}
+import { MODULE_ID } from '../settings.ts'
+import { colors } from '../types/enums/colors.ts'
+import { shipClasses } from '../types/enums/class.ts'
+import initUpdateOptions from './update.ts'
+import defaultOnComplete from './callback.ts'
 
 const openGenerateShipDialog = async (
   onComplete: (colors: string, role: string, shipClass: string) => Promise<void> = defaultOnComplete
@@ -77,6 +53,7 @@ const openGenerateShipDialog = async (
     hint: t(['class', 'hint'])
   })
 
+  Hooks.once('renderDialogV2', initUpdateOptions)
   const data = await foundry.applications.api.DialogV2.input({
     window: { title: t('title') },
     position: { width: 500 },

@@ -3,7 +3,7 @@ import { scopeLocalizer, registerAPI } from '@revolutionarygamesco/common-foundr
 import { MODULE_ID } from './settings'
 
 import generateShip from './ship.ts'
-import openGenerateShipDialog from './dialog.ts'
+import openGenerateShipDialog from './dialog/open.ts'
 
 registerAPI(MODULE_ID, {
   generateShip,
