@@ -1,7 +1,9 @@
 import { getPronouns, makeLink, type Linkable } from '@revolutionarygamesco/common-foundryvtt'
 import { selectRandomElement, stockArray } from '@revolutionarygamesco/common'
 import { type Colors } from '../../../types/enums/colors.ts'
+import { type ShipClass } from '../../../types/enums/class.ts'
 import { type CaptainExperience } from '../descriptions/captain.ts'
+import { type PersonalNameData } from '../../../names/person.ts'
 import { MODULE_ID } from '../../../settings.ts'
 import namePerson from '../../../names/person.ts'
 import getSailorActorName from '../../../names/selectors/sailor-actor.ts'
@@ -36,10 +38,10 @@ const createCaptain = async (
   privateer: boolean,
   experience: CaptainExperience,
   ship: Linkable,
-  shipType: string,
+  shipClass: ShipClass,
   folder: foundry.documents.Folder | undefined,
   naval: boolean = false
-): Promise<foundry.documents.Actor> => {
+): Promise<{ actor: Partial<foundry.documents.Actor>, names: PersonalNameData[] }> => {
   const names = await namePerson(colors, 'captain')
   const name = getSailorActorName(names)
   const actor: Partial<foundry.documents.Actor> = {
@@ -68,7 +70,7 @@ const createCaptain = async (
     'unwise in their courage']
   let moraleStart = moraleFloor[experience]
   let moraleEnd = 5
-  if (colors === 'Pirate') moraleStart = Math.max(2, moraleStart)
+  if (colors === 'Pirate' || privateer) moraleStart = Math.max(2, moraleStart)
   if (naval) { moraleStart = Math.max(3, moraleStart) }
   setMorale(actor, selectRandomElement(morale.slice(moraleStart, moraleEnd)))
 
@@ -99,14 +101,11 @@ const createCaptain = async (
     colors,
     sovereign,
     navy,
-    class: shipType,
+    class: shipClass.toLowerCase()
   })
 
   actor.system!.description = `<p><em>${desc}</em></p>${features.join('')}`
-  const created = await foundry.documents.Actor.create(actor)
-  if (!created) throw new Error('Failed to create actor')
-  await created.setFlag(MODULE_ID, 'names', JSON.stringify(names))
-  return created
+  return { actor, names }
 }
 
 export default createCaptain

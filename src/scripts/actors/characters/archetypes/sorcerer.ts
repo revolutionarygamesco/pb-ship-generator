@@ -1,6 +1,7 @@
 import { getPronouns, makeLink, type Linkable } from '@revolutionarygamesco/common-foundryvtt'
 import { selectRandomElement } from '@revolutionarygamesco/common'
 import { type Colors } from '../../../types/enums/colors.ts'
+import { type PersonalNameData } from '../../../names/person.ts'
 import { MODULE_ID } from '../../../settings.ts'
 import { indefiniteNationality } from '../../../types/enums/nationality.ts'
 import namePerson from '../../../names/person.ts'
@@ -16,7 +17,7 @@ const createDeckSorcerer = async (
   ship: Linkable,
   folder: foundry.documents.Folder | undefined,
   naval: boolean = false
-): Promise<foundry.documents.Actor> => {
+): Promise<{ actor: Partial<foundry.documents.Actor>, names: PersonalNameData[] }> => {
   const names = await namePerson(colors, 'sorcerer')
   const name = getSailorActorName(names)
   const actor: Partial<foundry.documents.Actor> = {
@@ -68,10 +69,7 @@ const createDeckSorcerer = async (
   })
 
   actor.system!.description = `<p><em>${desc}</em></p>${features.join('')}`
-  const created = await foundry.documents.Actor.create(actor)
-  if (!created) throw new Error('Failed to create actor')
-  await created.setFlag(MODULE_ID, 'names', JSON.stringify(names))
-  return created
+  return { actor, names }
 }
 
 export default createDeckSorcerer

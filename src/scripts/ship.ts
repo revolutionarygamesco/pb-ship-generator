@@ -11,29 +11,13 @@ import selectRandomThreatProfile from './randomizers/threat.ts'
 import addShanties from './randomizers/shanties.ts'
 import applyUpgrades from './actors/ships/upgrades/apply.ts'
 import addNavalFirepower from './actors/ships/upgrades/naval.ts'
-import getFeatureUUID from './utilities/get-feature-uuid.ts'
+import generateCrew from './generator/crew/all.ts'
 
 import createBrigantine from './actors/ships/classes/brigantine.ts'
 import createFluyt from './actors/ships/classes/fluyt.ts'
 import createFrigate from './actors/ships/classes/frigate.ts'
 import createManOfWar from './actors/ships/classes/manowar.ts'
 import createSloop from './actors/ships/classes/sloop.ts'
-
-import randomizeQuartermaster from './randomizers/crew/quartermaster.ts'
-import randomizeBosun from './randomizers/crew/bosun.ts'
-import randomizeMasterGunner from './randomizers/crew/gunner.ts'
-import randomizeSailingMaster from './randomizers/crew/master.ts'
-import randomizeMasterCarpenter from './randomizers/crew/carpenter.ts'
-import randomizeMagician from './randomizers/crew/magician.ts'
-
-import createCaptain from './actors/characters/archetypes/captain.ts'
-import createQuartermaster from './actors/characters/archetypes/quartermaster.ts'
-import createBosun from './actors/characters/archetypes/bosun.ts'
-import createMasterGunner from './actors/characters/archetypes/gunner.ts'
-import createSailingMaster from './actors/characters/archetypes/master.ts'
-import createMasterCarpenter from './actors/characters/archetypes/carpenter.ts'
-import createDeckPriest from './actors/characters/archetypes/priest.ts'
-import createDeckSorcerer from './actors/characters/archetypes/sorcerer.ts'
 
 const actorCreators: Record<ShipClass, (name: string) => Partial<foundry.documents.Actor>> = {
   Brigantine: createBrigantine,
@@ -78,70 +62,18 @@ const generateShip = async (
   if (!ship) throw new Error('Failed to create ship')
   await addShanties(ship, shanties)
 
-  const specialtyCrew: string[] = []
-  const crews: string[] = []
-
-  const quartermaster = randomizeQuartermaster(colors, experience)
-  const bosun = randomizeBosun()
-  const gunner = randomizeMasterGunner(role)
-  const master = randomizeSailingMaster()
-  const carpenter = randomizeMasterCarpenter()
-  const { priest, sorcerer } = randomizeMagician()
-
-  const captain = await createCaptain(
+  const { captain, features, crews } = await generateCrew({
     colors,
-    role === 'Man-of-War' && privateer,
+    privateer: role === 'Man-of-War' && privateer,
+    role,
     experience,
     ship,
-    shipClass.toLowerCase(),
+    shipClass,
     folder,
-    isNaval
-  )
-
-  if (experience === 'legendary') specialtyCrew.push(getFeatureUUID('dmlGTnZhfEgWUYDm'))
-  crews.push(captain.id!)
-
-  if (quartermaster) {
-    const { id } = await createQuartermaster(ship, folder)
-    specialtyCrew.push(quartermaster)
-    crews.push(id!)
-  }
-
-  if (bosun) {
-    const { id } = await createBosun(colors, ship, folder, isNaval)
-    specialtyCrew.push(bosun)
-    crews.push(id!)
-  }
-
-  if (gunner) {
-    const { id } = await createMasterGunner(colors, ship, folder, isNaval)
-    specialtyCrew.push(gunner)
-    crews.push(id!)
-  }
-
-  if (master) {
-    const { id } = await createSailingMaster(colors, ship, folder, isNaval)
-    specialtyCrew.push(master)
-    crews.push(id!)
-  }
-
-  if (priest) {
-    const { id } = await createDeckPriest(colors, ship, folder, isNaval)
-    specialtyCrew.push(priest)
-    crews.push(id!)
-  }
-
-  if (sorcerer) {
-    const { id } = await createDeckSorcerer(colors, ship, folder, isNaval)
-    specialtyCrew.push(sorcerer)
-    crews.push(id!)
-  }
-
-  if (carpenter) {
-    const { id } = await createMasterCarpenter(colors, ship, folder, isNaval)
-    specialtyCrew.push(carpenter)
-    crews.push(id!)
-  }
+    isNaval,
+    features: [],
+    crews: []
+  })
 
   let d = 'merchant'
   if (role === 'Man-of-War') d = privateer ? 'privateer' : 'navy'
@@ -155,7 +87,7 @@ const generateShip = async (
     navy
   })
 
-  const specialtyCrewFeatures = await Promise.all(specialtyCrew.map(uuid => foundry.utils.fromUuid(uuid))) as foundry.documents.Item[]
+  const specialtyCrewFeatures = await Promise.all(features.map(uuid => foundry.utils.fromUuid(uuid))) as foundry.documents.Item[]
   await ship.createEmbeddedDocuments('Item', specialtyCrewFeatures)
 
   await ship.update({

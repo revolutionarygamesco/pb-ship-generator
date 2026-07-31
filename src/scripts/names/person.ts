@@ -71,6 +71,38 @@ const createCrewTitles: Record<SpecialtyCrew, (nationality: Nationality) => Titl
   carpenter: createTitles
 }
 
+export const createPersonalName = (
+  overrides?: Partial<PersonalNameData>
+): PersonalNameData => {
+  return {
+    gender: 'Masculine',
+    nationality: 'English',
+    birth: {
+      family: {
+        nationality: 'English',
+        name: 'Doe',
+        size: 4,
+        ...overrides?.birth?.family
+      },
+      order: 1,
+      twin: false,
+      weekday: 'Monday',
+      special: null,
+      ...overrides?.birth
+    },
+    forms: {
+      nationality: 'English',
+      full: 'John Doe',
+      personal: 'John',
+      mister: 'Mr. Doe',
+      captain: 'Captain Doe',
+      priest: 'Reverend Doe',
+      ...overrides?.forms
+    },
+    ...overrides
+  }
+}
+
 const namePerson = async (
   colors: Colors,
   role: SpecialtyCrew
