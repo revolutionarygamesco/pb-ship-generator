@@ -6,6 +6,7 @@ import generateGunner from './gunner.ts'
 import generateMagician from './magician.ts'
 import generateMaster from './master.ts'
 import generateQuartermaster from './quartermaster.ts'
+import generateDrunks from './drunk.ts'
 
 interface Crew {
   captain: foundry.documents.Actor
@@ -17,12 +18,13 @@ const generateCrew = async (
   params: SpecialtyCrewGenerationParams
 ): Promise<Crew> => {
   const captain = await generateCaptain(params)
+  await generateQuartermaster(params)
+  await generateMaster(params)
   await generateBosun(params)
   await generateCarpenter(params)
   await generateGunner(params)
   await generateMagician(params)
-  await generateMaster(params)
-  await generateQuartermaster(params)
+  await generateDrunks(params)
   const { features, crews } = params
   return { captain, features, crews }
 }
