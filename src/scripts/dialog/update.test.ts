@@ -2,7 +2,7 @@
 import { describe, it, expect } from 'vitest'
 import { colors } from '../types/enums/colors.ts'
 import { shipClasses } from '../types/enums/class.ts'
-import { updateOptions } from './update.ts'
+import initUpdateOptions, { updateOptions } from './update.ts'
 
 const buildDialog = (
   checkedColors: string = 'Random',
@@ -44,6 +44,42 @@ const getOptions = (html: HTMLElement): Record<string, HTMLOptionElement | null>
   return { randomRole, privateer, naval, merchant, randomClass, sloop, brigantine, frigate, fluyt, manowar }
 }
 
+const expectRoles = (
+  html: HTMLElement,
+  expected: {
+    randomRole: boolean,
+    privateer: boolean,
+    naval: boolean,
+    merchant: boolean,
+  }
+)=> {
+  const { randomRole, privateer, naval, merchant } = getOptions(html)
+  expect(randomRole?.disabled).toBe(!expected.randomRole)
+  expect(merchant?.disabled).toBe(!expected.merchant)
+  expect(privateer?.disabled).toBe(!expected.privateer)
+  expect(naval?.disabled).toBe(!expected.naval)
+}
+
+const expectShips = (
+  html: HTMLElement,
+  expected: {
+    randomClass: boolean,
+    sloop: boolean,
+    brigantine: boolean,
+    frigate: boolean,
+    fluyt: boolean,
+    manowar: boolean
+  }
+) => {
+  const { randomClass, sloop, brigantine, frigate, fluyt, manowar } = getOptions(html)
+  expect(randomClass?.disabled).toBe(!expected.randomClass)
+  expect(sloop?.disabled).toBe(!expected.sloop)
+  expect(brigantine?.disabled).toBe(!expected.brigantine)
+  expect(frigate?.disabled).toBe(!expected.frigate)
+  expect(fluyt?.disabled).toBe(!expected.fluyt)
+  expect(manowar?.disabled).toBe(!expected.manowar)
+}
+
 describe('updateOptions', () => {
   it.each([
     'Random',
@@ -53,34 +89,34 @@ describe('updateOptions', () => {
   ] as string[])('enables all roles for %s', (colors: string) => {
     const html = buildDialog(colors)
     updateOptions(html)
-    const { randomRole, privateer, naval, merchant } = getOptions(html)
-
-    expect(randomRole?.disabled).toBe(false)
-    expect(merchant?.disabled).toBe(false)
-    expect(privateer?.disabled).toBe(false)
-    expect(naval?.disabled).toBe(false)
+    expectRoles(html, {
+      randomRole: true,
+      merchant: true,
+      naval: true,
+      privateer: true
+    })
   })
 
   it('disables privateer and naval roles for Dutch', () => {
     const html = buildDialog('Dutch')
     updateOptions(html)
-    const { randomRole, privateer, naval, merchant } = getOptions(html)
-
-    expect(randomRole?.disabled).toBe(false)
-    expect(merchant?.disabled).toBe(false)
-    expect(privateer?.disabled).toBe(true)
-    expect(naval?.disabled).toBe(true)
+    expectRoles(html, {
+      randomRole: true,
+      merchant: true,
+      naval: false,
+      privateer: false
+    })
   })
 
   it('disables merchant and naval roles for pirates', () => {
     const html = buildDialog('Pirate')
     updateOptions(html)
-    const { randomRole, privateer, naval, merchant } = getOptions(html)
-
-    expect(randomRole?.disabled).toBe(false)
-    expect(merchant?.disabled).toBe(true)
-    expect(privateer?.disabled).toBe(false)
-    expect(naval?.disabled).toBe(true)
+    expectRoles(html, {
+      randomRole: true,
+      merchant: false,
+      naval: false,
+      privateer: true
+    })
   })
 
   it.each([
@@ -95,27 +131,27 @@ describe('updateOptions', () => {
   ] as Array<[string, string]>)('enables sloops, brigs, and frigates for %s %s', (colors: string, role: string) => {
     const html = buildDialog(colors, role)
     updateOptions(html)
-    const { randomClass, sloop, brigantine, frigate, fluyt, manowar } = getOptions(html)
-
-    expect(randomClass?.disabled).toBe(false)
-    expect(sloop?.disabled).toBe(false)
-    expect(brigantine?.disabled).toBe(false)
-    expect(frigate?.disabled).toBe(false)
-    expect(fluyt?.disabled).toBe(true)
-    expect(manowar?.disabled).toBe(true)
+    expectShips(html, {
+      randomClass: true,
+      sloop: true,
+      brigantine: true,
+      frigate: true,
+      fluyt: false,
+      manowar: false
+    })
   })
 
   it('enables sloops, brigs, and frigates for pirates', () => {
     const html = buildDialog('Pirates', 'random')
     updateOptions(html)
-    const { randomClass, sloop, brigantine, frigate, fluyt, manowar } = getOptions(html)
-
-    expect(randomClass?.disabled).toBe(false)
-    expect(sloop?.disabled).toBe(false)
-    expect(brigantine?.disabled).toBe(false)
-    expect(frigate?.disabled).toBe(false)
-    expect(fluyt?.disabled).toBe(true)
-    expect(manowar?.disabled).toBe(true)
+    expectShips(html, {
+      randomClass: true,
+      sloop: true,
+      brigantine: true,
+      frigate: true,
+      fluyt: false,
+      manowar: false
+    })
   })
 
   it.each([
@@ -126,26 +162,73 @@ describe('updateOptions', () => {
   ] as Array<[string, string]>)('enables sloops, brigs, frigates, and men-of-war for %s', (_desc: string, colors: string) => {
     const html = buildDialog(colors, 'naval')
     updateOptions(html)
-    const { randomClass, sloop, brigantine, frigate, fluyt, manowar } = getOptions(html)
-
-    expect(randomClass?.disabled).toBe(false)
-    expect(sloop?.disabled).toBe(false)
-    expect(brigantine?.disabled).toBe(false)
-    expect(frigate?.disabled).toBe(false)
-    expect(fluyt?.disabled).toBe(true)
-    expect(manowar?.disabled).toBe(false)
+    expectShips(html, {
+      randomClass: true,
+      sloop: true,
+      brigantine: true,
+      frigate: true,
+      fluyt: false,
+      manowar: true
+    })
   })
 
   it('enables sloops, brigs, frigates, and fluyts for ships of the Dutch West India Company', () => {
     const html = buildDialog('Dutch', 'merchant')
     updateOptions(html)
-    const { randomClass, sloop, brigantine, frigate, fluyt, manowar } = getOptions(html)
+    expectShips(html, {
+      randomClass: true,
+      sloop: true,
+      brigantine: true,
+      frigate: true,
+      fluyt: true,
+      manowar: false
+    })
+  })
+})
 
-    expect(randomClass?.disabled).toBe(false)
-    expect(sloop?.disabled).toBe(false)
-    expect(brigantine?.disabled).toBe(false)
-    expect(frigate?.disabled).toBe(false)
-    expect(fluyt?.disabled).toBe(false)
-    expect(manowar?.disabled).toBe(true)
+describe('initUpdateOptions', () => {
+  const app = {} as foundry.applications.api.DialogV2
+
+  it('initializes update', () => {
+    const html = buildDialog('Dutch')
+    initUpdateOptions(app, html)
+    expectRoles(html, {
+      randomRole: true,
+      merchant: true,
+      naval: false,
+      privateer: false
+    })
+  })
+
+  it('updates when you choose a nation', () => {
+    const html = buildDialog('Random')
+    initUpdateOptions(app, html)
+
+    const dutch = html.querySelector<HTMLInputElement>('input[name="colors"][value="Dutch"]')!
+    dutch.checked = true
+    dutch.dispatchEvent(new Event('change', { bubbles: true }))
+    expectRoles(html, {
+      randomRole: true,
+      merchant: true,
+      naval: false,
+      privateer: false
+    })
+  })
+
+  it('updates when you choose a role', () => {
+    const html = buildDialog('British', 'merchant')
+    initUpdateOptions(app, html)
+
+    const roleSelector = html.querySelector<HTMLSelectElement>('select[name="role"]')!
+    roleSelector.value = 'naval'
+    roleSelector.dispatchEvent(new Event('change', { bubbles: true }))
+    expectShips(html, {
+      randomClass: true,
+      sloop: true,
+      brigantine: true,
+      frigate: true,
+      fluyt: false,
+      manowar: true
+    })
   })
 })
