@@ -1,3 +1,19 @@
+### 2.0.0
+* Folder structure reorganized. Instead of one folder for generated ships and
+  another for generated captains, we create one folder for each ship and place
+  the ship and its captain together in that folder.
+* We also create actual actor for each specialty crew feature. Instead of just
+  telling you that this ship has a strict bosun, we generate a bosun. The
+  folder now contains the ship, the captain, and each of the specialty crew
+  members generated in the process.
+* Updated API
+  * `rollShip` is removed; everything is now handled in a single `generateShip`
+    method.
+  * Parameters and return values for `generateShip` and
+    `openGenerateShipDialog` have changed.
+* Codebase has been completely rewritten with greater modularity and 91% test
+  coverage to make future changes easier.
+
 ### 1.1.0
 * Ships now have randomized mystic sea shanties. Crews with inexperienced captains know d2-1, crews with moderately experienced captains know d2, crews with highly experienced captains know d4, and crews with legendary captains know d6.
 
