@@ -57,4 +57,27 @@ describe('createDeckPriest', () => {
     const { actor } = await createDeckPriest('British', ship, undefined, true)
     expect(actor.system?.attributes?.attack?.formula).toBeDefined()
   })
+
+  it('calls the priest by his title', async () => {
+    const localizeSpy = vi.spyOn(game.i18n, 'localize')
+    await createDeckPriest('British', ship, undefined, true)
+    expect(localizeSpy).toHaveBeenCalledWith(
+      `${MODULE_ID}.crew.specialty.priest.description`,
+      expect.objectContaining({ priest: 'Reverend Doe' })
+    )
+  })
+
+  it('uses an Irish priest’s anglicized name', async () => {
+    namePersonSpy.mockResolvedValue([
+      namer.createPersonalName({ nationality: 'Irish', forms: { nationality: 'Irish', full: 'Padraig Ó Ceallaigh', personal: 'Padraig', priest: 'Reverend Ó Ceallaigh' } }),
+      namer.createPersonalName({ nationality: 'Irish', forms: { nationality: 'English', full: 'Patrick Kelly', personal: 'Patrick', priest: 'Reverend Kelly' } })
+    ])
+    const localizeSpy = vi.spyOn(game.i18n, 'localize')
+    await createDeckPriest('British', ship, undefined, true)
+
+    expect(localizeSpy).toHaveBeenCalledWith(
+      `${MODULE_ID}.crew.specialty.priest.description`,
+      expect.objectContaining({ priest: 'Reverend Kelly' })
+    )
+  })
 })

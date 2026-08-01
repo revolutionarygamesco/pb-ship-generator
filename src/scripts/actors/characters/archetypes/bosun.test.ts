@@ -88,4 +88,29 @@ describe('createBosun', () => {
     const { actor } = await createBosun('British', ship, undefined, true)
     expect(actor.system?.attributes?.attack?.formula).toBeDefined()
   })
+
+  it('calls the bosun mister', async () => {
+    vi.mocked(chance).mockReturnValue(false)
+    const localizeSpy = vi.spyOn(game.i18n, 'localize')
+    await createBosun('British', ship, undefined, false)
+    expect(localizeSpy).toHaveBeenCalledWith(
+      `${MODULE_ID}.crew.specialty.bosun.description`,
+      expect.objectContaining({ mister: 'Mr. Doe' })
+    )
+  })
+
+  it('uses an Irish bosun’s anglicized name', async () => {
+    vi.mocked(chance).mockReturnValue(false)
+    namePersonSpy.mockResolvedValue([
+      namer.createPersonalName({ nationality: 'Irish', forms: { nationality: 'Irish', full: 'Padraig Ó Ceallaigh', personal: 'Padraig', mister: 'Mr. Ó Ceallaigh' } }),
+      namer.createPersonalName({ nationality: 'Irish', forms: { nationality: 'English', full: 'Patrick Kelly', personal: 'Patrick', mister: 'Mr. Kelly' } })
+    ])
+    const localizeSpy = vi.spyOn(game.i18n, 'localize')
+    await createBosun('British', ship, undefined, false)
+
+    expect(localizeSpy).toHaveBeenCalledWith(
+      `${MODULE_ID}.crew.specialty.bosun.description`,
+      expect.objectContaining({ mister: 'Mr. Kelly' })
+    )
+  })
 })

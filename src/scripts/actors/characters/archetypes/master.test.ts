@@ -57,4 +57,27 @@ describe('createSailingMaster', () => {
     const { actor } = await createSailingMaster('British', ship, undefined, true)
     expect(actor.system?.attributes?.attack?.formula).toBeDefined()
   })
+
+  it('calls the sailing master mister', async () => {
+    const localizeSpy = vi.spyOn(game.i18n, 'localize')
+    await createSailingMaster('British', ship, undefined, true)
+    expect(localizeSpy).toHaveBeenCalledWith(
+      `${MODULE_ID}.crew.specialty.master.description`,
+      expect.objectContaining({ mister: 'Mr. Doe' })
+    )
+  })
+
+  it('uses an Irish sailing master’s anglicized name', async () => {
+    namePersonSpy.mockResolvedValue([
+      namer.createPersonalName({ nationality: 'Irish', forms: { nationality: 'Irish', full: 'Padraig Ó Ceallaigh', personal: 'Padraig', mister: 'Mr. Ó Ceallaigh' } }),
+      namer.createPersonalName({ nationality: 'Irish', forms: { nationality: 'English', full: 'Patrick Kelly', personal: 'Patrick', mister: 'Mr. Kelly' } })
+    ])
+    const localizeSpy = vi.spyOn(game.i18n, 'localize')
+    await createSailingMaster('British', ship, undefined, true)
+
+    expect(localizeSpy).toHaveBeenCalledWith(
+      `${MODULE_ID}.crew.specialty.master.description`,
+      expect.objectContaining({ mister: 'Mr. Kelly' })
+    )
+  })
 })

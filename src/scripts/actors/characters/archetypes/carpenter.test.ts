@@ -57,4 +57,27 @@ describe('createMasterCarpenter', () => {
     const { actor } = await createMasterCarpenter('British', ship, undefined, true)
     expect(actor.system?.attributes?.attack?.formula).toBeDefined()
   })
+
+  it('calls the carpenter mister', async () => {
+    const localizeSpy = vi.spyOn(game.i18n, 'localize')
+    await createMasterCarpenter('British', ship, undefined, true)
+    expect(localizeSpy).toHaveBeenCalledWith(
+      `${MODULE_ID}.crew.specialty.carpenter.description`,
+      expect.objectContaining({ mister: 'Mr. Doe' })
+    )
+  })
+
+  it('uses an Irish carpenter’s anglicized name', async () => {
+    namePersonSpy.mockResolvedValue([
+      namer.createPersonalName({ nationality: 'Irish', forms: { nationality: 'Irish', full: 'Padraig Ó Ceallaigh', personal: 'Padraig', mister: 'Mr. Ó Ceallaigh' } }),
+      namer.createPersonalName({ nationality: 'Irish', forms: { nationality: 'English', full: 'Patrick Kelly', personal: 'Patrick', mister: 'Mr. Kelly' } })
+    ])
+    const localizeSpy = vi.spyOn(game.i18n, 'localize')
+    await createMasterCarpenter('British', ship, undefined, true)
+
+    expect(localizeSpy).toHaveBeenCalledWith(
+      `${MODULE_ID}.crew.specialty.carpenter.description`,
+      expect.objectContaining({ mister: 'Mr. Kelly' })
+    )
+  })
 })

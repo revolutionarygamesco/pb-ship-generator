@@ -72,4 +72,27 @@ describe('createCaptain', () => {
     const { actor } = await createCaptain('British', false, 'low', ship, 'Sloop', undefined, false)
     expect(actor.system?.attributes?.attack?.formula).toBeDefined()
   })
+
+  it('calls the captain by his title', async () => {
+    const localizeSpy = vi.spyOn(game.i18n, 'localize')
+    await createCaptain('British', false, 'low', ship, 'Sloop', undefined, false)
+    expect(localizeSpy).toHaveBeenCalledWith(
+      `${MODULE_ID}.crew.specialty.captain.description.merchant.low`,
+      expect.objectContaining({ captain: 'Captain Doe' })
+    )
+  })
+
+  it('uses an Irish captain’s anglicized name', async () => {
+    namePersonSpy.mockResolvedValue([
+      namer.createPersonalName({ nationality: 'Irish', forms: { nationality: 'Irish', full: 'Padraig Ó Ceallaigh', personal: 'Padraig', captain: 'Captain Ó Ceallaigh' } }),
+      namer.createPersonalName({ nationality: 'Irish', forms: { nationality: 'English', full: 'Patrick Kelly', personal: 'Patrick', captain: 'Captain Kelly' } })
+    ])
+    const localizeSpy = vi.spyOn(game.i18n, 'localize')
+    await createCaptain('British', false, 'low', ship, 'Sloop', undefined, false)
+
+    expect(localizeSpy).toHaveBeenCalledWith(
+      `${MODULE_ID}.crew.specialty.captain.description.merchant.low`,
+      expect.objectContaining({ captain: 'Captain Kelly' })
+    )
+  })
 })
