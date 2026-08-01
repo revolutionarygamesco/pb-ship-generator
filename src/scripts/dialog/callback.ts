@@ -10,7 +10,6 @@ const defaultOnComplete = async (
   r: string,
   s: string
 ): Promise<void> => {
-  const colors: Colors = isColors(c) ? c : await selectRandomColors()
   const shipClass: ShipClass = isShipClass(s) ? s : selectRandomShipClass()
   let role: ShipRole
   let privateer: boolean
@@ -23,6 +22,7 @@ const defaultOnComplete = async (
     privateer = role === 'Man-of-War' && chance(2, 3)
   }
 
+  const colors: Colors = isColors(c) ? c : await selectRandomColors(role, privateer)
   const { ship, captain } = await generateShip({ colors, role, privateer, shipClass })
   await whisperGeneratedShip(colors, role, privateer, shipClass, ship, captain, [game.user.id])
 }

@@ -12,9 +12,9 @@ import updateShip from './ship/update.ts'
 const generateShip = async (
   params?: Partial<GenerateShipParams>
 ): Promise<{ ship: foundry.documents.Actor, captain: foundry.documents.Actor }> => {
-  const colors = params?.colors ?? await selectRandomColors()
   const role = params?.role ?? selectRandomShipRole()
   const privateer = params?.privateer ?? chance(2, 3)
+  const colors = params?.colors ?? await selectRandomColors(role, privateer)
   const shipClass = params?.shipClass ?? selectRandomShipClass()
   const isNaval = role === 'Man-of-War' && !privateer
   const { upgrades, shanties, experience } = selectRandomThreatProfile()
