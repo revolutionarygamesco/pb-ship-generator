@@ -59,6 +59,18 @@ describe('updateShip', () => {
     }))
   })
 
+  it('sets the crew size to be at least the number of listed crew', async () => {
+    const crews = [generateID(), generateID(), generateID(), generateID()]
+    ship.system = { attributes: { crew: { value: 3, max: 10, min: 3 } } }
+    await updateShip(ship, captain, 'British', 'Merchantman', false, 'Sloop', [], crews)
+
+    expect(updateSpy).toHaveBeenCalledWith(expect.objectContaining({
+      'system.crews': crews,
+      'system.captain': captainId,
+      'system.attributes.crew.value': crews.length
+    }))
+  })
+
   it.each([
     ['merchant', 'Merchantman', false, 'British'],
     ['navy', 'Man-of-War', false, 'British'],

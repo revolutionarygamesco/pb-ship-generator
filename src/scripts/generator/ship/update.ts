@@ -38,7 +38,8 @@ const updateShip = async (
   await ship.update({
     'system.crews': crews,
     'system.captain': captain.id,
-    'system.description': desc
+    'system.description': desc,
+    'system.attributes.crew.value': Math.max(ship.system?.attributes?.crew?.value ?? 0, crews.length)
   })
 }
 
