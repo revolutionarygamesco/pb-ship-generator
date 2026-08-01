@@ -5,7 +5,7 @@ import { colors } from '../types/enums/colors.ts'
 import { shipRoles, type ShipRole } from '../types/enums/role.ts'
 import { shipClasses } from '../types/enums/class.ts'
 
-import * as ship from '../ship.ts'
+import * as ship from '../generator'
 import * as whisper from '../whisper.ts'
 
 import defaultOnComplete from './callback.ts'

@@ -2,7 +2,7 @@ import { chance } from '@revolutionarygamesco/common'
 import { type Colors, isColors, selectRandomColors } from '../types/enums/colors.ts'
 import { isShipClass, selectRandomShipClass, type ShipClass } from '../types/enums/class.ts'
 import { selectRandomShipRole, type ShipRole } from '../types/enums/role.ts'
-import generateShip from '../ship.ts'
+import generateShip from '../generator'
 import whisperGeneratedShip from '../whisper.ts'
 
 const defaultOnComplete = async (
