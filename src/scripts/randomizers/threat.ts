@@ -16,11 +16,11 @@ interface ThreatBand {
 }
 
 const chances: Record<ShipClass, Record<CaptainExperience, number>> = {
-  Sloop: { legendary: 1, high: 5, medium: 25, low: 50 },
+  Sloop: { legendary: 1, high: 4, medium: 16, low: 32 },
   Brigantine: { legendary: 1, high: 4, medium: 16, low: 32 },
   Frigate: { legendary: 1, high: 2, medium: 4, low: 8 },
-  Fluyt: { legendary: 1, high: 4, medium: 16, low: 32 },
-  'Man-of-War': { legendary: 1, high: 2, medium: 4, low: 4 },
+  Fluyt: { legendary: 1, high: 4, medium: 16, low: 8 },
+  'Man-of-War': { legendary: 1, high: 2, medium: 4, low: 2 }
 }
 
 const selectRandomThreatProfile = (

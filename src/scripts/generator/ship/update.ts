@@ -20,7 +20,12 @@ const updateShip = async (
   if (colors === 'Pirate') tag = 'pirate'
 
   const navy = game.i18n.localize(`${MODULE_ID}.navies.${colors}`)
-  const desc = game.i18n.localize([MODULE_ID, 'ships', shipClass.toLowerCase(), 'description', tag].join('.'),  {
+  const path = shipClass === 'Fluyt'
+    ? [MODULE_ID, 'ships', 'fluyt', 'description'].join('.')
+    : shipClass === 'Man-of-War'
+      ? [MODULE_ID, 'ships', 'manowar', 'description'].join('.')
+      : [MODULE_ID, 'ships', shipClass.toLowerCase(), 'description', tag].join('.')
+  const desc = game.i18n.localize(path,  {
     name: ship.name,
     nationality: colors,
     captain: makeLink(captain),
