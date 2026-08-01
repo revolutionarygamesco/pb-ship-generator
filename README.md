@@ -130,3 +130,22 @@ the user selected as `string` parameters.
 _Default:_ By default, we provide a method that generates the ship whispers it
 and its and captain to the user. In most  cases, this is the expected behavior,
 but you can override this if necessary.
+
+## Migrating from v1 to v2
+
+If you’ve been using Pirate Borg Ship Generator v1, the biggest upgrade concern
+are some changes we’ve made to the folder structure. Instead of putting ships
+in one category and captains in another, we now create a folder for each ship
+and place the ship, the captain, and all the specialty crew (new to v2; in v1
+we assigned the features to the ship, but we didn’t actually create crew
+members) all to that folder.
+
+This does mean that you could run into some trouble trying to run the new
+version with the old folders. We recommend the following steps:
+
+1. Go to the **Actors** tab in the sidebar.
+2. Move any ships or captains you want to keep into another folder.
+3. Right click on **Generated Ships**.
+4. Select **Delete All**.
+5. When the confirmation dialog asks if you’re sure, click **Yes**.
+6. Reload the page.
